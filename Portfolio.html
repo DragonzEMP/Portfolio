@@ -181,7 +181,37 @@
   .hero-inner{
     position:relative;
     z-index:2;
-    max-width:760px;
+    max-width:1000px;
+    display:flex;
+    align-items:center;
+    gap:64px;
+    width:100%;
+  }
+  .hero-text{ flex:1; }
+  .hero-avatar{
+    flex-shrink:0;
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    border:3px solid var(--line);
+    overflow:hidden;
+    box-shadow:0 0 0 6px rgba(124,92,252,0.15), 0 20px 40px rgba(0,0,0,0.4);
+    background:var(--bg-panel);
+    transition:box-shadow .3s ease, transform .3s ease;
+  }
+  .hero-avatar:hover{
+    box-shadow:0 0 0 6px rgba(124,92,252,0.35), 0 20px 40px rgba(0,0,0,0.4);
+    transform:scale(1.03);
+  }
+  .hero-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  @media (max-width:860px){
+    .hero-inner{ flex-direction:column-reverse; gap:32px; }
+    .hero-avatar{ width:140px; height:140px; }
   }
   .hero .eyebrow{ color:var(--gold); margin-bottom:22px; }
   .hero h1{
@@ -538,14 +568,23 @@
 <section class="hero" id="top">
   <canvas id="network-canvas"></canvas>
   <div class="wrap hero-inner">
-    <div class="eyebrow">CSE Graduate · Dhaka, Bangladesh</div>
-    <h1>Turning ideas into software,<br>and data into <span class="grad">meaningful insights.</span></h1>
-    <div class="role-cycle"><span id="roleText"></span><span class="cursor"></span></div>
-    <p class="lede">I'm a Computer Science graduate with a focus on Data Science. Currently, I work remotely as a Web Developer, building custom WordPress themes and responsive websites, while also creating intelligent applications and research-driven models.</p>
-    <div class="hero-actions">
-      <a href="#projects" class="btn btn-primary">See my work</a>
-      <a href="#contact" class="btn btn-ghost">Say hello</a>
+    <div class="hero-text">
+      <div class="eyebrow">CSE Graduate · Dhaka, Bangladesh</div>
+      <h1>Turning ideas into software,<br>and data into <span class="grad">meaningful insights.</span></h1>
+      <div class="role-cycle"><span id="roleText"></span><span class="cursor"></span></div>
+      <p class="lede">I'm a Computer Science graduate with a focus on Data Science. Currently, I work remotely as a Web Developer, building custom WordPress themes and responsive websites, while also creating intelligent applications and research-driven models.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">See my work</a>
+        <a href="#contact" class="btn btn-ghost">Say hello</a>
+      </div>
     </div>
+    <a href="https://www.facebook.com/ridwonahmed.fahim" target="_blank" rel="noopener" class="hero-avatar" title="Ridwan Ahmed Fahim">
+      <img
+        src="https://graph.facebook.com/100011912048527/picture?type=large&width=400&height=400"
+        alt="Syed Ridwan Ahmed Fahim"
+        onerror="this.src='https://ui-avatars.com/api/?name=Syed+Fahim&background=7c5cfc&color=fff&size=400'"
+      >
+    </a>
   </div>
   <div class="scroll-hint"><span>Scroll</span><span class="line"></span></div>
 </section>
@@ -634,7 +673,7 @@
       <div class="skill-row">
         <h4>Database</h4>
         <div class="pill-set">
-          <span class="pill">MySQL</span>
+          <span class="pill">MySQL</span><span class="pill">MongoDB</span><span class="pill">XAMPP</span>
         </div>
       </div>
       <div class="skill-row">
@@ -670,6 +709,15 @@
           <p>A full-stack e-commerce platform for gaming peripherals featuring product categories, a shopping cart, order tracking, and an admin dashboard.</p>
           <div class="tech-set">
             <span class="tech-tag">Full-Stack</span><span class="tech-tag">MongoDB</span><span class="tech-tag">Frontend</span><span class="tech-tag">Backend</span>
+          </div>
+        </a>
+
+        <a href="https://brick67.vercel.app" target="_blank" rel="noopener" class="p-card reveal" style="display: block;">
+          <span class="p-num">Live Project</span>
+          <h3>Brick Smasher 67 ↗</h3>
+          <p>A feature-rich DX Ball–style brick breaker game with 50 campaign levels, Endless, Time Attack &amp; Survival modes, power-ups, and full mobile touch support.</p>
+          <div class="tech-set">
+            <span class="tech-tag">JavaScript</span><span class="tech-tag">HTML5 Canvas</span><span class="tech-tag">Mobile-Friendly</span><span class="tech-tag">Game Dev</span>
           </div>
         </a>
 
