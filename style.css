@@ -445,7 +445,7 @@
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-    background-color: var(--bg);
+    background-color: transparent;
     padding-top: calc(var(--hdr-h, 64px) + 36px);
     padding-bottom: 24px;
     box-sizing: border-box;
@@ -865,7 +865,7 @@
   #about {
     padding: clamp(70px, 10vh, 120px) 0 clamp(60px, 8vh, 100px);
     position: relative;
-    background: var(--bg);
+    background: transparent;
   }
 
   .about-tagline {
@@ -1008,7 +1008,7 @@
   #what-i-do {
     padding: clamp(60px, 8vh, 100px) 0 clamp(80px, 10vh, 120px);
     position: relative;
-    background: var(--bg);
+    background: transparent;
   }
 
   .capabilities-head {
@@ -2331,3 +2331,87 @@
     .foot-status { align-items: flex-start; }
     .foot-bottom { flex-direction: column; align-items: flex-start; gap: 16px; }
   }
+
+
+/* ==========================================================================
+   INTERACTIVE LIQUID WEBGL BACKGROUND & PROCEDURAL GRAIN OVERLAY
+   ========================================================================== */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  pointer-events: none;
+  display: block;
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.055;
+  filter: url(#noise);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Ambient Specular Orbs & Concentric Radial Auras */
+.hero-aura,
+.foot-aura {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.aura-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.28;
+  will-change: transform;
+}
+
+.aura-1 {
+  width: clamp(350px, 45vw, 650px);
+  height: clamp(350px, 45vw, 650px);
+  top: 10%;
+  left: 20%;
+  background: radial-gradient(circle, var(--accent) 0%, rgba(37, 99, 235, 0.4) 60%, transparent 80%);
+  animation: orbFloat1 18s ease-in-out infinite alternate;
+}
+
+.aura-2 {
+  width: clamp(300px, 40vw, 550px);
+  height: clamp(300px, 40vw, 550px);
+  top: 30%;
+  right: 15%;
+  background: radial-gradient(circle, #6c48e8 0%, rgba(34, 211, 238, 0.3) 60%, transparent 80%);
+  animation: orbFloat2 22s ease-in-out infinite alternate;
+}
+
+.aura-foot-1 {
+  width: clamp(400px, 50vw, 750px);
+  height: clamp(400px, 50vw, 750px);
+  bottom: -20%;
+  left: 30%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.35) 0%, rgba(34, 211, 238, 0.2) 50%, transparent 80%);
+  animation: orbFloat1 20s ease-in-out infinite alternate;
+}
+
+@keyframes orbFloat1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, -30px) scale(1.08); }
+  100% { transform: translate(-30px, 40px) scale(0.95); }
+}
+
+@keyframes orbFloat2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-50px, 30px) scale(1.12); }
+  100% { transform: translate(30px, -40px) scale(0.92); }
+}
