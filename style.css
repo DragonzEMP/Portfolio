@@ -1294,19 +1294,24 @@
   /* ==========================================================================
      SELECTED WORK - 3D PROJECT ROTUNDA (#work)
      ========================================================================== */
-  #work {
+  .work-hall {
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    padding: 100px 0 80px;
     background: var(--bg);
-    min-height: 850px;
+    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-top: calc(var(--hdr-h, 64px) + 36px);
+    padding-bottom: clamp(40px, 6vh, 72px);
+    box-sizing: border-box;
+    color: var(--ink);
+    --w: clamp(160px, 17vw, 250px);
   }
 
-  /* Ambient looping background lighting */
+  /* Ambient background lighting */
   .work-bg {
     position: absolute;
     inset: 0;
@@ -1319,16 +1324,16 @@
     content: "";
     position: absolute;
     left: 50%;
-    top: 50%;
-    width: 900px;
-    height: 600px;
+    top: 48%;
+    width: 1000px;
+    height: 650px;
     transform: translate(-50%, -50%);
     background: radial-gradient(ellipse at center, color-mix(in srgb, var(--accent) 18%, transparent) 0%, rgba(37, 99, 235, 0.12) 35%, transparent 70%);
     animation: work-aura-pulse 8s ease-in-out infinite alternate;
   }
 
   @keyframes work-aura-pulse {
-    0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.7; }
+    0% { transform: translate(-50%, -50%) scale(0.92); opacity: 0.65; }
     100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
   }
 
@@ -1336,64 +1341,21 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, var(--bg) 0%, transparent 18%, transparent 82%, var(--bg) 100%);
-  }
-
-  /* Rotunda Meta Header */
-  .hall-meta {
-    text-align: center;
-    position: relative;
-    z-index: 5;
-    margin-bottom: 8px;
-  }
-
-  .hall-count {
-    font-family: var(--font-mono);
-    font-size: 14px;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-    text-transform: uppercase;
-  }
-
-  .hall-count b {
-    color: var(--accent);
-    font-weight: 700;
-  }
-
-  .hall-title {
-    font-family: var(--font-sans);
-    font-size: clamp(1.8rem, 3.6vw, 2.7rem);
-    font-weight: var(--dw, 800);
-    letter-spacing: var(--dls, -0.045em);
-    color: var(--ink);
-    margin: 8px 0 6px;
-    line-height: 1.15;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-
-  .hall-desc {
-    font-size: 15px;
-    color: var(--muted);
-    margin: 0 auto;
-    max-width: 560px;
-    line-height: 1.55;
-    transition: opacity 0.3s ease;
+    background: linear-gradient(180deg, var(--bg) 0%, rgba(5, 8, 15, 0.35) 14%, rgba(5, 8, 15, 0.2) 40%, rgba(5, 8, 15, 0.8) 70%, var(--bg) 92%);
   }
 
   /* 3D Rotunda Container */
   .hall {
-    --w: clamp(160px, 17vw, 250px);
-    --top: clamp(24px, 4vh, 48px);
+    --top: clamp(28px, 5vh, 56px);
     position: relative;
     isolation: isolate;
-    margin: 20px auto 0;
-    width: 100%;
-    height: calc(var(--top) + 60px + var(--w) * 2.1);
+    margin-top: 24px;
+    height: calc(var(--top) + 30px + var(--w) * 2.3);
     perspective: 1400px;
     perspective-origin: 50% 38%;
     outline: none;
     touch-action: pan-y;
+    -webkit-user-select: none;
     user-select: none;
     cursor: grab;
   }
@@ -1402,18 +1364,22 @@
     cursor: grabbing;
   }
 
-  /* Reflective Floor Light */
+  .hall:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--accent);
+  }
+
+  /* Reflective Floor */
   .hall-floor {
     position: absolute;
     left: 0;
     right: 0;
     top: calc(var(--top) + 36px + var(--w) * 4 / 3);
-    bottom: -300px;
+    bottom: -1200px;
     z-index: -1;
     pointer-events: none;
-    background: radial-gradient(60% 320px at 50% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%),
-                linear-gradient(180deg, rgba(2, 4, 9, 0.4) 0px, rgba(5, 8, 15, 0.8) 180px, transparent 400px);
-    border-top: 1px solid color-mix(in srgb, var(--accent) 16%, transparent);
+    background: radial-gradient(60% 420px at 50% 0%, rgba(34, 211, 238, 0.08), transparent 70%),
+                linear-gradient(180deg, rgba(2, 4, 9, 0.5) 0px, rgba(5, 8, 15, 0.82) 220px, var(--bg) 520px);
+    border-top: 1px solid color-mix(in srgb, var(--accent) 14%, transparent);
   }
 
   .hall-stage {
@@ -1433,33 +1399,35 @@
     will-change: transform, opacity;
     color: var(--ink);
     text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
     cursor: pointer;
-    transition: filter 0.4s ease;
-    filter: brightness(0.7) saturate(0.85);
-  }
-
-  .hall-card.front {
-    filter: none;
   }
 
   .hall-label {
     display: block;
     text-align: center;
-    font-family: var(--font-mono);
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--muted);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: 10px;
-    transition: color 0.3s ease;
+    margin-bottom: 12px;
+    transition: color 0.4s ease;
   }
 
   .hall-card.front .hall-label {
-    color: var(--accent);
+    color: var(--ink);
+    overflow: visible;
+    text-overflow: clip;
+    width: max-content;
+    max-width: calc(100vw - 32px);
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
   }
 
   /* Card Frame (Aspect Ratio 3/4) */
@@ -1467,19 +1435,161 @@
     position: relative;
     display: block;
     aspect-ratio: 3 / 4;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
     background: #0b1220;
     box-shadow: 0 30px 60px -30px #000c, 0 0 0 1px #ffffff0f;
-    transition: box-shadow 0.45s ease, border-color 0.3s ease;
+    transition: box-shadow 0.5s ease, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   .hall-card.front .hall-frame {
-    box-shadow: 0 45px 85px -25px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.18);
+    box-shadow: 0 50px 90px -30px #000000e6, 0 0 0 1px #ffffff18;
   }
 
   .hall-card.front:hover .hall-frame {
+    transform: scale(1.03);
     box-shadow: 0 50px 95px -25px color-mix(in srgb, var(--accent) 30%, transparent), 0 0 0 1.5px var(--accent);
+  }
+
+  .hall-card:focus-visible .hall-frame {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
+
+  /* Card Face & Aesthetics */
+  .card-face {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 22px 18px;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    box-sizing: border-box;
+    filter: brightness(0.7) saturate(0.85);
+    transition: filter 0.5s ease;
+  }
+
+  .hall-card.front .card-face {
+    filter: none;
+  }
+
+  .card-face::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-size: 20px 20px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    pointer-events: none;
+  }
+
+  .face-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
+
+  .face-cat {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .face-badge {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    letter-spacing: 0.05em;
+  }
+
+  .face-center {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin: auto 0;
+  }
+
+  .face-logo {
+    font-size: clamp(22px, 2.5vw, 28px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    line-height: 1.1;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+  }
+
+  .face-logo span {
+    color: var(--accent);
+  }
+
+  .face-sub {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  .face-bottom {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .face-tag {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.9);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  /* Specific Card Themes */
+  .face-nexus {
+    background: radial-gradient(circle at 50% 20%, #4f46e5 0%, transparent 65%),
+                linear-gradient(160deg, #1e1b4b 0%, #0f172a 60%, #030712 100%);
+  }
+
+  .face-brick {
+    background: radial-gradient(circle at 50% 20%, #ea580c 0%, transparent 65%),
+                linear-gradient(160deg, #7c2d12 0%, #1c1917 60%, #09090b 100%);
+  }
+
+  .face-racing {
+    background: radial-gradient(circle at 50% 20%, #0284c7 0%, transparent 65%),
+                linear-gradient(160deg, #0e7490 0%, #082f49 60%, #020617 100%);
+  }
+
+  .face-chat {
+    background: radial-gradient(circle at 50% 20%, #059669 0%, transparent 65%),
+                linear-gradient(160deg, #064e3b 0%, #022c22 60%, #020617 100%);
+  }
+
+  .face-snake {
+    background: radial-gradient(circle at 50% 20%, #9333ea 0%, transparent 65%),
+                linear-gradient(160deg, #581c87 0%, #3b0764 60%, #09090b 100%);
+  }
+
+  .face-uno {
+    background: radial-gradient(circle at 50% 20%, #dc2626 0%, transparent 65%),
+                linear-gradient(160deg, #991b1b 0%, #450a0a 60%, #0f172a 100%);
   }
 
   /* Floating Pill (.hall-open) */
@@ -1504,7 +1614,8 @@
     pointer-events: none;
   }
 
-  .hall-card.front:hover .hall-open {
+  .hall-card.front:hover .hall-open,
+  .hall-card.front:focus-visible .hall-open {
     opacity: 1;
     transform: translate(-50%, 0);
   }
@@ -1514,15 +1625,14 @@
     display: block;
     width: 100%;
     aspect-ratio: 3 / 4;
-    object-fit: cover;
     margin-top: 4px;
-    border-radius: 10px;
+    border-radius: 12px;
     transform: scaleY(-1);
     transform-origin: center;
-    opacity: 0.52;
+    opacity: 0.55;
     filter: blur(1px) brightness(0.75) saturate(1.05);
-    -webkit-mask-image: linear-gradient(0deg, rgba(0, 0, 0, 0.85) 0%, transparent 72%);
-    mask-image: linear-gradient(0deg, rgba(0, 0, 0, 0.85) 0%, transparent 72%);
+    -webkit-mask-image: linear-gradient(0deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.35) 30%, transparent 72%);
+    mask-image: linear-gradient(0deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.35) 30%, transparent 72%);
     pointer-events: none;
     overflow: hidden;
   }
@@ -1531,171 +1641,135 @@
     opacity: 0.72;
   }
 
-  /* Card Artwork & Aesthetics */
-  .card-art {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 22px 18px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .card-art::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-size: 24px 24px;
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    pointer-events: none;
-  }
-
-  .art-nexus {
-    background: radial-gradient(circle at 80% 20%, #4338ca, transparent 65%),
-                linear-gradient(150deg, #1e1b4b 0%, #0f172a 60%, #030712 100%);
-  }
-  .art-brick {
-    background: radial-gradient(circle at 80% 20%, #ea580c, transparent 65%),
-                linear-gradient(150deg, #7c2d12 0%, #1c1917 60%, #09090b 100%);
-  }
-  .art-racing {
-    background: radial-gradient(circle at 80% 20%, #0284c7, transparent 65%),
-                linear-gradient(150deg, #0e7490 0%, #082f49 60%, #020617 100%);
-  }
-  .art-chat {
-    background: radial-gradient(circle at 80% 20%, #059669, transparent 65%),
-                linear-gradient(150deg, #064e3b 0%, #022c22 60%, #020617 100%);
-  }
-  .art-snake {
-    background: radial-gradient(circle at 80% 20%, #9333ea, transparent 65%),
-                linear-gradient(150deg, #581c87 0%, #3b0764 60%, #09090b 100%);
-  }
-  .art-uno {
-    background: radial-gradient(circle at 80% 20%, #dc2626, transparent 65%),
-                linear-gradient(150deg, #991b1b 0%, #450a0a 60%, #0f172a 100%);
-  }
-
-  .card-art-content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .card-cat {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: rgba(255, 255, 255, 0.7);
-  }
-
-  .card-art h4 {
-    font-family: var(--font-sans);
-    font-size: 19px;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 0;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-  }
-
-  .card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-top: 6px;
-  }
-
-  .c-tag {
-    font-family: var(--font-mono);
-    font-size: 9.5px;
-    padding: 2px 7px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.12);
-    color: rgba(255, 255, 255, 0.9);
-    letter-spacing: 0.02em;
-    -webkit-backdrop-filter: blur(4px);
-    backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-  }
-
   /* Circular Glass Navigation Buttons */
   .hall-nav {
     position: absolute;
-    top: calc(var(--top) + 8px + var(--w) * 2 / 3);
-    z-index: 20;
+    top: calc(var(--top) + 6px + var(--w) * 2 / 3);
+    z-index: 200;
     width: 48px;
     height: 48px;
     border-radius: 50%;
     border: 1px solid var(--line);
-    background: color-mix(in srgb, var(--surface) 75%, transparent);
+    background: color-mix(in srgb, var(--surface) 80%, transparent);
     color: var(--ink);
-    display: grid;
-    place-items: center;
     cursor: pointer;
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
-  }
-
-  .hall-nav:hover {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--btn-ink);
-    transform: scale(1.06);
-  }
-
-  .hall-nav.prev {
-    left: max(20px, calc((100vw - 1180px) / 2));
-  }
-
-  .hall-nav.next {
-    right: max(20px, calc((100vw - 1180px) / 2));
-  }
-
-  .hall-nav svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  /* Pagination Dots */
-  .hall-dots {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    margin-top: 24px;
-    position: relative;
-    z-index: 10;
   }
 
-  .hall-dot {
-    width: 8px;
-    height: 8px;
+  .hall-nav:hover,
+  .hall-nav:focus-visible {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #04202a;
+    transform: scale(1.08);
+  }
+
+  .hall-nav.prev {
+    left: max(16px, calc((100vw - 1180px) / 2));
+  }
+
+  .hall-nav.next {
+    right: max(16px, calc((100vw - 1180px) / 2));
+  }
+
+  .hall-nav svg {
+    pointer-events: none;
+  }
+
+  /* Bottom Meta Section (Below Carousel & Overlapping Floor) */
+  .hall-meta {
+    position: relative;
+    z-index: 160;
+    margin-top: calc(var(--w) * -0.55);
+    text-align: center;
+  }
+
+  .hall-count {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    margin: 0;
+  }
+
+  .hall-count b {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .hall-title {
+    margin: 10px auto 0;
+    max-width: none;
+    white-space: nowrap;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.15;
+    font-size: min(clamp(1.4rem, 3.4vw, 2.4rem), calc((100vw - 48px) / (var(--len, 12) * 0.92)));
+    color: var(--ink);
+    animation: hall-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  @keyframes hall-in {
+    0% { opacity: 0; transform: translateY(12px); letter-spacing: 0.25em; }
+  }
+
+  .hall-dots {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .hall-dots button {
+    width: 7px;
+    height: 7px;
     padding: 0;
     border: 0;
     border-radius: 999px;
     background: var(--line);
     cursor: pointer;
-    transition: width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.3s ease, box-shadow 0.3s ease;
+    transition: width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.3s ease;
   }
 
-  .hall-dot.active {
+  .hall-dots button.on {
     width: 28px;
     background: var(--accent);
     box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 70%, transparent);
   }
 
-  @media (max-width: 640px) {
+  .hall-ctas {
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 760px) {
+    .work-hall, .hall {
+      --w: clamp(140px, 42vw, 200px);
+    }
+    .hall {
+      perspective: 900px;
+    }
     .hall-nav {
       display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hall-title {
+      animation: none;
     }
   }
 

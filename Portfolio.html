@@ -357,208 +357,269 @@
   </div>
 </section>
 
-<section id="work">
+<section class="work-hall" id="work">
   <div class="work-bg" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="section-head reveal" style="text-align: center; margin-bottom: 20px;">
-      <div class="tag" style="margin: 0 auto 12px;">Selected Work</div>
-      <h2 class="section-title" style="font-size: clamp(2rem, 4vw, 2.8rem); font-weight: var(--dw); letter-spacing: var(--dls);">Interactive Project Rotunda</h2>
-    </div>
-
-    <div class="hall-meta" aria-live="polite">
-      <div class="hall-count"><b id="hallCurrent">01</b> / <span id="hallTotal">06</span></div>
-      <h3 class="hall-title" id="hallTitle">Nexus Gear</h3>
-      <p class="hall-desc" id="hallDesc">A full-stack e-commerce platform for gaming peripherals featuring product categories, shopping cart, order tracking, and an admin dashboard.</p>
+    <div class="center" style="text-align: center;">
+      <p class="tag" style="margin: 0 auto 10px;">Selected work</p>
+      <h2 style="font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: var(--dw); letter-spacing: var(--dls); margin-bottom: 8px; color: var(--ink);">Projects</h2>
+      <p class="lead" style="color: var(--muted); font-size: 15px; margin: 0 auto 14px;">Drag, swipe or use the arrows. Click the front project to open its case study.</p>
     </div>
   </div>
 
-  <div class="hall" id="projectHall" tabindex="0" role="region" aria-label="3D Project Carousel — Use drag or arrow keys to rotate">
+  <div class="hall" id="projectHall" role="region" aria-roledescription="carousel" aria-label="Projects" tabindex="0">
     <div class="hall-floor" aria-hidden="true"></div>
-
-    <button type="button" class="hall-nav prev" id="hallPrev" aria-label="Previous project">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <polyline points="15 18 9 12 15 6"></polyline>
-      </svg>
-    </button>
-
-    <button type="button" class="hall-nav next" id="hallNext" aria-label="Next project">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <polyline points="9 18 15 12 9 6"></polyline>
-      </svg>
-    </button>
 
     <div class="hall-stage" id="hallStage">
       <!-- Card 01: Nexus Gear -->
-      <a href="https://nexus-gear.onrender.com" target="_blank" rel="noopener" class="hall-card" data-index="0" data-title="Nexus Gear" data-desc="A full-stack e-commerce platform for gaming peripherals featuring product categories, shopping cart, order tracking, and an admin dashboard.">
-        <span class="hall-label">01 / Nexus Gear</span>
+      <a href="https://nexus-gear.onrender.com" target="_blank" rel="noopener" class="hall-card" data-index="0" data-title="NEXUS GEAR" data-url="https://nexus-gear.onrender.com" aria-label="Nexus Gear: launch project">
+        <span class="hall-label">Nexus Gear</span>
         <div class="hall-frame">
-          <div class="card-art art-nexus">
-            <div class="card-art-content">
-              <span class="card-cat">Full-Stack E-Commerce</span>
-              <h4>Nexus Gear</h4>
-              <div class="card-tags">
-                <span class="c-tag">Full-Stack</span>
-                <span class="c-tag">MongoDB</span>
-                <span class="c-tag">Node.js</span>
-              </div>
+          <div class="card-face face-nexus">
+            <div class="face-top">
+              <span class="face-cat">E-Commerce</span>
+              <span class="face-badge">Live</span>
+            </div>
+            <div class="face-center">
+              <div class="face-logo">Nexus<span>Gear</span></div>
+              <div class="face-sub">Gaming Peripherals Store</div>
+            </div>
+            <div class="face-bottom">
+              <span class="face-tag">Full-Stack</span>
+              <span class="face-tag">MongoDB</span>
+              <span class="face-tag">Node.js</span>
             </div>
           </div>
           <span class="hall-open">Launch Project ↗</span>
         </div>
         <div class="hall-mirror" aria-hidden="true">
-          <div class="card-art art-nexus">
-            <div class="card-art-content">
-              <span class="card-cat">Full-Stack E-Commerce</span>
-              <h4>Nexus Gear</h4>
+          <div class="card-face face-nexus">
+            <div class="face-top">
+              <span class="face-cat">E-Commerce</span>
+              <span class="face-badge">Live</span>
+            </div>
+            <div class="face-center">
+              <div class="face-logo">Nexus<span>Gear</span></div>
+              <div class="face-sub">Gaming Peripherals Store</div>
             </div>
           </div>
         </div>
       </a>
 
       <!-- Card 02: Brick Smasher 67 -->
-      <a href="https://brick67.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="1" data-title="Brick Smasher 67" data-desc="A feature-rich DX Ball–style brick breaker game with 50 campaign levels, Endless, Time Attack &amp; Survival modes, power-ups, and mobile touch support.">
-        <span class="hall-label">02 / Brick Smasher 67</span>
+      <a href="https://brick67.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="1" data-title="BRICK SMASHER 67" data-url="https://brick67.vercel.app" aria-label="Brick Smasher 67: launch project">
+        <span class="hall-label">Brick Smasher 67</span>
         <div class="hall-frame">
-          <div class="card-art art-brick">
-            <div class="card-art-content">
-              <span class="card-cat">Arcade Game Dev</span>
-              <h4>Brick Smasher 67</h4>
-              <div class="card-tags">
-                <span class="c-tag">JavaScript</span>
-                <span class="c-tag">HTML5 Canvas</span>
-                <span class="c-tag">Mobile Touch</span>
-              </div>
+          <div class="card-face face-brick">
+            <div class="face-top">
+              <span class="face-cat">Arcade Game</span>
+              <span class="face-badge">50 Levels</span>
+            </div>
+            <div class="face-center">
+              <div class="face-logo">BRICK<span>67</span></div>
+              <div class="face-sub">DX Ball Retro Breaker</div>
+            </div>
+            <div class="face-bottom">
+              <span class="face-tag">Canvas</span>
+              <span class="face-tag">JavaScript</span>
+              <span class="face-tag">Touch</span>
             </div>
           </div>
           <span class="hall-open">Launch Project ↗</span>
         </div>
         <div class="hall-mirror" aria-hidden="true">
-          <div class="card-art art-brick">
-            <div class="card-art-content">
-              <span class="card-cat">Arcade Game Dev</span>
-              <h4>Brick Smasher 67</h4>
+          <div class="card-face face-brick">
+            <div class="face-top">
+              <span class="face-cat">Arcade Game</span>
+              <span class="face-badge">50 Levels</span>
+            </div>
+            <div class="face-center">
+              <div class="face-logo">BRICK<span>67</span></div>
+              <div class="face-sub">DX Ball Retro Breaker</div>
             </div>
           </div>
         </div>
       </a>
 
       <!-- Card 03: Retro Racing Game -->
-      <a href="https://retro-racing-game.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="2" data-title="Retro Racing Game" data-desc="A classic arcade-style retro racing game built with HTML5 Canvas and JavaScript, featuring multiple maps, car selection, and responsive UI.">
-        <span class="hall-label">03 / Retro Racing</span>
+      <a href="https://retro-racing-game.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="2" data-title="RETRO RACING" data-url="https://retro-racing-game.vercel.app" aria-label="Retro Racing: launch project">
+        <span class="hall-label">Retro Racing</span>
         <div class="hall-frame">
-          <div class="card-art art-racing">
-            <div class="card-art-content">
-              <span class="card-cat">HTML5 Canvas Arcade</span>
-              <h4>Retro Racing</h4>
-              <div class="card-tags">
-                <span class="c-tag">JavaScript</span>
-                <span class="c-tag">Canvas 2D</span>
-                <span class="c-tag">Game Dev</span>
-              </div>
+          <div class="card-face face-racing">
+            <div class="face-top">
+              <span class="face-cat">2D Racing</span>
+              <span class="face-badge">Arcade</span>
+            </div>
+            <div class="face-center">
+              <div class="face-logo">RETRO<span>RACER</span></div>
+              <div class="face-sub">Speed &amp; Drift Arcade</div>
+            </div>
+            <div class="face-bottom">
+              <span class="face-tag">HTML5 Canvas</span>
+              <span class="face-tag">Game Dev</span>
             </div>
           </div>
           <span class="hall-open">Launch Project ↗</span>
         </div>
         <div class="hall-mirror" aria-hidden="true">
-          <div class="card-art art-racing">
-            <div class="card-art-content">
-              <span class="card-cat">HTML5 Canvas Arcade</span>
-              <h4>Retro Racing</h4>
+          <div class="card-face face-racing">
+            <div class="face-top">
+              <span class="face-cat">2D Racing</span>
+              <span class="face-badge">Arcade</span>
+            </div>
+            <div class="face-center">
+              <div class="face-logo">RETRO<span>RACER</span></div>
+              <div class="face-sub">Speed &amp; Drift Arcade</div>
             </div>
           </div>
         </div>
       </a>
 
       <!-- Card 04: Chat-EXE -->
-      <a href="https://chat-exe.onrender.com" target="_blank" rel="noopener" class="hall-card" data-index="3" data-title="Chat-EXE" data-desc="A real-time live chatting platform with a self-cleaning MongoDB database that automatically deletes messages older than 24 hours to ensure privacy.">
-        <span class="hall-label">04 / Chat-EXE</span>
+      <a href="https://chat-exe.onrender.com" target="_blank" rel="noopener" class="hall-card" data-index="3" data-title="CHAT-EXE" data-url="https://chat-exe.onrender.com" aria-label="Chat-EXE: launch project">
+        <span class="hall-label">Chat-EXE</span>
         <div class="hall-frame">
-          <div class="card-art art-chat">
-            <div class="card-art-content">
-              <span class="card-cat">Real-Time Messaging</span>
-              <h4>Chat-EXE</h4>
-              <div class="card-tags">
-                <span class="c-tag">Full-Stack</span>
-                <span class="c-tag">MongoDB</span>
-                <span class="c-tag">WebSockets</span>
-              </div>
+          <div class="card-face face-chat">
+            <div class="face-top">
+              <span class="face-cat">Real-Time Chat</span>
+              <span class="face-badge">24h Auto-Wipe</span>
+            </div>
+            <div class="face-center">
+              <div class="face-logo">Chat<span>.EXE</span></div>
+              <div class="face-sub">Ephemeral Private Messaging</div>
+            </div>
+            <div class="face-bottom">
+              <span class="face-tag">MongoDB</span>
+              <span class="face-tag">WebSockets</span>
             </div>
           </div>
           <span class="hall-open">Launch Project ↗</span>
         </div>
         <div class="hall-mirror" aria-hidden="true">
-          <div class="card-art art-chat">
-            <div class="card-art-content">
-              <span class="card-cat">Real-Time Messaging</span>
-              <h4>Chat-EXE</h4>
+          <div class="card-face face-chat">
+            <div class="face-top">
+              <span class="face-cat">Real-Time Chat</span>
+              <span class="face-badge">24h Auto-Wipe</span>
+            </div>
+            <div class="face-center">
+              <div class="face-logo">Chat<span>.EXE</span></div>
+              <div class="face-sub">Ephemeral Private Messaging</div>
             </div>
           </div>
         </div>
       </a>
 
       <!-- Card 05: Neon Snake -->
-      <a href="https://neon-snake-swart-beta.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="4" data-title="Neon Snake" data-desc="A sleek, modern take on the classic Snake game featuring neon cyber aesthetics, responsive controls, and fluid Canvas animation.">
-        <span class="hall-label">05 / Neon Snake</span>
+      <a href="https://neon-snake-swart-beta.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="4" data-title="NEON SNAKE" data-url="https://neon-snake-swart-beta.vercel.app" aria-label="Neon Snake: launch project">
+        <span class="hall-label">Neon Snake</span>
         <div class="hall-frame">
-          <div class="card-art art-snake">
-            <div class="card-art-content">
-              <span class="card-cat">Cyberpunk Arcade</span>
-              <h4>Neon Snake</h4>
-              <div class="card-tags">
-                <span class="c-tag">JavaScript</span>
-                <span class="c-tag">Canvas</span>
-                <span class="c-tag">Neon UI</span>
-              </div>
+          <div class="card-face face-snake">
+            <div class="face-top">
+              <span class="face-cat">Cyber Arcade</span>
+              <span class="face-badge">Neon Glow</span>
+            </div>
+            <div class="face-center">
+              <div class="face-logo">NEON<span>SNAKE</span></div>
+              <div class="face-sub">Classic Arcade Reimagined</div>
+            </div>
+            <div class="face-bottom">
+              <span class="face-tag">JavaScript</span>
+              <span class="face-tag">Canvas</span>
+              <span class="face-tag">Neon UI</span>
             </div>
           </div>
           <span class="hall-open">Launch Project ↗</span>
         </div>
         <div class="hall-mirror" aria-hidden="true">
-          <div class="card-art art-snake">
-            <div class="card-art-content">
-              <span class="card-cat">Cyberpunk Arcade</span>
-              <h4>Neon Snake</h4>
+          <div class="card-face face-snake">
+            <div class="face-top">
+              <span class="face-cat">Cyber Arcade</span>
+              <span class="face-badge">Neon Glow</span>
+            </div>
+            <div class="face-center">
+              <div class="face-logo">NEON<span>SNAKE</span></div>
+              <div class="face-sub">Classic Arcade Reimagined</div>
             </div>
           </div>
         </div>
       </a>
 
       <!-- Card 06: UNO Online -->
-      <a href="https://uno-six-iota.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="5" data-title="UNO Online" data-desc="An interactive, responsive web version of the classic UNO card game built with React, featuring standard rules, special action cards, and animations.">
-        <span class="hall-label">06 / UNO Online</span>
+      <a href="https://uno-six-iota.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="5" data-title="UNO ONLINE" data-url="https://uno-six-iota.vercel.app" aria-label="UNO Online: launch project">
+        <span class="hall-label">UNO Online</span>
         <div class="hall-frame">
-          <div class="card-art art-uno">
-            <div class="card-art-content">
-              <span class="card-cat">Interactive Card Game</span>
-              <h4>UNO Online</h4>
-              <div class="card-tags">
-                <span class="c-tag">React</span>
-                <span class="c-tag">JavaScript</span>
-                <span class="c-tag">Game Logic</span>
-              </div>
+          <div class="card-face face-uno">
+            <div class="face-top">
+              <span class="face-cat">Card Game</span>
+              <span class="face-badge">React</span>
+            </div>
+            <div class="face-center">
+              <div class="face-logo">UNO<span>Online</span></div>
+              <div class="face-sub">Action Cards &amp; Multiplayer</div>
+            </div>
+            <div class="face-bottom">
+              <span class="face-tag">React</span>
+              <span class="face-tag">Interactive</span>
+              <span class="face-tag">Game Logic</span>
             </div>
           </div>
           <span class="hall-open">Launch Project ↗</span>
         </div>
         <div class="hall-mirror" aria-hidden="true">
-          <div class="card-art art-uno">
-            <div class="card-art-content">
-              <span class="card-cat">Interactive Card Game</span>
-              <h4>UNO Online</h4>
+          <div class="card-face face-uno">
+            <div class="face-top">
+              <span class="face-cat">Card Game</span>
+              <span class="face-badge">React</span>
+            </div>
+            <div class="face-center">
+              <div class="face-logo">UNO<span>Online</span></div>
+              <div class="face-sub">Action Cards &amp; Multiplayer</div>
             </div>
           </div>
         </div>
       </a>
     </div>
+
+    <!-- Navigation Chevrons -->
+    <button type="button" class="hall-nav prev" id="hallPrev" aria-label="Previous project">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button type="button" class="hall-nav next" id="hallNext" aria-label="Next project">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
   </div>
 
-  <div class="hall-dots" id="hallDots" role="tablist" aria-label="Project selection">
-    <button type="button" class="hall-dot active" role="tab" aria-selected="true" aria-label="Project 1: Nexus Gear" data-index="0"></button>
-    <button type="button" class="hall-dot" role="tab" aria-selected="false" aria-label="Project 2: Brick Smasher 67" data-index="1"></button>
-    <button type="button" class="hall-dot" role="tab" aria-selected="false" aria-label="Project 3: Retro Racing" data-index="2"></button>
-    <button type="button" class="hall-dot" role="tab" aria-selected="false" aria-label="Project 4: Chat-EXE" data-index="3"></button>
-    <button type="button" class="hall-dot" role="tab" aria-selected="false" aria-label="Project 5: Neon Snake" data-index="4"></button>
-    <button type="button" class="hall-dot" role="tab" aria-selected="false" aria-label="Project 6: UNO Online" data-index="5"></button>
+  <!-- Bottom Meta & Controls (Below Carousel & Overlapping Floor) -->
+  <div class="wrap hall-meta" aria-live="polite">
+    <p class="hall-count"><b id="hallCurrent">01</b> / <span id="hallTotal">06</span></p>
+    <h3 class="hall-title" id="hallTitle" style="--len: 10;">NEXUS GEAR</h3>
+    <div class="hall-dots" id="hallDots" role="tablist" aria-label="Choose a project">
+      <button type="button" role="tab" aria-selected="true" aria-label="Project 1: Nexus Gear" class="on" data-index="0"></button>
+      <button type="button" role="tab" aria-selected="false" aria-label="Project 2: Brick Smasher 67" class="" data-index="1"></button>
+      <button type="button" role="tab" aria-selected="false" aria-label="Project 3: Retro Racing" class="" data-index="2"></button>
+      <button type="button" role="tab" aria-selected="false" aria-label="Project 4: Chat-EXE" class="" data-index="3"></button>
+      <button type="button" role="tab" aria-selected="false" aria-label="Project 5: Neon Snake" class="" data-index="4"></button>
+      <button type="button" role="tab" aria-selected="false" aria-label="Project 6: UNO Online" class="" data-index="5"></button>
+    </div>
+    <div class="hall-ctas" id="hallCtas">
+      <a href="https://nexus-gear.onrender.com" target="_blank" rel="noopener" class="btn btn-primary" id="hallPrimaryBtn">
+        <span>Launch Project</span>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="7" y1="17" x2="17" y2="7"></line>
+          <polyline points="7 7 17 7 17 17"></polyline>
+        </svg>
+      </a>
+      <a href="https://github.com/DragonzEMP" target="_blank" rel="noopener" class="btn btn-secondary">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        <span>GitHub Profile</span>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -878,7 +939,7 @@
   setupCanvas();
 
   // ==========================================
-  // 3D PROJECT ROTUNDA LOGIC
+  // 3D PROJECT ROTUNDA LOGIC (Panoramic Arc & Button Controls)
   // ==========================================
   (function initRotunda() {
     const hall = document.getElementById('projectHall');
@@ -886,196 +947,188 @@
     if (!hall || !stage) return;
 
     const cards = Array.from(stage.querySelectorAll('.hall-card'));
-    const dots = Array.from(document.querySelectorAll('#hallDots .hall-dot'));
+    const dots = Array.from(document.querySelectorAll('#hallDots button'));
     const prevBtn = document.getElementById('hallPrev');
     const nextBtn = document.getElementById('hallNext');
     const titleEl = document.getElementById('hallTitle');
-    const descEl = document.getElementById('hallDesc');
     const countEl = document.getElementById('hallCurrent');
+    const primaryBtn = document.getElementById('hallPrimaryBtn');
 
-    const total = cards.length;
-    if (total === 0) return;
-    const stepAngle = 360 / total; // 60 degrees for 6 cards
+    const s = cards.length;
+    if (!s) return;
 
-    let currentAngle = 0;
-    let targetAngle = 0;
-    let velocity = 0;
+    // Step angle for cards (18 degrees gives wide panoramic visibility like sample)
+    const Sc = 18;
+    const Y_ = 0.16;
+
+    let f = 0; // Current smooth float index
+    let v = 0; // Target integer index
+    let isHovered = false;
     let isDragging = false;
     let startX = 0;
-    let lastX = 0;
-    let lastTime = 0;
-    let dragDist = 0;
-    let activeIndex = 0;
-    let lastActiveIndex = -1;
+    let startF = 0;
+    let maxDragDist = 0;
+    let activeIdx = 0;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    function getRadius() {
-      const cardW = cards[0]?.offsetWidth || 220;
-      return Math.max(280, Math.round(cardW * 1.38));
+    // Shortest signed modular distance in [ -s/2, s/2 ]
+    function wrapDist(p) {
+      const half = s / 2;
+      return ((p + half) % s + s) % s - half;
     }
 
-    function updateCards() {
-      const radius = getRadius();
+    function setTarget(newV) {
+      v = newV;
+      if (prefersReducedMotion) f = newV;
+    }
 
-      cards.forEach((card, idx) => {
-        let angleDeg = (idx * stepAngle + currentAngle) % 360;
-        if (angleDeg > 180) angleDeg -= 360;
-        if (angleDeg < -180) angleDeg += 360;
+    function step(delta) {
+      setTarget(Math.round(v) + delta);
+    }
 
-        const angleRad = (angleDeg * Math.PI) / 180;
-        const x = Math.sin(angleRad) * radius;
-        const z = -radius * (1 - Math.cos(angleRad));
-        const rotY = -angleDeg;
+    // Projects metadata
+    const projectData = [
+      { title: 'NEXUS GEAR', url: 'https://nexus-gear.onrender.com' },
+      { title: 'BRICK SMASHER 67', url: 'https://brick67.vercel.app' },
+      { title: 'RETRO RACING', url: 'https://retro-racing-game.vercel.app' },
+      { title: 'CHAT-EXE', url: 'https://chat-exe.onrender.com' },
+      { title: 'NEON SNAKE', url: 'https://neon-snake-swart-beta.vercel.app' },
+      { title: 'UNO ONLINE', url: 'https://uno-six-iota.vercel.app' }
+    ];
 
-        const absDist = Math.abs(angleDeg);
-        const isCenter = absDist < stepAngle / 2;
-        const scale = isCenter ? (1.06 - (0.06 * (absDist / (stepAngle / 2)))) : 1.0;
+    let lastActive = -1;
+    function updateMeta(idx) {
+      if (idx === lastActive) return;
+      lastActive = idx;
+      const p = projectData[idx];
+      if (!p) return;
 
-        card.style.transform = `translate3d(${x.toFixed(2)}px, 0px, ${z.toFixed(2)}px) rotateY(${rotY.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
-        card.style.zIndex = Math.round(1000 + z);
-        card.classList.toggle('front', isCenter);
+      if (countEl) countEl.textContent = String(idx + 1).padStart(2, '0');
+      if (titleEl) {
+        titleEl.textContent = p.title;
+        titleEl.style.setProperty('--len', String(p.title.length));
+      }
+      if (primaryBtn) {
+        primaryBtn.href = p.url;
+      }
+
+      dots.forEach((dot, i) => {
+        const isActive = i === idx;
+        dot.classList.toggle('on', isActive);
+        dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+    }
+
+    // Main 3D render loop
+    function render() {
+      const cardW = cards[0]?.offsetWidth || 220;
+      // Smooth lerp damping towards target
+      f += (v - f) * (prefersReducedMotion ? 1 : 0.09);
+
+      const halfStepRad = (Sc / 2) * Math.PI / 180;
+      const radius = (cardW * (1 + Y_)) / (2 * Math.sin(halfStepRad));
+
+      cards.forEach((card, i) => {
+        const Q = wrapDist(i - f);
+        const absQ = Math.abs(Q);
+        const angleRad = Q * Sc * Math.PI / 180;
+        const x = radius * Math.sin(angleRad);
+        const z = radius * (1 - Math.cos(angleRad));
+        const rotY = -Q * Sc;
+
+        const opacity = absQ > 3.2 ? 0 : 1 - Math.max(0, absQ - 2.2);
+        const scale = 1 + 0.1 * Math.max(0, 1 - absQ);
+
+        card.style.transform = `translate3d(${x.toFixed(2)}px, 0, ${z.toFixed(2)}px) rotateY(${rotY.toFixed(2)}deg) scale(${scale.toFixed(4)})`;
+        card.style.opacity = opacity.toFixed(3);
+        card.style.zIndex = String(100 - Math.round(absQ * 10));
+        card.style.pointerEvents = opacity < 0.2 ? 'none' : '';
+        card.classList.toggle('front', absQ < 0.5);
       });
 
-      // Synchronize active project metadata
-      let normalizedAngle = (-currentAngle) % 360;
-      if (normalizedAngle < 0) normalizedAngle += 360;
-      const currentActive = Math.round(normalizedAngle / stepAngle) % total;
-
-      if (currentActive !== lastActiveIndex) {
-        lastActiveIndex = currentActive;
-        activeIndex = currentActive;
-        const activeCard = cards[activeIndex];
-        if (activeCard) {
-          if (countEl) countEl.textContent = String(activeIndex + 1).padStart(2, '0');
-          if (titleEl) {
-            titleEl.style.opacity = '0';
-            titleEl.style.transform = 'translateY(6px)';
-            setTimeout(() => {
-              titleEl.textContent = activeCard.dataset.title || '';
-              titleEl.style.opacity = '1';
-              titleEl.style.transform = 'translateY(0)';
-            }, 120);
-          }
-          if (descEl) {
-            descEl.style.opacity = '0';
-            setTimeout(() => {
-              descEl.textContent = activeCard.dataset.desc || '';
-              descEl.style.opacity = '1';
-            }, 120);
-          }
-        }
-
-        dots.forEach((dot, i) => {
-          const isActive = i === activeIndex;
-          dot.classList.toggle('active', isActive);
-          dot.setAttribute('aria-selected', isActive);
-        });
-      }
-    }
-
-    function animate() {
-      if (!isDragging) {
-        if (Math.abs(velocity) > 0.08) {
-          currentAngle += velocity;
-          velocity *= 0.91; // Inertial decay
-          targetAngle = Math.round(currentAngle / stepAngle) * stepAngle;
-        } else {
-          velocity = 0;
-          const diff = targetAngle - currentAngle;
-          currentAngle += diff * (prefersReducedMotion ? 0.35 : 0.12);
-          if (Math.abs(diff) < 0.02) {
-            currentAngle = targetAngle;
-          }
-        }
+      const currentActive = (Math.round(f) % s + s) % s;
+      if (currentActive !== activeIdx) {
+        activeIdx = currentActive;
+        updateMeta(activeIdx);
       }
 
-      updateCards();
-      requestAnimationFrame(animate);
+      requestAnimationFrame(render);
     }
 
-    // Drag / Swipe Inertial Physics
+    // Direct, infallible button listeners
+    if (prevBtn) {
+      prevBtn.addEventListener('pointerdown', (e) => e.stopPropagation());
+      prevBtn.addEventListener('mousedown', (e) => e.stopPropagation());
+      prevBtn.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        step(-1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('pointerdown', (e) => e.stopPropagation());
+      nextBtn.addEventListener('mousedown', (e) => e.stopPropagation());
+      nextBtn.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        step(1);
+      });
+    }
+
+    // Touch & pointer dragging
     hall.addEventListener('pointerdown', (e) => {
       if (e.target.closest('.hall-nav') || e.target.closest('.hall-open')) return;
       isDragging = true;
+      maxDragDist = 0;
       startX = e.clientX;
-      lastX = e.clientX;
-      lastTime = performance.now();
-      velocity = 0;
-      dragDist = 0;
-      try { hall.setPointerCapture(e.pointerId); } catch (_) {}
+      startF = f;
+      isHovered = true;
     });
 
-    hall.addEventListener('pointermove', (e) => {
+    window.addEventListener('pointermove', (e) => {
       if (!isDragging) return;
-      const now = performance.now();
-      const dt = Math.max(1, now - lastTime);
-      const dx = e.clientX - lastX;
-      dragDist += Math.abs(dx);
+      const dx = e.clientX - startX;
+      maxDragDist = Math.max(maxDragDist, Math.abs(dx));
+      const cardW = cards[0]?.offsetWidth || 220;
+      v = f = startF - dx / (cardW * 0.9);
+    }, { passive: true });
 
-      const dAngle = dx * 0.28;
-      currentAngle += dAngle;
-      velocity = (dAngle / dt) * 16.6;
-
-      lastX = e.clientX;
-      lastTime = now;
-    });
-
-    function endDrag(e) {
-      if (!isDragging) return;
-      isDragging = false;
-      targetAngle = Math.round((currentAngle + velocity * 6) / stepAngle) * stepAngle;
-      try { hall.releasePointerCapture(e.pointerId); } catch (_) {}
+    function onPointerUp() {
+      if (isDragging) {
+        isDragging = false;
+        isHovered = hall.matches(':hover');
+        setTarget(Math.round(f));
+        hall.dataset.dragged = maxDragDist > 6 ? '1' : '';
+      }
     }
 
-    hall.addEventListener('pointerup', endDrag);
-    hall.addEventListener('pointercancel', endDrag);
+    window.addEventListener('pointerup', onPointerUp);
+    window.addEventListener('pointercancel', onPointerUp);
 
-    // Prevent navigation if user dragged
+    // Click card to center or open
     cards.forEach((card, idx) => {
       card.addEventListener('click', (e) => {
-        if (dragDist > 7) {
+        if (hall.dataset.dragged === '1') {
           e.preventDefault();
           return;
         }
-        if (!card.classList.contains('front')) {
+        if (idx !== activeIdx) {
           e.preventDefault();
-          goToIndex(idx);
+          const diff = wrapDist(idx - f);
+          setTarget(Math.round(f + diff));
         }
       });
     });
 
-    function goToIndex(idx) {
-      velocity = 0;
-      const currentSnapIndex = ((-Math.round(targetAngle / stepAngle) % total) + total) % total;
-      let delta = idx - currentSnapIndex;
-      if (delta > total / 2) delta -= total;
-      if (delta < -total / 2) delta += total;
-      targetAngle -= delta * stepAngle;
-    }
-
-    function rotateBy(deltaSteps) {
-      velocity = 0;
-      targetAngle += deltaSteps * stepAngle;
-    }
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        rotateBy(1);
-      });
-    }
-    if (nextBtn) {
-      nextBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        rotateBy(-1);
-      });
-    }
-
+    // Pagination dots
     dots.forEach((dot, idx) => {
-      dot.addEventListener('click', (e) => {
-        e.stopPropagation();
-        goToIndex(idx);
+      dot.addEventListener('click', () => {
+        const diff = wrapDist(idx - f);
+        setTarget(Math.round(f + diff));
       });
     });
 
@@ -1083,19 +1136,29 @@
     hall.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowLeft') {
         e.preventDefault();
-        rotateBy(1);
+        step(-1);
       } else if (e.key === 'ArrowRight') {
         e.preventDefault();
-        rotateBy(-1);
+        step(1);
       }
     });
 
-    window.addEventListener('resize', () => {
-      updateCards();
-    });
+    hall.addEventListener('pointerenter', () => { isHovered = true; });
+    hall.addEventListener('pointerleave', () => { isHovered = false; });
 
-    updateCards();
-    requestAnimationFrame(animate);
+    // Optional subtle autoplay if in view
+    setInterval(() => {
+      if (!isHovered && !document.hidden && !isDragging) {
+        const rect = hall.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          step(1);
+        }
+      }
+    }, 6000);
+
+    // Initial render
+    updateMeta(0);
+    requestAnimationFrame(render);
   })();
 </script>
 </body>
