@@ -3,8 +3,8 @@
  * Architecture:
  * 1. Theme Management (Sync with localStorage & system preference)
  * 2. Sliding Capsule Navigation & Active Section Spy
- * 3. Interactive WebGL Liquid Distortion Shader Background (#bg-canvas)
- * 4. 3D Project Rotunda (#work) — Exact Reference Architecture & Kinematics
+ * 3. Daiki Fujita 3D Prismatic Crystal Lens WebGL Engine (#bg-canvas)
+ * 4. 3D Project Rotunda (#work) — Reference Architecture & Kinematics
  * 5. Disciplines Hover & Editorial Interactions (#what-i-do)
  * 6. Interactive CLI Terminal (#terminal)
  * 7. Contact Section Interactions (#contact)
@@ -116,176 +116,289 @@
   });
 
   // ==========================================================================
-  // 3. INTERACTIVE WEBGL LIQUID BACKGROUND (#bg-canvas)
+  // 3. DAIKI FUJITA 3D PRISMATIC CRYSTAL LENS WEBGL ENGINE (#bg-canvas)
   // ==========================================================================
-  function initLiquidBg() {
+  function initDaikiCrystal() {
     const canvas = document.getElementById('bg-canvas');
     if (!canvas) return;
 
-    const gl = canvas.getContext('webgl', { alpha: true, antialias: false, depth: false }) ||
-               canvas.getContext('experimental-webgl', { alpha: true, antialias: false, depth: false });
-    if (!gl) return;
-
-    // Full-viewport quad vertex shader
-    const vsSource = `
-      attribute vec2 a_pos;
-      varying vec2 v_uv;
-      void main() {
-        v_uv = (a_pos + 1.0) * 0.5;
-        gl_Position = vec4(a_pos, 0.0, 1.0);
-      }
-    `;
-
-    // Liquid distortion fragment shader with domain warping & mouse propagation
-    const fsSource = `
-      precision mediump float;
-      uniform vec2 u_res;
-      uniform vec2 u_mouse;
-      uniform float u_time;
-      uniform float u_scroll;
-      varying vec2 v_uv;
-
-      // Fast simplex-style pseudo noise
-      float hash(vec2 p) {
-        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-      }
-
-      float noise(vec2 p) {
-        vec2 i = floor(p);
-        vec2 f = fract(p);
-        vec2 u = f * f * (3.0 - 2.0 * f);
-        return mix(mix(hash(i + vec2(0.0,0.0)), hash(i + vec2(1.0,0.0)), u.x),
-                   mix(hash(i + vec2(0.0,1.0)), hash(i + vec2(1.0,1.0)), u.x), u.y);
-      }
-
-      float fbm(vec2 p) {
-        float val = 0.0;
-        float amp = 0.5;
-        for (int i = 0; i < 4; i++) {
-          val += amp * noise(p);
-          p *= 2.05;
-          amp *= 0.5;
-        }
-        return val;
-      }
-
-      void main() {
-        vec2 uv = gl_FragCoord.xy / u_res;
-        float aspect = u_res.x / u_res.y;
-        vec2 aspect_uv = vec2(uv.x * aspect, uv.y);
-        vec2 m = vec2(u_mouse.x * aspect, u_mouse.y);
-
-        // Fluid time scale & vertical flow offset based on scroll
-        float t = u_time * 0.22;
-        vec2 q = vec2(fbm(aspect_uv + t * 0.3), fbm(aspect_uv + vec2(1.0) - t * 0.2));
-
-        // Interactive mouse disturbance wave
-        float dist = distance(aspect_uv, m);
-        float mouseWave = exp(-dist * 3.2) * sin(dist * 24.0 - u_time * 4.0);
-        q += (aspect_uv - m) * mouseWave * 0.25;
-
-        // Second domain warping layer
-        vec2 r = vec2(
-          fbm(aspect_uv + 3.0 * q + vec2(1.7, 9.2) + 0.15 * t + vec2(0.0, u_scroll * 0.0003)),
-          fbm(aspect_uv + 3.0 * q + vec2(8.3, 2.8) + 0.126 * t)
-        );
-
-        float f = fbm(aspect_uv + 3.5 * r);
-
-        // Cyberpunk atmospheric palette mapping:
-        // Deep obsidian background (#060910), cyan tint (#22d3ee), cobalt blue (#2563eb), violet (#6c48e8)
-        vec3 colA = vec3(0.024, 0.035, 0.063); // #060910
-        vec3 colB = vec3(0.06, 0.14, 0.35);    // #0f2459
-        vec3 colC = vec3(0.133, 0.827, 0.933); // #22d3ee
-        vec3 colD = vec3(0.42, 0.28, 0.91);    // #6c48e8
-
-        vec3 color = mix(colA, colB, clamp(f * f * 2.2, 0.0, 1.0));
-        color = mix(color, colD, clamp(length(q) * 0.45, 0.0, 1.0));
-        color = mix(color, colC, clamp(length(r.x) * f * 0.6, 0.0, 1.0));
-
-        // Add subtle mouse glow bloom
-        float bloom = exp(-dist * 5.0) * 0.22;
-        color += colC * bloom;
-
-        gl_FragColor = vec4(color, 0.38); // Translucent fluid overlaying deep void
-      }
-    `;
-
-    function createShader(type, src) {
-      const shader = gl.createShader(type);
-      gl.shaderSource(shader, src);
-      gl.compileShader(shader);
-      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        gl.deleteShader(shader);
-        return null;
-      }
-      return shader;
+    const THREE = window.THREE;
+    if (!THREE) {
+      console.warn('[WebGL] Three.js not found, skipping 3D crystal.');
+      return;
     }
 
-    const vs = createShader(gl.VERTEX_SHADER, vsSource);
-    const fs = createShader(gl.FRAGMENT_SHADER, fsSource);
-    if (!vs || !fs) return;
+    // 1. Renderer Setup matching Daiki Fujita's pipeline
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        canvas,
+        alpha: true,
+        antialias: true,
+        powerPreference: 'high-performance'
+      });
+    } catch (e) {
+      console.warn('[WebGL] Failed to initialize WebGLRenderer:', e);
+      return;
+    }
 
-    const program = gl.createProgram();
-    gl.attachShader(program, vs);
-    gl.attachShader(program, fs);
-    gl.linkProgram(program);
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return;
-    gl.useProgram(program);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    renderer.setPixelRatio(dpr);
+    renderer.setSize(window.innerWidth, window.innerHeight, false);
+    renderer.setClearColor(0x000000, 0);
 
-    // Quad geometry
-    const quad = new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]);
-    const buffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, quad, gl.STATIC_DRAW);
+    // 2. Perspective Camera with 1:1 pixel coordinate projection
+    const scene = new THREE.Scene();
+    const cameraDist = 1600;
+    const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 10, 6000);
+    camera.position.set(0, 0, cameraDist);
 
-    const aPos = gl.getAttribLocation(program, 'a_pos');
-    gl.enableVertexAttribArray(aPos);
-    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
-
-    const uRes = gl.getUniformLocation(program, 'u_res');
-    const uMouse = gl.getUniformLocation(program, 'u_mouse');
-    const uTime = gl.getUniformLocation(program, 'u_time');
-    const uScroll = gl.getUniformLocation(program, 'u_scroll');
-
-    let mouseX = 0.5, mouseY = 0.5;
-    let targetMouseX = 0.5, targetMouseY = 0.5;
-
-    function resize() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    function updateCamera() {
       const w = window.innerWidth;
       const h = window.innerHeight;
-      canvas.width = Math.floor(w * dpr);
-      canvas.height = Math.floor(h * dpr);
-      gl.viewport(0, 0, canvas.width, canvas.height);
-      gl.uniform2f(uRes, canvas.width, canvas.height);
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.fov = (2 * Math.atan(h / 2 / cameraDist) * 180) / Math.PI;
+      camera.updateProjectionMatrix();
     }
+    updateCamera();
+    window.addEventListener('resize', updateCamera, { passive: true });
 
-    window.addEventListener('resize', resize, { passive: true });
-    resize();
+    // 3. Sculpted Asymmetric Crystal Shard Geometry (Daiki Fujita ke/Ae inspired)
+    const baseGeo = new THREE.IcosahedronGeometry(95, 0);
+    const pos = baseGeo.attributes.position;
+    const p = new THREE.Vector3();
 
+    for (let i = 0; i < pos.count; i++) {
+      p.fromBufferAttribute(pos, i);
+      // Elongate along Y axis, taper at ends, sculpt asymmetric facet depth
+      p.y *= 1.35;
+      p.x *= 0.88 - Math.abs(p.y) * 0.0015;
+      p.z *= 0.76 + p.x * 0.001;
+
+      // Asymmetric cut planes
+      if (p.x > 20 && p.y > 10) {
+        p.x *= 1.1;
+        p.z *= 0.85;
+      }
+      if (p.x < -15 && p.y < -10) {
+        p.x *= 1.05;
+        p.y *= 1.12;
+      }
+      pos.setXYZ(i, p.x, p.y, p.z);
+    }
+    baseGeo.computeVertexNormals();
+
+    // 4. Daiki Fujita Custom Prismatic Refraction Shaders
+    const uniforms = {
+      uTime: { value: 0 },
+      uHover: { value: 0 },
+      uView: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+      uMouse: { value: new THREE.Vector2(0, 0) },
+      uMouseVel: { value: new THREE.Vector2(0, 0) }
+    };
+
+    const vertexShader = `
+      varying vec3 vN;
+      varying vec3 vVP;
+      varying vec3 vObj;
+      varying vec3 vWorldPos;
+
+      void main() {
+        vObj = position;
+        vec4 worldPos = modelMatrix * vec4(position, 1.0);
+        vWorldPos = worldPos.xyz;
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        vVP = mv.xyz;
+        vN = normalize(normalMatrix * normal);
+        gl_Position = projectionMatrix * mv;
+      }
+    `;
+
+    const fragmentShader = `
+      precision highp float;
+
+      uniform vec2 uView;
+      uniform float uTime;
+      uniform float uHover;
+      uniform vec2 uMouse;
+      uniform vec2 uMouseVel;
+
+      varying vec3 vN;
+      varying vec3 vVP;
+      varying vec3 vObj;
+      varying vec3 vWorldPos;
+
+      // Daiki Fujita's exact rainbow spectral dispersion formula
+      vec3 rainbow(float t) {
+        return 0.5 + 0.5 * cos(6.2831853 * (t + vec3(0.0, 0.33, 0.67)));
+      }
+
+      // Daiki Fujita's studio softbox light reflection formula
+      float box(vec3 R, vec3 c, vec2 s, float soft) {
+        c = normalize(c);
+        float d = dot(R, c);
+        if (d <= 0.0) return 0.0;
+        vec3 u = normalize(cross(c, vec3(0.0, 1.0, 0.001)));
+        vec3 v = cross(u, c);
+        vec2 p = vec2(dot(R, u), dot(R, v)) / d;
+        vec2 q = abs(p) - s;
+        return smoothstep(soft, 0.0, max(q.x, q.y)) * (1.0 - 0.55 * smoothstep(0.0, 1.0, length(p / s)));
+      }
+
+      vec3 envLight(vec3 R, float t) {
+        vec3 dayC = mix(vec3(0.03, 0.05, 0.1), vec3(0.15, 0.25, 0.4), smoothstep(-0.5, 0.4, R.y));
+        dayC = mix(dayC, vec3(0.9, 0.95, 1.0), smoothstep(0.2, 0.85, R.y));
+
+        // Studio softbox light panels
+        float e = 0.0;
+        e += 4.5 * box(R, vec3(-0.45 + 0.22 * sin(t * 0.21), 0.62 + 0.08 * cos(t * 0.17), 0.65), vec2(0.26, 0.09), 0.05);
+        e += 6.5 * box(R, vec3(0.7 + 0.12 * sin(t * 0.13 + 1.0), 0.15, 0.7), vec2(0.02, 0.85), 0.015);
+        e += 4.0 * box(R, vec3(-0.75, -0.2, 0.62), vec2(0.015, 0.6), 0.01);
+
+        return dayC * 0.35 + vec3(e) * 0.55;
+      }
+
+      void main() {
+        vec3 V = normalize(vVP);
+        vec3 N = normalize(vN);
+        float ndv = clamp(dot(N, -V), 0.0, 1.0);
+
+        // Fresnel reflection
+        float F = pow(1.0 - ndv, 3.0);
+
+        // Prismatic chromatic dispersion (red, green, blue refractions)
+        float etaR = 1.0 / 1.48;
+        float etaG = 1.0 / 1.52;
+        float etaB = 1.0 / 1.56;
+
+        vec3 refrR = refract(V, N, etaR);
+        vec3 refrG = refract(V, N, etaG);
+        vec3 refrB = refract(V, N, etaB);
+
+        // Internal facet absorption & chromatic split
+        float t = uTime;
+        vec3 envR = envLight(refrR, t);
+        vec3 envG = envLight(refrG, t);
+        vec3 envB = envLight(refrB, t);
+        vec3 interiorCol = vec3(envR.r, envG.g, envB.b);
+
+        // Deep crystal body color (obsidian / cyan tint)
+        vec3 crystalCore = mix(vec3(0.02, 0.05, 0.09), vec3(0.133, 0.827, 0.933), 0.18);
+        vec3 col = mix(crystalCore, interiorCol, 0.68);
+
+        // Reflected environment & specular glints
+        vec3 refl = reflect(V, N);
+        vec3 specEnv = envLight(refl, t);
+        col += specEnv * (0.35 + F * 0.75);
+
+        // Daiki rainbow facet edge dispersion
+        vec3 rimRainbow = rainbow(dot(vObj, vec3(1.7, 1.1, 0.9)) + ndv * 2.8 + t * 0.15);
+        col += (mix(rimRainbow, vec3(0.8, 0.9, 1.0), 0.35) * 0.65 + vec3(0.66, 0.56, 1.0) * 0.35) * F * (0.85 + uHover * 0.5);
+
+        // Sharp pinpoint specular glints
+        vec3 L1 = normalize(vec3(-0.45, 0.65, 0.7));
+        vec3 L2 = normalize(vec3(0.6, 0.3, 0.8));
+        float sp1 = pow(max(dot(refl, L1), 0.0), 110.0);
+        float sp2 = pow(max(dot(refl, L2), 0.0), 160.0);
+        col += vec3(1.0) * (sp1 * 0.85 + sp2 * 1.3);
+
+        // Subtle internal facet caustics
+        float facetAngle = sin(dot(vObj, vec3(4.2, 5.1, 3.8)) + t * 0.5);
+        col += rainbow(facetAngle * 0.5 + t * 0.05) * 0.08 * (1.0 - ndv);
+
+        // Output with high alpha for crisp prismatic presence
+        float alpha = clamp(0.75 + F * 0.25, 0.0, 0.98);
+        gl_FragColor = vec4(col, alpha);
+      }
+    `;
+
+    const material = new THREE.ShaderMaterial({
+      uniforms,
+      vertexShader,
+      fragmentShader,
+      transparent: true,
+      side: THREE.DoubleSide
+    });
+
+    const crystal = new THREE.Mesh(baseGeo, material);
+    scene.add(crystal);
+
+    // 5. Physics & Dynamic Motion Tracking
+    let targetX = 0, targetY = 0;
+    let posX = 0, posY = 0;
+    let prevPosX = 0, prevPosY = 0;
+    let velX = 0, velY = 0;
+    let rotX = 0, rotY = 0, rotZ = 0;
+    let hoverState = 0;
+    let targetHover = 0;
+
+    // Track mouse in screen space (center = 0, 0)
     window.addEventListener('pointermove', (e) => {
-      targetMouseX = e.clientX / window.innerWidth;
-      targetMouseY = 1.0 - (e.clientY / window.innerHeight);
+      targetX = e.clientX - window.innerWidth / 2;
+      targetY = -(e.clientY - window.innerHeight / 2);
     }, { passive: true });
 
-    let startTime = performance.now();
-    function render() {
-      // Lerp mouse coordinates
-      mouseX += (targetMouseX - mouseX) * 0.08;
-      mouseY += (targetMouseY - mouseY) * 0.08;
+    // Hover detection over interactive targets
+    document.addEventListener('mouseover', (e) => {
+      const isInteract = e.target.closest('a, button, [role="button"], .hall-card, .term-chip, [data-discrow]');
+      targetHover = isInteract ? 1.0 : 0.0;
+    });
 
-      const elapsed = (performance.now() - startTime) * 0.001;
-      gl.uniform1f(uTime, elapsed);
-      gl.uniform2f(uMouse, mouseX, mouseY);
-      gl.uniform1f(uScroll, window.scrollY || 0);
+    // 6. Animation Loop
+    let clock = new THREE.Clock();
+    function animate() {
+      requestAnimationFrame(animate);
 
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
-      requestAnimationFrame(render);
+      const delta = Math.min(clock.getDelta(), 0.1);
+      const elapsed = clock.getElapsedTime();
+
+      // Smooth position lerp with spring inertia
+      posX += (targetX - posX) * 0.075;
+      posY += (targetY - posY) * 0.075;
+
+      velX = posX - prevPosX;
+      velY = posY - prevPosY;
+      prevPosX = posX;
+      prevPosY = posY;
+
+      // Floating organic breathing motion
+      const floatY = Math.sin(elapsed * 1.5) * 7.0;
+      crystal.position.set(posX, posY + floatY, 0);
+
+      // Dynamic tilt based on velocity and continuous ethereal spin
+      const targetRotX = -velY * 0.012 + Math.sin(elapsed * 0.8) * 0.15;
+      const targetRotY = velX * 0.012 + elapsed * 0.35;
+      const targetRotZ = -velX * 0.006;
+
+      rotX += (targetRotX - rotX) * 0.08;
+      rotY += (targetRotY - rotY) * 0.08;
+      rotZ += (targetRotZ - rotZ) * 0.08;
+      crystal.rotation.set(rotX, rotY, rotZ);
+
+      // Smooth hover scale & glint pulse
+      hoverState += (targetHover - hoverState) * 0.1;
+      const baseScale = 1.0 + hoverState * 0.16;
+      crystal.scale.set(baseScale, baseScale, baseScale);
+
+      // Update uniforms
+      uniforms.uTime.value = elapsed;
+      uniforms.uHover.value = hoverState;
+      uniforms.uView.value.set(window.innerWidth, window.innerHeight);
+      uniforms.uMouse.value.set(posX, posY);
+      uniforms.uMouseVel.value.set(velX, velY);
+
+      renderer.render(scene, camera);
     }
-    requestAnimationFrame(render);
+    animate();
   }
-  initLiquidBg();
+
+  // Initialize once DOM & scripts are loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDaikiCrystal);
+  } else {
+    initDaikiCrystal();
+  }
 
   // ==========================================================================
   // 4. 3D PROJECT ROTUNDA (#work) — EXACT MATCH TO REFERENCE DESIGN
