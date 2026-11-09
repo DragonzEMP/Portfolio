@@ -1724,7 +1724,7 @@
     z-index: 10;
     margin-top: clamp(24px, 4vh, 44px);
     text-align: center;
-    pointer-events: none;
+    pointer-events: auto;
   }
 
   .hall-count {
@@ -1755,6 +1755,15 @@
     color: #ffffff;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.85);
     animation: hall-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease, text-shadow 0.2s ease;
+    display: inline-block;
+  }
+
+  .hall-title:hover {
+    color: #22d3ee;
+    text-shadow: 0 0 24px rgba(34, 211, 238, 0.7);
+    transform: scale(1.03);
   }
 
   @keyframes hall-in {

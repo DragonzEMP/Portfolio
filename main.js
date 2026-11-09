@@ -1356,25 +1356,76 @@
       current = dragStartPos - dx / (cw * GAP_RATIO);
     }, { passive: true });
 
-    const endDrag = () => {
+    const endDrag = (e) => {
       if (!isDragging) return;
       isDragging = false;
       current = Math.round(current);
-      hall.dataset.dragged = dragDelta > 6 ? '1' : '';
+      if (hall.hasPointerCapture && e && e.pointerId && hall.hasPointerCapture(e.pointerId)) {
+        try { hall.releasePointerCapture(e.pointerId); } catch (_) {}
+      }
+      setTimeout(() => {
+        hall.dataset.dragged = '';
+        dragDelta = 0;
+      }, 80);
     };
     hall.addEventListener('pointerup', endDrag);
     hall.addEventListener('pointercancel', endDrag);
 
-    // Click on a non-front card → navigate to it
+    // Click on a project card:
+    // If it's the front card → open its project link!
+    // If it's a side card → rotate smoothly to bring it front!
     cards.forEach((card, i) => {
       card.addEventListener('click', (e) => {
-        if (hall.dataset.dragged === '1') { e.preventDefault(); return; }
-        if (!card.classList.contains('front')) {
+        if (hall.dataset.dragged === '1' || dragDelta > 6) {
+          e.preventDefault();
+          return;
+        }
+
+        const p = projectData[i];
+        if (!p || !p.url) return;
+
+        if (card.classList.contains('front')) {
+          e.preventDefault();
+          if (p.url.startsWith('#')) {
+            const targetEl = document.querySelector(p.url);
+            if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            window.open(p.url, '_blank', 'noopener,noreferrer');
+          }
+        } else {
           e.preventDefault();
           goTo(i);
         }
       });
     });
+
+    // Also allow clicking the active project title to open its link
+    if (titleEl) {
+      titleEl.style.cursor = 'pointer';
+      titleEl.setAttribute('role', 'button');
+      titleEl.setAttribute('tabindex', '0');
+      titleEl.setAttribute('title', 'Click to open project');
+
+      const openActiveProject = (e) => {
+        if (e) e.preventDefault();
+        const activeIdx = wrap(Math.round(current));
+        const p = projectData[activeIdx];
+        if (!p || !p.url) return;
+        if (p.url.startsWith('#')) {
+          const targetEl = document.querySelector(p.url);
+          if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          window.open(p.url, '_blank', 'noopener,noreferrer');
+        }
+      };
+
+      titleEl.addEventListener('click', openActiveProject);
+      titleEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          openActiveProject(e);
+        }
+      });
+    }
 
     // Keyboard
     hall.addEventListener('keydown', (e) => {
