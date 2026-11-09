@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syed Ridwan Ahmed Fahim — Data Science &amp; Full-Stack Developer</title>
+<meta name="description" content="Portfolio of Syed Ridwan Ahmed Fahim — CSE graduate specializing in Data Science, Machine Learning and Web Development.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  try {
+    var t = localStorage.getItem('theme');
+    if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="style.css">
+
+<!-- Three.js Engine for Daiki Fujita 3D Prismatic Crystal Shard Animation -->
+<script src="assets/js/three.min.js"></script>
+<script>
+  window.THREE || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+</script>
+
+</head>
+<body>
+
+<!-- Procedural Grain Overlay Filter (Daiki Fujita System) -->
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+  <filter id="noise">
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+  </filter>
+</svg>
+<div class="noise-overlay" aria-hidden="true"></div>
+
+<!-- Interactive Liquid WebGL Background Canvas -->
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<canvas id="crystal-canvas" aria-hidden="true"></canvas>
+
+
+<header class="hdr" id="siteNav">
+  <div class="wrap hdr-inner">
+    <a href="#top" class="brand" aria-label="Syed Ridwan Ahmed Fahim">
+      <i>SF</i>
+      <span>Syed Ridwan Ahmed <b>Fahim.</b></span>
+    </a>
+
+    <nav class="nav-capsule" id="navCapsule" aria-label="Primary Navigation">
+      <span class="nav-ind" id="navInd" aria-hidden="true"></span>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#what-i-do" class="nav-link">What I Do</a>
+      <a href="#work" class="nav-link">Work</a>
+      <a href="#terminal" class="nav-link">Terminal</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <div class="hdr-right">
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button type="button" class="hdr-toggle" id="navToggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <a href="#about" class="m-link">About</a>
+    <a href="#what-i-do" class="m-link">What I Do</a>
+    <a href="#work" class="m-link">Work</a>
+    <a href="#terminal" class="m-link">Terminal</a>
+    <a href="#contact" class="m-link">Contact</a>
+  </div>
+</header>
+
+<section class="hero-section" id="hero">
+  <span id="top" style="position:absolute;top:0;" aria-hidden="true"></span>
+  
+  <!-- Ambient Specular Radial Auras -->
+  <div class="hero-aura" aria-hidden="true">
+    <div class="aura-orb aura-1"></div>
+    <div class="aura-orb aura-2"></div>
+  </div>
+
+
+  <div class="wrap hero-content">
+    <div class="hero-main">
+      <div class="tag">Web Developer &amp; Data Scientist</div>
+      <h1 class="hero-title">Turning ideas into software,<br>and data into <span class="hero-grad">meaningful insights.</span></h1>
+      <p class="hero-pitch">
+        I'm a Computer Science graduate with a focus on Data Science. Currently, I work remotely as a Web Developer, building custom WordPress themes and responsive websites, while also creating intelligent applications and research-driven models.
+      </p>
+      <div class="hero-actions">
+        <a href="#work" class="btn btn-primary">
+          <span>See my work</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </a>
+        <a href="https://github.com/DragonzEMP" target="_blank" rel="noopener" class="btn btn-secondary">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <a href="https://github.com/DragonzEMP" target="_blank" rel="noopener" class="hero-portrait" title="GitHub: DragonzEMP">
+        <img
+          src="https://github.com/DragonzEMP.png"
+          alt="Syed Ridwan Ahmed Fahim"
+          onerror="this.src='https://avatars.githubusercontent.com/u/122268976?v=4'"
+        >
+        <span class="portrait-badge">
+          <span class="status-dot"></span>
+          <span>Online</span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Tech Stack Ticker -->
+  <div class="ts" aria-label="Core Technical Stack">
+    <div class="ts-row">
+      <div class="ts-track">
+        <span class="ts-pill"><i class="ts-dot"></i>Python</span>
+        <span class="ts-pill"><i class="ts-dot"></i>Java</span>
+        <span class="ts-pill"><i class="ts-dot"></i>C++</span>
+        <span class="ts-pill"><i class="ts-dot"></i>JavaScript</span>
+        <span class="ts-pill"><i class="ts-dot"></i>React</span>
+        <span class="ts-pill"><i class="ts-dot"></i>WordPress</span>
+        <span class="ts-pill"><i class="ts-dot"></i>Next-Gen AI IDEs</span>
+        <span class="ts-pill"><i class="ts-dot"></i>MongoDB</span>
+        <span class="ts-pill"><i class="ts-dot"></i>Pandas</span>
+        <span class="ts-pill"><i class="ts-dot"></i>NumPy</span>
+        <span class="ts-pill"><i class="ts-dot"></i>Scikit-learn</span>
+      </div>
+      <div class="ts-track" aria-hidden="true">
+        <span class="ts-pill"><i class="ts-dot"></i>Python</span>
+        <span class="ts-pill"><i class="ts-dot"></i>Java</span>
+        <span class="ts-pill"><i class="ts-dot"></i>C++</span>
+        <span class="ts-pill"><i class="ts-dot"></i>JavaScript</span>
+        <span class="ts-pill"><i class="ts-dot"></i>React</span>
+        <span class="ts-pill"><i class="ts-dot"></i>WordPress</span>
+        <span class="ts-pill"><i class="ts-dot"></i>Next-Gen AI IDEs</span>
+        <span class="ts-pill"><i class="ts-dot"></i>MongoDB</span>
+        <span class="ts-pill"><i class="ts-dot"></i>Pandas</span>
+        <span class="ts-pill"><i class="ts-dot"></i>NumPy</span>
+        <span class="ts-pill"><i class="ts-dot"></i>Scikit-learn</span>
+      </div>
+    </div>
+
+    <div class="ts-row ts-reverse">
+      <div class="ts-track">
+        <span class="ts-pill"><i class="ts-dot"></i>Pandas</span>
+        <span class="ts-pill"><i class="ts-dot"></i>NumPy</span>
+        <span class="ts-pill"><i class="ts-dot"></i>Scikit-learn</span>
+        <span class="ts-pill"><i class="ts-dot"></i>MongoDB</span>
+        <span class="ts-pill"><i class="ts-dot"></i>Next-Gen AI IDEs</span>
+        <span class="ts-pill"><i class="ts-dot"></i>Python</span>
+        <span class="ts-pill"><i class="ts-dot"></i>Java</span>
+        <span class="ts-pill"><i class="ts-dot"></i>C++</span>
+        <span class="ts-pill"><i class="ts-dot"></i>JavaScript</span>
+        <span class="ts-pill"><i class="ts-dot"></i>React</span>
+        <span class="ts-pill"><i class="ts-dot"></i>WordPress</span>
+      </div>
+      <div class="ts-track" aria-hidden="true">
+        <span class="ts-pill"><i class="ts-dot"></i>Pandas</span>
+        <span class="ts-pill"><i class="ts-dot"></i>NumPy</span>
+        <span class="ts-pill"><i class="ts-dot"></i>Scikit-learn</span>
+        <span class="ts-pill"><i class="ts-dot"></i>MongoDB</span>
+        <span class="ts-pill"><i class="ts-dot"></i>Next-Gen AI IDEs</span>
+        <span class="ts-pill"><i class="ts-dot"></i>Python</span>
+        <span class="ts-pill"><i class="ts-dot"></i>Java</span>
+        <span class="ts-pill"><i class="ts-dot"></i>C++</span>
+        <span class="ts-pill"><i class="ts-dot"></i>JavaScript</span>
+        <span class="ts-pill"><i class="ts-dot"></i>React</span>
+        <span class="ts-pill"><i class="ts-dot"></i>WordPress</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about-section">
+  <div class="wrap">
+    <div class="aw-head">
+      <span class="aw-label">(01) ABOUT</span>
+    </div>
+
+    <!-- Neo-Brutalist Display Tagline with Instrument Serif Italic Accent -->
+    <h2 class="about-tagline">
+      CURIOUS BY DEFAULT,<br>
+      <em>methodical</em> BY TRAINING.
+    </h2>
+
+    <!-- Clean, Flat Asymmetric Text Layout -->
+    <div class="about-editorial-grid">
+      <div class="about-narrative">
+        <p class="about-lead">I am a Computer Science &amp; Engineering graduate blending specialized research in Data Science and Machine Learning with active remote work in production web engineering.</p>
+        <p class="about-body">Currently, I work remotely at a private company collaborating on custom enterprise web platforms and bespoke WordPress theme architectures. My focus is engineering resilient, high-speed applications that bridge complex backend algorithms with clean, intuitive user experiences.</p>
+
+        <div class="about-spec-strip">
+          <div class="spec-cell">
+            <span class="spec-k">Degree</span>
+            <span class="spec-v">B.Sc. in Computer Science &amp; Engineering</span>
+          </div>
+          <div class="spec-cell">
+            <span class="spec-k">Specialization</span>
+            <span class="spec-v">Data Science, Analytics &amp; Machine Learning</span>
+          </div>
+          <div class="spec-cell">
+            <span class="spec-k">Role</span>
+            <span class="spec-v">Remote Web Developer &amp; Data Engineer</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-stats-flat">
+        <div class="flat-stat-item">
+          <span class="flat-stat-num">10<span class="flat-stat-plus">+</span></span>
+          <span class="flat-stat-label">Live Web Projects</span>
+          <span class="flat-stat-sub">Full-stack web applications, e-commerce &amp; games</span>
+        </div>
+        <div class="flat-stat-item">
+          <span class="flat-stat-num">03<span class="flat-stat-plus">+</span></span>
+          <span class="flat-stat-label">Research Papers</span>
+          <span class="flat-stat-sub">Predictive analytics, NLP &amp; health informatics</span>
+        </div>
+        <div class="flat-stat-item">
+          <span class="flat-stat-num">15<span class="flat-stat-plus">+</span></span>
+          <span class="flat-stat-label">WordPress Themes</span>
+          <span class="flat-stat-sub">Custom enterprise &amp; agency client systems</span>
+        </div>
+        <div class="flat-stat-item">
+          <span class="flat-stat-num">100<span class="flat-stat-plus">+</span></span>
+          <span class="flat-stat-label">AI Workflows</span>
+          <span class="flat-stat-sub">Agentic development, prompt pipelines &amp; IDEs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="what-i-do" class="capabilities-section">
+  <div class="wrap">
+    <div class="aw-head">
+      <span class="aw-label">(02) CAPABILITIES</span>
+    </div>
+
+    <div class="capabilities-head">
+      <h2 class="capabilities-tagline">THREE DISCIPLINES, ONE STANDARD OF CRAFT.</h2>
+      <p class="capabilities-sub">From statistical data models to full-scale web platforms and agentic workflows.</p>
+    </div>
+
+    <!-- 8-Column Editorial List (Daiki Fujita Inspired Grid) -->
+    <ol class="a12-dl" role="list">
+      <li data-discrow="true">
+        <span class="n aw-label aw-dim">(01)</span>
+        <span class="t">DATA SCIENCE &amp; ML</span>
+        <span class="d">PREDICTIVE MODELS &amp; INSIGHTS</span>
+      </li>
+      <li data-discrow="true">
+        <span class="n aw-label aw-dim">(02)</span>
+        <span class="t">FULL-STACK WEB DEV</span>
+        <span class="d">SCALABLE APPS &amp; CUSTOM THEMES</span>
+      </li>
+      <li data-discrow="true">
+        <span class="n aw-label aw-dim">(03)</span>
+        <span class="t">AI-ASSISTED ARCHITECTURE</span>
+        <span class="d">AGENTIC WORKFLOWS &amp; SPEED</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="s work-hall" id="work">
+  <div class="work-bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="center" style="text-align: center;">
+      <p class="tag" style="margin: 0 auto 10px;">Selected work</p>
+      <h2 class="display" style="font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: var(--dw); letter-spacing: var(--dls); margin-bottom: 8px; color: var(--ink);">Projects</h2>
+      <p class="lead" style="color: var(--muted); font-size: 15px; margin: 0 auto 14px;">Drag, swipe or use the arrows. Click the front project to open its case study.</p>
+    </div>
+  </div>
+
+  <div class="hall-wrapper">
+    <!-- Nav buttons OUTSIDE the 3D perspective stage so they always receive clicks -->
+    <button type="button" class="hall-nav prev" id="hallPrev" aria-label="Previous project">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button type="button" class="hall-nav next" id="hallNext" aria-label="Next project">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+
+    <div class="hall" id="projectHall" role="region" aria-roledescription="carousel" aria-label="Projects" tabindex="0">
+    <div class="hall-floor" aria-hidden="true"></div>
+
+    <div class="hall-track" id="hallTrack">
+      <!-- Project 01: NEXUS GEAR -->
+      <a href="https://nexus-gear.onrender.com" target="_blank" rel="noopener" class="hall-card" data-index="0" draggable="false" aria-label="NEXUS GEAR: open project">
+        <span class="hall-label" aria-hidden="true">NEXUS GEAR</span>
+        <span class="hall-frame">
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #1e3a8a 0%, #0c1527 70%, #050b14 100%); --card-accent: #22d3ee;">
+            <div class="hall-art-badge">E-COMMERCE PLATFORM</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="10" width="36" height="26" rx="4"/><line x1="16" y1="23" x2="22" y2="23"/><line x1="19" y1="20" x2="19" y2="26"/><circle cx="31" cy="21" r="1.5" fill="#22d3ee"/><circle cx="35" cy="25" r="1.5" fill="#22d3ee"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">NEXUS GEAR</span>
+              <div class="hall-art-tags"><span>React</span><span>Node.js</span><span>MongoDB</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/nexus-gear.svg" alt="NEXUS GEAR" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
+          <span class="hall-open" aria-hidden="true">Open project</span>
+        </span>
+        <img class="hall-mirror" src="assets/projects/nexus-gear.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
+      </a>
+
+      <!-- Project 02: BRICK SMASHER 67 -->
+      <a href="https://brick67.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="1" draggable="false" aria-label="BRICK SMASHER 67: open project">
+        <span class="hall-label" aria-hidden="true">BRICK SMASHER 67</span>
+        <span class="hall-frame">
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #581c87 0%, #1e0933 70%, #0a0312 100%); --card-accent: #f59e0b;">
+            <div class="hall-art-badge">ARCADE PHYSICS GAME</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="10" width="9" height="6" rx="1"/><rect x="20" y="10" width="9" height="6" rx="1"/><rect x="32" y="10" width="9" height="6" rx="1"/><rect x="14" y="19" width="9" height="6" rx="1"/><rect x="26" y="19" width="9" height="6" rx="1"/><rect x="17" y="34" width="14" height="4" rx="2" fill="#f59e0b"/><circle cx="24" cy="28" r="2.5" fill="#ec4899"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">BRICK SMASHER 67</span>
+              <div class="hall-art-tags"><span>HTML5 Canvas</span><span>Web Audio</span><span>JS</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/brick-smasher-67.svg" alt="BRICK SMASHER 67" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
+          <span class="hall-open" aria-hidden="true">Open project</span>
+        </span>
+        <img class="hall-mirror" src="assets/projects/brick-smasher-67.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
+      </a>
+
+      <!-- Project 03: RETRO RACING -->
+      <a href="https://retro-racing-game.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="2" draggable="false" aria-label="RETRO RACING: open project">
+        <span class="hall-label" aria-hidden="true">RETRO RACING</span>
+        <span class="hall-frame">
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #4c1d95 0%, #190838 70%, #080314 100%); --card-accent: #a855f7;">
+            <div class="hall-art-badge">2.5D PSEUDO-3D RACER</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 36 L20 16 L28 16 L36 36 Z"/><line x1="24" y1="16" x2="24" y2="36" stroke-dasharray="3 3"/><circle cx="24" cy="12" r="4" stroke="#ec4899"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">RETRO RACING</span>
+              <div class="hall-art-tags"><span>Canvas 2D</span><span>Procedural Track</span><span>Physics</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/retro-racing.svg" alt="RETRO RACING" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
+          <span class="hall-open" aria-hidden="true">Open project</span>
+        </span>
+        <img class="hall-mirror" src="assets/projects/retro-racing.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
+      </a>
+
+      <!-- Project 04: CHAT-EXE -->
+      <a href="https://chat-exe.onrender.com" target="_blank" rel="noopener" class="hall-card" data-index="3" draggable="false" aria-label="CHAT-EXE: open project">
+        <span class="hall-label" aria-hidden="true">CHAT-EXE</span>
+        <span class="hall-frame">
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #064e3b 0%, #04241c 70%, #020f0b 100%); --card-accent: #10b981;">
+            <div class="hall-art-badge">REAL-TIME SOCKET CHAT</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12 A4 4 0 0 1 12 8 L36 8 A4 4 0 0 1 40 12 L40 28 A4 4 0 0 1 36 32 L16 32 L8 38 Z"/><circle cx="18" cy="20" r="1.5" fill="#10b981"/><circle cx="24" cy="20" r="1.5" fill="#10b981"/><circle cx="30" cy="20" r="1.5" fill="#10b981"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">CHAT-EXE</span>
+              <div class="hall-art-tags"><span>Socket.io</span><span>Tailwind</span><span>Node.js</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/chat-exe.svg" alt="CHAT-EXE" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
+          <span class="hall-open" aria-hidden="true">Open project</span>
+        </span>
+        <img class="hall-mirror" src="assets/projects/chat-exe.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
+      </a>
+
+      <!-- Project 05: NEON SNAKE -->
+      <a href="https://neon-snake-swart-beta.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="4" draggable="false" aria-label="NEON SNAKE: open project">
+        <span class="hall-label" aria-hidden="true">NEON SNAKE</span>
+        <span class="hall-frame">
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #701a75 0%, #280a33 70%, #0e0314 100%); --card-accent: #f43f5e;">
+            <div class="hall-art-badge">CYBER ARCADE GAME</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#f43f5e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 36 L12 28 L24 28 L24 16 L36 16 L36 24"/><circle cx="36" cy="24" r="2.5" fill="#38bdf8"/><circle cx="16" cy="14" r="2" fill="#f43f5e"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">NEON SNAKE</span>
+              <div class="hall-art-tags"><span>WebGL Glow</span><span>Canvas</span><span>JavaScript</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/neon-snake.svg" alt="NEON SNAKE" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
+          <span class="hall-open" aria-hidden="true">Open project</span>
+        </span>
+        <img class="hall-mirror" src="assets/projects/neon-snake.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
+      </a>
+
+      <!-- Project 06: UNO ONLINE -->
+      <a href="https://uno-six-iota.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="5" draggable="false" aria-label="UNO ONLINE: open project">
+        <span class="hall-label" aria-hidden="true">UNO ONLINE</span>
+        <span class="hall-frame">
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #991b1b 0%, #3b0808 70%, #120202 100%); --card-accent: #ef4444;">
+            <div class="hall-art-badge">MULTIPLAYER CARD GAME</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="8" width="18" height="26" rx="3" transform="rotate(-10 10 8)" fill="#ef444422"/><rect x="18" y="12" width="18" height="26" rx="3" stroke="#facc15" fill="#facc1522"/><text x="24" y="29" font-size="12" font-weight="900" fill="#facc15" stroke="none">U</text></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">UNO ONLINE</span>
+              <div class="hall-art-tags"><span>React</span><span>Game Logic</span><span>Multiplayer</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/uno-online.svg" alt="UNO ONLINE" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
+          <span class="hall-open" aria-hidden="true">Open project</span>
+        </span>
+        <img class="hall-mirror" src="assets/projects/uno-online.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
+      </a>
+
+      <!-- Project 07: SENTIMENT NLP -->
+      <a href="https://github.com/DragonzEMP/YouTube-Comment-Sentiment-Analysis" target="_blank" rel="noopener" class="hall-card" data-index="6" draggable="false" aria-label="SENTIMENT NLP: open project">
+        <span class="hall-label" aria-hidden="true">SENTIMENT NLP</span>
+        <span class="hall-frame">
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #1e1b4b 0%, #0e1236 70%, #040618 100%); --card-accent: #38bdf8;">
+            <div class="hall-art-badge">AI & COMMENT ANALYSIS</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="18" r="4"/><circle cx="36" cy="14" r="4"/><circle cx="24" cy="34" r="4"/><line x1="15" y1="20" x2="22" y2="31"/><line x1="33" y1="17" x2="26" y2="31"/><circle cx="24" cy="24" r="2" fill="#38bdf8"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">SENTIMENT NLP</span>
+              <div class="hall-art-tags"><span>Python</span><span>PyTorch</span><span>BERT Model</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/youtube-sentiment.svg" alt="SENTIMENT NLP" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
+          <span class="hall-open" aria-hidden="true">Open project</span>
+        </span>
+        <img class="hall-mirror" src="assets/projects/youtube-sentiment.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
+      </a>
+
+      <!-- Project 08: WORDPRESS THEMES -->
+      <a href="#contact" target="_blank" rel="noopener" class="hall-card" data-index="7" draggable="false" aria-label="WORDPRESS THEMES: open project">
+        <span class="hall-label" aria-hidden="true">WORDPRESS THEMES</span>
+        <span class="hall-frame">
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #1e293b 0%, #0f172a 70%, #050811 100%); --card-accent: #60a5fa;">
+            <div class="hall-art-badge">CMS ARCHITECTURE</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="16"/><path d="M14 24 L20 34 L25 18 L29 34 L34 24"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">WORDPRESS THEMES</span>
+              <div class="hall-art-tags"><span>PHP</span><span>CSS3 Architecture</span><span>REST API</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/wordpress-themes.svg" alt="WORDPRESS THEMES" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
+          <span class="hall-open" aria-hidden="true">Open project</span>
+        </span>
+        <img class="hall-mirror" src="assets/projects/wordpress-themes.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
+      </a>
+
+      <!-- Project 09: NETWORK SYSTEMS -->
+      <a href="https://github.com/DragonzEMP" target="_blank" rel="noopener" class="hall-card" data-index="8" draggable="false" aria-label="NETWORK SYSTEMS: open project">
+        <span class="hall-label" aria-hidden="true">NETWORK SYSTEMS</span>
+        <span class="hall-frame">
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #075985 0%, #082f49 70%, #02121e 100%); --card-accent: #06b6d4;">
+            <div class="hall-art-badge">SYSTEMS & PROTOCOLS</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="8" width="12" height="8" rx="2"/><rect x="8" y="32" width="12" height="8" rx="2"/><rect x="28" y="32" width="12" height="8" rx="2"/><path d="M24 16 L24 24 M14 32 L14 24 L34 24 L34 32"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">NETWORK SYSTEMS</span>
+              <div class="hall-art-tags"><span>C++</span><span>Socket Architecture</span><span>Linux</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/network-infrastructure.svg" alt="NETWORK SYSTEMS" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
+          <span class="hall-open" aria-hidden="true">Open project</span>
+        </span>
+        <img class="hall-mirror" src="assets/projects/network-infrastructure.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
+      </a>
+
+      <!-- Project 10: SONAR RADAR -->
+      <a href="https://github.com/DragonzEMP" target="_blank" rel="noopener" class="hall-card" data-index="9" draggable="false" aria-label="SONAR RADAR: open project">
+        <span class="hall-label" aria-hidden="true">SONAR RADAR</span>
+        <span class="hall-frame">
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #14532d 0%, #052e16 70%, #011409 100%); --card-accent: #22c55e;">
+            <div class="hall-art-badge">HARDWARE VISUALIZER</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="16"/><circle cx="24" cy="24" r="10"/><circle cx="24" cy="24" r="4" fill="#22c55e"/><line x1="24" y1="24" x2="36" y2="12"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">SONAR RADAR</span>
+              <div class="hall-art-tags"><span>Arduino</span><span>Processing</span><span>C++</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/sonar-detection.svg" alt="SONAR RADAR" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
+          <span class="hall-open" aria-hidden="true">Open project</span>
+        </span>
+        <img class="hall-mirror" src="assets/projects/sonar-detection.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
+      </a>
+    </div><!-- /.hall-track -->
+  </div><!-- /.hall -->
+  </div><!-- /.hall-wrapper -->
+
+    <!-- Navigation Buttons with Direct Chevrons -->
+
+  <!-- Bottom Meta Section (Below Carousel & Overlapping Floor) -->
+  <div class="wrap hall-meta" aria-live="polite">
+    <p class="hall-count" id="hallCount"><b>01</b> / 10</p>
+    <h3 class="hall-title" id="hallTitle" style="--len: 10;">NEXUS GEAR</h3>
+    <div class="hall-dots" id="hallDots" role="tablist" aria-label="Choose a project">
+      <button type="button" role="tab" aria-selected="true" aria-label="Project 1: Nexus Gear" class="on" data-index="0"></button>
+      <button type="button" role="tab" aria-selected="false" aria-label="Project 2: Brick Smasher 67" class="" data-index="1"></button>
+      <button type="button" role="tab" aria-selected="false" aria-label="Project 3: Retro Racing" class="" data-index="2"></button>
+      <button type="button" role="tab" aria-selected="false" aria-label="Project 4: Chat-EXE" class="" data-index="3"></button>
+      <button type="button" role="tab" aria-selected="false" aria-label="Project 5: Neon Snake" class="" data-index="4"></button>
+      <button type="button" role="tab" aria-selected="false" aria-label="Project 6: UNO Online" class="" data-index="5"></button>
+      <button type="button" role="tab" aria-selected="false" aria-label="Project 7: Sentiment NLP" class="" data-index="6"></button>
+      <button type="button" role="tab" aria-selected="false" aria-label="Project 8: WordPress Themes" class="" data-index="7"></button>
+      <button type="button" role="tab" aria-selected="false" aria-label="Project 9: Network Systems" class="" data-index="8"></button>
+      <button type="button" role="tab" aria-selected="false" aria-label="Project 10: Sonar Radar" class="" data-index="9"></button>
+    </div>
+    <div class="hall-ctas" id="hallCtas">
+      <a href="https://nexus-gear.onrender.com" target="_blank" rel="noopener" class="btn btn-primary" id="hallPrimaryBtn">
+        <span>Open project</span>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="7" y1="17" x2="17" y2="7"></line>
+          <polyline points="7 7 17 7 17 17"></polyline>
+        </svg>
+      </a>
+      <a href="https://github.com/DragonzEMP" target="_blank" rel="noopener" class="btn btn-secondary">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        <span>GitHub Profile</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     INTERACTIVE TERMINAL SECTION (#terminal)
+     ========================================================================== -->
+<section class="s terminal-s" id="terminal">
+  <div class="wrap">
+    <div class="center" style="text-align: center;">
+      <p class="tag" style="margin: 0 auto 10px;">Interactive CLI</p>
+      <h2 class="display" style="font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: var(--dw); letter-spacing: var(--dls); margin-bottom: 8px; color: var(--ink);">Terminal</h2>
+      <p class="lead" style="color: var(--muted); font-size: 15px; margin: 0 auto 14px;">Ask me anything. Type a command or click one of the quick chips below.</p>
+    </div>
+
+    <div class="term-solo">
+      <div class="term" id="termWindow" tabindex="0">
+        <div class="term-top" aria-hidden="true">
+          <i></i>
+          <i></i>
+          <i></i>
+          <span>guest@fahim-portfolio: ~</span>
+        </div>
+        <div class="term-body" id="termBody" role="log" aria-live="polite">
+          <div id="termHistory">
+            <p class="tl tl-system">Welcome to Fahim's terminal v2.0. Type <span class="tl-accent">help</span> to view available commands.</p>
+          </div>
+          <label class="tl tl-in" for="termInput">
+            <span class="tp">$</span>
+            <input type="text" id="termInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="type help..." aria-label="Terminal command input" />
+          </label>
+        </div>
+        <div class="term-quick" role="group" aria-label="Quick commands">
+          <button type="button" class="term-chip" data-cmd="help">help</button>
+          <button type="button" class="term-chip" data-cmd="about">about</button>
+          <button type="button" class="term-chip" data-cmd="skills">skills</button>
+          <button type="button" class="term-chip" data-cmd="projects">projects</button>
+          <button type="button" class="term-chip" data-cmd="contact">contact</button>
+          <button type="button" class="term-chip" data-cmd="clear">clear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     CONTACT SECTION (#contact)
+     ========================================================================== -->
+<section class="s contact-s" id="contact">
+  <div class="wrap">
+    <div class="center" style="text-align: center;">
+      <p class="tag" style="margin: 0 auto 10px;">Get in touch</p>
+      <h2 class="display" style="font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: var(--dw); letter-spacing: var(--dls); margin-bottom: 8px; color: var(--ink);">Contact</h2>
+      <p class="lead" style="color: var(--muted); font-size: 15px; margin: 0 auto 14px;">Have a project in mind, a question, or a remote opportunity? Reach out directly.</p>
+    </div>
+
+    <div class="c-box">
+      <!-- Left Side: Direct Contact Details -->
+      <aside class="c-panel" aria-label="Direct contact details">
+        <div class="c-panel-aura" aria-hidden="true"></div>
+        <div class="c-panel-inner">
+          <p class="c-panel-tag">Direct reach</p>
+          <h3 class="c-panel-title">Let's build something.</h3>
+          <p class="c-panel-desc">Whether you have an enterprise web project, a data science inquiry, or a remote engineering role, my inbox is always open.</p>
+
+          <ul class="c-list">
+            <li class="c-item">
+              <span class="ic" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </span>
+              <div class="c-item-content">
+                <small>Email</small>
+                <div class="c-email-row">
+                  <a href="mailto:Fahimrr3@gmail.com" class="c-link">Fahimrr3@gmail.com</a>
+                  <button type="button" class="copy-btn" id="copyEmailBtn" aria-label="Copy email address">
+                    <span id="copyText">Copy</span>
+                  </button>
+                </div>
+              </div>
+            </li>
+
+            <li class="c-item">
+              <span class="ic" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+              </span>
+              <div class="c-item-content">
+                <small>GitHub</small>
+                <a href="https://github.com/DragonzEMP" target="_blank" rel="noopener" class="c-link">github.com/DragonzEMP</a>
+              </div>
+            </li>
+
+            <li class="c-item">
+              <span class="ic" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+              </span>
+              <div class="c-item-content">
+                <small>Facebook</small>
+                <a href="https://www.facebook.com/ridwonahmed.fahim" target="_blank" rel="noopener" class="c-link">fb.com/ridwonahmed.fahim</a>
+              </div>
+            </li>
+
+            <li class="c-item">
+              <span class="ic" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </span>
+              <div class="c-item-content">
+                <small>Location</small>
+                <b class="c-val">Dhaka, Bangladesh (UTC+6)</b>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Right Side: Interactive Form -->
+      <div class="form-wrap">
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-head">
+            <h3>Send a message</h3>
+            <p class="hint">Tell me what you have in mind and I'll reply via email within 24 hours.</p>
+          </div>
+
+          <div class="fields">
+            <div class="fl" id="fl-name">
+              <input type="text" id="c-name" name="name" required placeholder=" " autocomplete="name" maxlength="100" />
+              <label for="c-name">Your Name</label>
+              <span class="err" id="c-name-err">Please enter your name.</span>
+            </div>
+
+            <div class="fl" id="fl-email">
+              <input type="email" id="c-email" name="email" required placeholder=" " autocomplete="email" maxlength="150" />
+              <label for="c-email">Email Address</label>
+              <span class="err" id="c-email-err">Please enter a valid email address.</span>
+            </div>
+
+            <div class="fl full" id="fl-message">
+              <textarea id="c-msg" name="message" required placeholder=" " maxlength="1000" rows="5"></textarea>
+              <label for="c-msg">Tell me about your project</label>
+              <span class="count" id="c-count" aria-hidden="true">0 / 1000</span>
+              <span class="err" id="c-msg-err">Please write a brief message.</span>
+            </div>
+          </div>
+
+          <div class="consent" id="fl-consent">
+            <label for="c-agree">
+              <input type="checkbox" id="c-agree" name="agree" required />
+              <span>I agree that Fahim may use the details provided to reply to my message.</span>
+            </label>
+            <span class="err" id="c-agree-err">Please check the box so I can reply.</span>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="contactSubmitBtn">
+              <span>Send message</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Done State Overlay -->
+          <div class="done-state" id="contactDone" role="status" aria-live="polite">
+            <div class="done-content">
+              <div class="ok" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <h3>Message delivered!</h3>
+              <p>Thank you for reaching out. I'll get back to you within 24 hours.</p>
+              <button type="button" class="btn btn-secondary" id="contactResetBtn" style="margin-top: 18px;">Send another message</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-foot">
+
+  <div class="foot-aura" aria-hidden="true">
+    <div class="aura-orb aura-foot-1"></div>
+  </div>
+
+  <div class="wrap foot-inner">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="#top" class="brand" aria-label="Syed Ridwan Ahmed Fahim">
+          <i>SF</i>
+          <span>Syed Ridwan Ahmed <b>Fahim.</b></span>
+        </a>
+        <p class="foot-desc">Data Science &amp; Full-Stack Developer. Turning ideas into software, and data into meaningful insights.</p>
+      </div>
+      <div class="foot-status">
+        <span class="status-pill">
+          <span class="status-dot"></span>
+          Available for remote work &amp; research
+        </span>
+        <div class="local-time" id="localTimeDisplay">
+          <span class="time-badge">Dhaka UTC+6</span>
+          <span class="time-val" id="localTimeVal">--:--:--</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot-divider" aria-hidden="true"></div>
+
+    <div class="foot-bottom">
+      <p class="foot-copy">© 2026 Syed Ridwan Ahmed Fahim. Crafted with purpose.</p>
+      <ul class="foot-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#what-i-do">What I Do</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#terminal">Terminal</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="https://github.com/DragonzEMP" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js" defer></script>
+</body>
+</html>
