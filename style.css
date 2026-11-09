@@ -1149,7 +1149,6 @@
     padding-bottom: clamp(40px, 6vh, 72px);
     box-sizing: border-box;
     color: var(--ink);
-    --w: clamp(160px, 17vw, 250px);
   }
 
   /* Ambient background lighting */
@@ -1185,57 +1184,63 @@
     background: linear-gradient(180deg, var(--bg) 0%, rgba(5, 8, 15, 0.35) 14%, rgba(5, 8, 15, 0.2) 40%, rgba(5, 8, 15, 0.8) 70%, var(--bg) 92%);
   }
 
-  /* 3D Rotunda Container */
+  /* ── Wrapper holds the hall + the nav buttons as siblings ── */
+  .hall-wrapper {
+    position: relative;
+    width: 100%;
+    --card-w: clamp(160px, 18vw, 260px);
+  }
+
+  /* ── 3D Carousel Stage ── */
   .hall {
-    --top: clamp(28px, 5vh, 56px);
     position: relative;
     isolation: isolate;
-    margin-top: 28px;
-    height: calc(var(--top) + 30px + var(--w) * 2.3);
-    perspective: 1400px;
-    perspective-origin: 50% 38%;
+    margin-top: 20px;
+    height: calc(var(--card-w) * 1.42 + 60px);   /* card height + label */
+    perspective: 1200px;
+    perspective-origin: 50% 46%;
     outline: none;
     touch-action: pan-y;
     -webkit-user-select: none;
     user-select: none;
     cursor: grab;
+    overflow: visible;
   }
 
-  .hall:active {
-    cursor: grabbing;
-  }
+  .hall:active { cursor: grabbing; }
 
   .hall:focus-visible {
     box-shadow: inset 0 0 0 2px var(--accent);
   }
 
-  /* Reflective Floor */
+  /* ── Floor reflection strip ── */
   .hall-floor {
     position: absolute;
-    left: 0;
-    right: 0;
-    top: calc(var(--top) + 36px + var(--w) * 4 / 3);
-    bottom: -1200px;
+    left: 0; right: 0;
+    top: calc(60px + var(--card-w) * 1.42);
+    bottom: -600px;
     z-index: -1;
     pointer-events: none;
-    background: radial-gradient(60% 420px at 50% 0%, rgba(34, 211, 238, 0.07), transparent 70%),
-                linear-gradient(180deg, rgba(2, 4, 9, 0.5) 0px, rgba(5, 8, 15, 0.82) 220px, var(--bg) 520px);
+    background:
+      radial-gradient(60% 300px at 50% 0%, rgba(34, 211, 238, 0.07), transparent 70%),
+      linear-gradient(180deg, rgba(2, 4, 9, 0.5) 0px, rgba(5, 8, 15, 0.82) 180px, var(--bg) 400px);
     border-top: 1px solid color-mix(in srgb, var(--accent) 14%, transparent);
   }
 
-  .hall-stage {
+  /* ── Track: flat container that cards are positioned absolutely within ── */
+  .hall-track {
     position: absolute;
     inset: 0;
     transform-style: preserve-3d;
   }
 
-  /* 3D Cards */
+  /* ── Individual Cards ── */
   .hall-card {
     position: absolute;
-    top: var(--top);
+    top: 36px;                        /* room for the label above */
     left: 50%;
-    margin-left: calc(var(--w) / -2);
-    width: var(--w);
+    margin-left: calc(var(--card-w) / -2);
+    width: var(--card-w);
     transform-style: preserve-3d;
     will-change: transform, opacity;
     color: var(--ink);
@@ -1243,12 +1248,13 @@
     -webkit-tap-highlight-color: transparent;
     outline: none;
     cursor: pointer;
+    transform-origin: center center;
   }
 
   .hall-label {
     display: block;
     text-align: center;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -1256,8 +1262,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: 12px;
-    transition: color 0.4s ease;
+    margin-bottom: 10px;
+    transition: color 0.4s ease, opacity 0.4s ease;
+    position: relative;
+    top: -36px;                       /* float above the frame */
   }
 
   .hall-card.front .hall-label {
@@ -1266,12 +1274,11 @@
     text-overflow: clip;
     width: max-content;
     max-width: calc(100vw - 32px);
-    position: relative;
     left: 50%;
     transform: translate(-50%);
   }
 
-  /* Card Frame (Aspect Ratio 3/4) */
+  /* ── Card Frame — portrait 3:4 ── */
   .hall-frame {
     position: relative;
     display: block;
@@ -1279,12 +1286,17 @@
     border-radius: 12px;
     overflow: hidden;
     background: #0b1220;
-    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 20px 50px -20px rgba(0, 0, 0, 0.75),
+      0 0 0 1px rgba(255, 255, 255, 0.08);
     transition: box-shadow 0.5s ease;
   }
 
   .hall-card.front .hall-frame {
-    box-shadow: 0 50px 90px -30px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.18), 0 0 36px rgba(34, 211, 238, 0.12);
+    box-shadow:
+      0 40px 80px -24px rgba(0, 0, 0, 0.9),
+      0 0 0 1px rgba(255, 255, 255, 0.18),
+      0 0 36px rgba(34, 211, 238, 0.14);
   }
 
   .hall-card:focus-visible .hall-frame {
@@ -1292,7 +1304,7 @@
     outline-offset: 4px;
   }
 
-  /* Built-in Styled Card Art (Fallback & High-Visual Foundation) */
+  /* ── Built-in Card Art (fallback gradient) ── */
   .hall-card-art {
     position: absolute;
     inset: 0;
@@ -1311,7 +1323,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background-image: 
+    background-image:
       linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
     background-size: 20px 20px;
@@ -1389,7 +1401,7 @@
     padding: 2px 6px;
   }
 
-  /* Card Image Layer (Overlay when available) */
+  /* ── Project image overlay ── */
   .hall-frame img.hall-img {
     position: absolute;
     inset: 0;
@@ -1403,15 +1415,10 @@
     display: block;
   }
 
-  .hall-card.front .hall-frame img.hall-img {
-    filter: none;
-  }
+  .hall-card.front .hall-frame img.hall-img { filter: none; }
+  .hall-card.front:hover .hall-frame img.hall-img { transform: scale(1.05); }
 
-  .hall-card.front:hover .hall-frame img.hall-img {
-    transform: scale(1.06);
-  }
-
-  /* Floating Pill on Active Hover (.hall-open) */
+  /* ── "Open project" pill ── */
   .hall-open {
     position: absolute;
     left: 50%;
@@ -1439,7 +1446,7 @@
     transform: translate(-50%, 0);
   }
 
-  /* Floor Reflection (.hall-mirror) */
+  /* ── Floor mirror ── */
   .hall-mirror {
     display: block;
     width: 100%;
@@ -1449,40 +1456,38 @@
     border-radius: 12px;
     transform: scaleY(-1);
     transform-origin: center;
-    opacity: 0.6;
-    filter: blur(1px) brightness(0.75) saturate(1.05);
-    -webkit-mask-image: linear-gradient(0deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.35) 30%, transparent 72%);
-    mask-image: linear-gradient(0deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.35) 30%, transparent 72%);
+    opacity: 0.5;
+    filter: blur(1px) brightness(0.65) saturate(1.05);
+    -webkit-mask-image: linear-gradient(0deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 30%, transparent 68%);
+    mask-image: linear-gradient(0deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 30%, transparent 68%);
     pointer-events: none;
   }
 
-  .hall-card.front .hall-mirror {
-    opacity: 0.72;
-  }
+  .hall-card.front .hall-mirror { opacity: 0.65; }
 
-  /* Circular Glass Navigation Buttons */
+  /* ── Navigation Buttons — anchored to .hall-wrapper ── */
   .hall-nav {
     position: absolute;
-    top: calc(var(--top) + 6px + var(--w) * 2 / 3);
-    z-index: 350;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 500;
     width: 48px;
     height: 48px;
     border-radius: 50%;
     border: 1px solid var(--line);
-    background: color-mix(in srgb, var(--surface) 80%, transparent);
+    background: color-mix(in srgb, var(--surface) 90%, transparent);
     color: var(--ink);
-    font-size: 28px;
+    font-size: 26px;
     line-height: 1;
     cursor: pointer;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease, transform 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    transform: translateZ(600px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
@@ -1494,26 +1499,21 @@
     background: var(--accent);
     border-color: var(--accent);
     color: #04202a;
-    transform: translateZ(600px) scale(1.08);
+    transform: translateY(-50%) scale(1.08);
   }
 
   .hall-nav:active {
-    transform: translateZ(600px) scale(0.95);
+    transform: translateY(-50%) scale(0.94);
   }
 
-  .hall-nav.prev {
-    left: max(16px, calc((100vw - 1180px) / 2));
-  }
+  .hall-nav.prev { left: max(12px, calc((100vw - 1240px) / 2)); }
+  .hall-nav.next { right: max(12px, calc((100vw - 1240px) / 2)); }
 
-  .hall-nav.next {
-    right: max(16px, calc((100vw - 1180px) / 2));
-  }
-
-  /* Bottom Meta Section (Below Carousel & Overlapping Floor) */
+  /* ── Bottom Meta ── */
   .hall-meta {
     position: relative;
-    z-index: 160;
-    margin-top: calc(var(--w) * -0.55);
+    z-index: 10;
+    margin-top: 28px;
     text-align: center;
   }
 
@@ -1542,11 +1542,11 @@
     line-height: 1.15;
     font-size: min(clamp(1.4rem, 3.4vw, 2.4rem), calc((100vw - 48px) / (var(--len, 12) * 0.92)));
     color: var(--ink);
-    animation: hall-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    animation: hall-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   @keyframes hall-in {
-    0% { opacity: 0; transform: translateY(12px); letter-spacing: 0.3em; }
+    0% { opacity: 0; transform: translateY(10px); letter-spacing: 0.28em; }
   }
 
   .hall-dots {
@@ -1583,30 +1583,15 @@
   }
 
   @media (max-width: 760px) {
-    .work-hall, .hall {
-      --w: clamp(140px, 42vw, 200px);
-    }
-    .hall {
-      perspective: 900px;
-    }
-    .hall-nav {
-      width: 40px;
-      height: 40px;
-      font-size: 20px;
-      top: calc(var(--top) + 6px + var(--w) * 2 / 3);
-    }
-    .hall-nav.prev {
-      left: 10px;
-    }
-    .hall-nav.next {
-      right: 10px;
-    }
+    .hall-wrapper { --card-w: clamp(140px, 44vw, 210px); }
+    .hall { perspective: 900px; }
+    .hall-nav { width: 40px; height: 40px; font-size: 18px; }
+    .hall-nav.prev { left: 8px; }
+    .hall-nav.next { right: 8px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hall-title {
-      animation: none;
-    }
+    .hall-title { animation: none; }
   }
 
   /* ---------- STATUS ---------- */

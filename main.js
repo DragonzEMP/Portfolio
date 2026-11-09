@@ -747,61 +747,111 @@
   }
 
   // ==========================================================================
-  // 5. 3D PROJECT ROTUNDA (#work) — EXACT MATCH TO REFERENCE DESIGN
+  // 5. 3D PROJECT CAROUSEL (#work) — FLAT ARC DESIGN MATCHING REFERENCE
   // ==========================================================================
   function initRotunda() {
-    const hall = document.getElementById('projectHall');
-    const stage = document.getElementById('hallStage');
-    if (!hall || !stage) return;
-
-    const cards = Array.from(stage.querySelectorAll('.hall-card'));
-    const dots = Array.from(document.querySelectorAll('#hallDots button'));
-    const prevBtn = document.getElementById('hallPrev');
-    const nextBtn = document.getElementById('hallNext');
-    const titleEl = document.getElementById('hallTitle');
-    const countEl = document.getElementById('hallCount');
+    const hall      = document.getElementById('projectHall');
+    const track     = document.getElementById('hallTrack');
+    const prevBtn   = document.getElementById('hallPrev');
+    const nextBtn   = document.getElementById('hallNext');
+    const titleEl   = document.getElementById('hallTitle');
+    const countEl   = document.getElementById('hallCount');
     const primaryBtn = document.getElementById('hallPrimaryBtn');
+    const dotsWrap  = document.getElementById('hallDots');
 
+    if (!hall || !track) return;
+
+    const cards = Array.from(track.querySelectorAll('.hall-card'));
+    const dots  = dotsWrap ? Array.from(dotsWrap.querySelectorAll('button')) : [];
     const s = cards.length;
     if (!s) return;
 
-    const Sc = 13;      // Step angle = 13 degrees per card
-    const Y_ = 0.16;    // Gap ratio between cards = 16%
-
-    let f = 0;          // Smooth interpolated float position
-    let v = 0;          // Target discrete step index
-    let isHovered = false;
-    let b = 0;          // Current active integer index
-
-    const z = (P) => {
-      const H = s / 2;
-      return ((P + H) % s + s) % s - H;
-    };
-
-    const setTarget = (N) => {
-      v = N;
-      if (prefersReducedMotion) f = N;
-    };
-
-    const step = (dir) => {
-      setTarget(Math.round(v) + dir);
-      if (typeof globalTriggerShatter === 'function') {
-        globalTriggerShatter(0.85);
-      }
-    };
-
     const projectData = [
-      { title: 'Nexus Gear', url: 'https://nexus-gear.onrender.com' },
+      { title: 'Nexus Gear',       url: 'https://nexus-gear.onrender.com' },
       { title: 'Brick Smasher 67', url: 'https://brick67.vercel.app' },
-      { title: 'Retro Racing', url: 'https://retro-racing-game.vercel.app' },
-      { title: 'Chat-EXE', url: 'https://chat-exe.onrender.com' },
-      { title: 'Neon Snake', url: 'https://neon-snake-swart-beta.vercel.app' },
-      { title: 'UNO Online', url: 'https://uno-six-iota.vercel.app' },
-      { title: 'Sentiment NLP', url: 'https://github.com/DragonzEMP/YouTube-Comment-Sentiment-Analysis' },
+      { title: 'Retro Racing',     url: 'https://retro-racing-game.vercel.app' },
+      { title: 'Chat-EXE',         url: 'https://chat-exe.onrender.com' },
+      { title: 'Neon Snake',       url: 'https://neon-snake-swart-beta.vercel.app' },
+      { title: 'UNO Online',       url: 'https://uno-six-iota.vercel.app' },
+      { title: 'Sentiment NLP',    url: 'https://github.com/DragonzEMP/YouTube-Comment-Sentiment-Analysis' },
       { title: 'WordPress Themes', url: '#contact' },
-      { title: 'Network Systems', url: 'https://github.com/DragonzEMP' },
-      { title: 'Sonar Radar', url: 'https://github.com/DragonzEMP' }
+      { title: 'Network Systems',  url: 'https://github.com/DragonzEMP' },
+      { title: 'Sonar Radar',      url: 'https://github.com/DragonzEMP' }
     ];
+
+    // --- State ---
+    let current  = 0;   // target index (integer)
+    let pos      = 0;   // smoothly interpolated float position
+    let rafId    = null;
+    let isHovered = false;
+    let isDragging = false, dragStartX = 0, dragStartPos = 0, dragDelta = 0;
+
+    // Clamp to circular index
+    const wrap = (i) => ((i % s) + s) % s;
+
+    // --- Layout constants ---
+    // Gap between card centers as a fraction of card width
+    const GAP_RATIO = 1.28;
+    // Per-step Y-axis rotation for side cards (degrees)
+    const TILT_DEG  = 48;
+    // Per-step Z-translate (how far back side cards push)
+    const DEPTH_PX  = 180;
+    // Scale falloff per step from center
+    const SCALE_STEP = 0.11;
+    // Opacity at ±2 cards
+    const FAR_OPACITY = 0.55;
+
+    function getCardWidth() {
+      const c = cards[0];
+      return (c && c.offsetWidth > 0) ? c.offsetWidth : 220;
+    }
+
+    function applyLayout(smoothPos) {
+      const cw = getCardWidth();
+      const gap = cw * GAP_RATIO;
+
+      cards.forEach((card, i) => {
+        // Offset from center in card-units
+        const raw = i - smoothPos;
+        // Wrap to range [-s/2, s/2]
+        const halfS = s / 2;
+        let d = ((raw + halfS) % s + s) % s - halfS;
+
+        const absD = Math.abs(d);
+
+        // Visibility: hide if more than 2.6 slots from center
+        if (absD > 2.65) {
+          card.style.opacity = '0';
+          card.style.pointerEvents = 'none';
+          card.style.zIndex = '0';
+          card.classList.remove('front');
+          return;
+        }
+
+        // Translate X: linear spacing
+        const tx = d * gap;
+
+        // Rotation: tilt inward toward center
+        const ry = -d * TILT_DEG;
+
+        // Depth: push back as distance increases
+        const tz = -absD * DEPTH_PX;
+
+        // Scale: shrink as distance increases
+        const sc = Math.max(0.55, 1 - absD * SCALE_STEP);
+
+        // Opacity: fade far cards
+        const op = absD > 1.6
+          ? FAR_OPACITY - (absD - 1.6) * 0.65
+          : 1 - absD * (1 - FAR_OPACITY) * 0.4;
+
+        card.style.transform  = `translateX(${tx.toFixed(1)}px) translateZ(${tz.toFixed(1)}px) rotateY(${ry.toFixed(1)}deg) scale(${sc.toFixed(3)})`;
+        card.style.opacity    = Math.max(0, Math.min(1, op)).toFixed(3);
+        card.style.zIndex     = String(Math.round(100 - absD * 20));
+        card.style.pointerEvents = absD > 2.4 ? 'none' : '';
+        card.classList.toggle('front', absD < 0.5);
+      });
+    }
 
     function updateMeta(idx) {
       const p = projectData[idx] || projectData[0];
@@ -819,157 +869,118 @@
       if (primaryBtn) {
         primaryBtn.href = p.url;
       }
-
       dots.forEach((dot, i) => {
-        const isActive = i === idx;
-        dot.classList.toggle('on', isActive);
-        dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        const active = i === idx;
+        dot.classList.toggle('on', active);
+        dot.setAttribute('aria-selected', active ? 'true' : 'false');
       });
     }
 
+    // Animation loop — smooth lerp toward target
+    let lastMeta = -1;
     function loop() {
-      const firstCard = hall.querySelector('.hall-card');
-      const P = (firstCard && firstCard.offsetWidth > 0) ? firstCard.offsetWidth : 220;
+      const ease = prefersReducedMotion ? 1 : 0.1;
+      pos += (current - pos) * ease;
+      if (isNaN(pos)) pos = current;
 
-      f += (v - f) * (prefersReducedMotion ? 1 : 0.09);
-      if (isNaN(f)) f = 0;
-      if (isNaN(v)) v = 0;
+      applyLayout(pos);
 
-      cards.forEach((F, re) => {
-        if (!F) return;
-        const Q = z(re - f);
-        const ae = Math.abs(Q);
-        const Ee = (Sc / 2) * Math.PI / 180;
-        const je = Q * Sc * Math.PI / 180;
-        const de = (P * (1 + Y_)) / (2 * Math.sin(Ee));
-        const M = `translate3d(${de * Math.sin(je)}px,0,${de * (1 - Math.cos(je))}px) rotateY(${-Q * Sc}deg)`;
-        const J = ae > 4.6 ? 0 : 1 - Math.max(0, ae - 3.6);
-        const te = 1 + 0.1 * Math.max(0, 1 - ae);
-
-        F.style.transform = `${M} scale(${te.toFixed(4)})`;
-        F.style.opacity = J;
-        F.style.zIndex = String(100 - Math.round(ae * 10));
-        F.style.pointerEvents = J < 0.2 ? 'none' : '';
-        F.classList.toggle('front', ae < 0.5);
-      });
-
-      const X = (Math.round(f) % s + s) % s;
-      if (X !== b) {
-        b = X;
-        updateMeta(b);
+      const snapped = wrap(Math.round(pos));
+      if (snapped !== lastMeta) {
+        lastMeta = snapped;
+        updateMeta(snapped);
       }
-
-      requestAnimationFrame(loop);
+      rafId = requestAnimationFrame(loop);
     }
 
+    // Navigate to index (shortest circular path)
+    function goTo(targetIdx) {
+      const halfS = s / 2;
+      const diff = ((targetIdx - current + halfS * 10) % s + s) % s;
+      // Choose shortest direction
+      current += diff <= halfS ? diff : diff - s;
+      if (typeof globalTriggerShatter === 'function') {
+        globalTriggerShatter(0.75);
+      }
+    }
+
+    function step(dir) {
+      goTo(wrap(Math.round(current) + dir));
+    }
+
+    // --- Button listeners ---
     if (prevBtn) {
-      prevBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        step(-1);
-      });
-      prevBtn.addEventListener('pointerdown', (e) => {
-        e.stopPropagation();
-      });
+      prevBtn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); step(-1); });
+      prevBtn.addEventListener('pointerdown', (e) => e.stopPropagation());
     }
-
     if (nextBtn) {
-      nextBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        step(1);
-      });
-      nextBtn.addEventListener('pointerdown', (e) => {
-        e.stopPropagation();
-      });
+      nextBtn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); step(1); });
+      nextBtn.addEventListener('pointerdown', (e) => e.stopPropagation());
     }
 
-    let startX = 0, startF = 0, isDragging = false, dragP = 0;
-
-    hall.addEventListener('pointerdown', (re) => {
-      if (re.target.closest('.hall-nav') || re.target.closest('button')) return;
-      isDragging = true;
-      dragP = 0;
-      startX = re.clientX;
-      startF = f;
-      isHovered = true;
+    // --- Dot listeners ---
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', (e) => { e.preventDefault(); goTo(i); });
     });
 
-    window.addEventListener('pointermove', (re) => {
+    // --- Drag / swipe ---
+    hall.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('.hall-nav') || e.target.closest('[role="tablist"] button')) return;
+      isDragging = true;
+      dragDelta = 0;
+      dragStartX = e.clientX;
+      dragStartPos = current;
+      isHovered = true;
+      hall.setPointerCapture(e.pointerId);
+    });
+
+    hall.addEventListener('pointermove', (e) => {
       if (!isDragging) return;
-      const Q = re.clientX - startX;
-      dragP = Math.max(dragP, Math.abs(Q));
-      const firstCard = hall.querySelector('.hall-card');
-      const ae = Math.max(160, firstCard ? firstCard.offsetWidth : 220);
-      v = f = startF - Q / (ae * 0.9);
+      const dx = e.clientX - dragStartX;
+      dragDelta = Math.abs(dx);
+      const cw = Math.max(160, getCardWidth());
+      current = dragStartPos - dx / (cw * GAP_RATIO);
     }, { passive: true });
 
-    const onPointerUp = () => {
-      if (isDragging) {
-        isDragging = false;
-        isHovered = hall.matches(':hover');
-        setTarget(Math.round(f));
-        hall.dataset.dragged = dragP > 6 ? '1' : '';
-      }
+    const endDrag = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      current = Math.round(current);
+      hall.dataset.dragged = dragDelta > 6 ? '1' : '';
     };
+    hall.addEventListener('pointerup', endDrag);
+    hall.addEventListener('pointercancel', endDrag);
 
-    window.addEventListener('pointerup', onPointerUp);
-    window.addEventListener('pointercancel', onPointerUp);
-
-    cards.forEach((card, x) => {
+    // Click on a non-front card → navigate to it
+    cards.forEach((card, i) => {
       card.addEventListener('click', (e) => {
-        if (hall.dataset.dragged === '1') {
+        if (hall.dataset.dragged === '1') { e.preventDefault(); return; }
+        if (!card.classList.contains('front')) {
           e.preventDefault();
-          return;
-        }
-        if (x !== b) {
-          e.preventDefault();
-          const V = s / 2;
-          const P = ((x - f + V) % s + s) % s - V;
-          setTarget(Math.round(f + P));
-          if (typeof globalTriggerShatter === 'function') {
-            globalTriggerShatter(0.85);
-          }
+          goTo(i);
         }
       });
     });
 
-    dots.forEach((dot, x) => {
-      dot.addEventListener('click', (e) => {
-        e.preventDefault();
-        const V = s / 2;
-        const P = ((x - f + V) % s + s) % s - V;
-        setTarget(Math.round(f + P));
-        if (typeof globalTriggerShatter === 'function') {
-          globalTriggerShatter(0.85);
-        }
-      });
-    });
-
-    hall.addEventListener('keydown', (re) => {
-      if (re.key === 'ArrowRight') {
-        re.preventDefault();
-        step(1);
-      } else if (re.key === 'ArrowLeft') {
-        re.preventDefault();
-        step(-1);
-      }
+    // Keyboard
+    hall.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
     });
 
     hall.addEventListener('pointerenter', () => { isHovered = true; });
     hall.addEventListener('pointerleave', () => { isHovered = false; });
 
+    // Auto-advance every 5 s when idle
     setInterval(() => {
-      if (!isHovered && !document.hidden && !isDragging) {
+      if (!isHovered && !isDragging && !document.hidden) {
         const rect = hall.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          step(1);
-        }
+        if (rect.top < window.innerHeight && rect.bottom > 0) step(1);
       }
     }, 5000);
 
     updateMeta(0);
-    requestAnimationFrame(loop);
+    rafId = requestAnimationFrame(loop);
   }
   try {
     initRotunda();

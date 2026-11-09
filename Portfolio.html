@@ -303,10 +303,19 @@
     </div>
   </div>
 
-  <div class="hall" id="projectHall" role="region" aria-roledescription="carousel" aria-label="Projects" tabindex="0">
+  <div class="hall-wrapper">
+    <!-- Nav buttons OUTSIDE the 3D perspective stage so they always receive clicks -->
+    <button type="button" class="hall-nav prev" id="hallPrev" aria-label="Previous project">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button type="button" class="hall-nav next" id="hallNext" aria-label="Next project">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+
+    <div class="hall" id="projectHall" role="region" aria-roledescription="carousel" aria-label="Projects" tabindex="0">
     <div class="hall-floor" aria-hidden="true"></div>
 
-    <div class="hall-stage" id="hallStage">
+    <div class="hall-track" id="hallTrack">
       <!-- Project 01: NEXUS GEAR -->
       <a href="https://nexus-gear.onrender.com" target="_blank" rel="noopener" class="hall-card" data-index="0" draggable="false" aria-label="NEXUS GEAR: open project">
         <span class="hall-label" aria-hidden="true">NEXUS GEAR</span>
@@ -506,12 +515,11 @@
         </span>
         <img class="hall-mirror" src="assets/projects/sonar-detection.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
       </a>
-    </div>
+    </div><!-- /.hall-track -->
+  </div><!-- /.hall -->
+  </div><!-- /.hall-wrapper -->
 
     <!-- Navigation Buttons with Direct Chevrons -->
-    <button type="button" class="hall-nav prev" id="hallPrev" aria-label="Previous project">‹</button>
-    <button type="button" class="hall-nav next" id="hallNext" aria-label="Next project">›</button>
-  </div>
 
   <!-- Bottom Meta Section (Below Carousel & Overlapping Floor) -->
   <div class="wrap hall-meta" aria-live="polite">
