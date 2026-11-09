@@ -30,7 +30,7 @@
     <nav class="nav-capsule" id="navCapsule" aria-label="Primary Navigation">
       <span class="nav-ind" id="navInd" aria-hidden="true"></span>
       <a href="#about" class="nav-link">About</a>
-      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#what-i-do" class="nav-link">What I Do</a>
       <a href="#projects" class="nav-link">Projects</a>
       <a href="#status" class="nav-link">Currently</a>
       <a href="#contact" class="nav-link">Contact</a>
@@ -63,7 +63,7 @@
 
   <div class="mobile-nav" id="mobileNav" aria-hidden="true">
     <a href="#about" class="m-link">About</a>
-    <a href="#skills" class="m-link">Skills</a>
+    <a href="#what-i-do" class="m-link">What I Do</a>
     <a href="#projects" class="m-link">Projects</a>
     <a href="#status" class="m-link">Currently</a>
     <a href="#contact" class="m-link">Contact</a>
@@ -175,107 +175,182 @@
   </div>
 </section>
 
-<section id="about">
+<section id="about" class="about-section">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow" style="color:var(--violet)">About</div>
-      <h2>Curious by default, methodical by training.</h2>
-    </div>
     <div class="about-grid">
-      <div class="about-text reveal">
-        <p>I'm a passionate Computer Science graduate blending my background in Data Science and Machine Learning with my professional work in Web Development. During university, I worked on research projects involving predictive analytics and data mining.</p>
-        <p>Currently, I work remotely at a private company where I collaborate on large-scale custom web platforms, build custom WordPress themes, and develop complete client websites. I believe in continuous learning, and I regularly use my data background and modern AI tools to architect smarter, more robust web solutions.</p>
+      <!-- Left Column: Portrait Container with Moody Lighting -->
+      <div class="about-visual reveal">
+        <div class="about-portrait-card">
+          <div class="portrait-glow" aria-hidden="true"></div>
+          <div class="portrait-frame">
+            <img
+              src="https://github.com/DragonzEMP.png"
+              alt="Syed Ridwan Ahmed Fahim"
+              class="portrait-img"
+              onerror="this.src='https://avatars.githubusercontent.com/u/122268976?v=4'"
+            >
+            <div class="portrait-overlay" aria-hidden="true"></div>
+          </div>
+          <div class="portrait-caption">
+            <span class="caption-name">Syed Ridwan Ahmed Fahim</span>
+            <span class="caption-sub">CSE Graduate · Data Science &amp; Full-Stack</span>
+          </div>
+        </div>
       </div>
-      <div class="do-grid reveal">
-        <div class="do-card c-violet">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V10M12 19V5M20 19v-7"/></svg></div>
-          <h4>Data Science</h4>
-          <ul>
-            <li>Machine learning models</li>
-            <li>Data cleaning &amp; visualization</li>
-            <li>Predictive analytics</li>
-            <li>Data mining</li>
-          </ul>
+
+      <!-- Right Column: Narrative & Metrics -->
+      <div class="about-content reveal">
+        <div class="tag">About me</div>
+        <h2 class="about-headline">Curious by default, methodical by training.</h2>
+        <div class="about-bio">
+          <p>I'm a passionate Computer Science graduate blending my background in Data Science and Machine Learning with my professional work in Web Development. During university, I worked on research projects involving predictive analytics and data mining.</p>
+          <p>Currently, I work remotely at a private company where I collaborate on large-scale custom web platforms, build custom WordPress themes, and develop complete client websites. I believe in continuous learning, and I regularly use my data background and modern AI tools to architect smarter, more robust web solutions.</p>
         </div>
-        <div class="do-card c-teal">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></div>
-          <h4>Web Development</h4>
-          <ul>
-            <li>Responsive websites</li>
-            <li>Frontend development</li>
-            <li>Portfolio websites</li>
-            <li>Landing pages</li>
-          </ul>
-        </div>
-        <div class="do-card c-coral">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6 3 12l5 6M16 6l5 6-5 6"/></svg></div>
-          <h4>Programming</h4>
-          <ul>
-            <li>Python</li>
-            <li>Java</li>
-            <li>C++</li>
-            <li>SQL</li>
-          </ul>
-        </div>
-        <div class="do-card c-gold">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/><circle cx="12" cy="12" r="3"/></svg></div>
-          <h4>AI IDEs &amp; Tools</h4>
-          <ul>
-            <li>Antigravity &amp; Cursor</li>
-            <li>AI-assisted development</li>
-            <li>Solo &amp; company builds</li>
-            <li>Workflow automation</li>
-          </ul>
+
+        <!-- Highlight Metrics Grid (4 Stats) -->
+        <div class="about-metrics">
+          <div class="metric-card">
+            <span class="metric-num">10<span class="metric-plus">+</span></span>
+            <span class="metric-label">Live Web Projects</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-num">3<span class="metric-plus">+</span></span>
+            <span class="metric-label">Research Papers</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-num">15<span class="metric-plus">+</span></span>
+            <span class="metric-label">WordPress Themes</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-num">100<span class="metric-plus">+</span></span>
+            <span class="metric-label">AI Workflows</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="skills">
+<section id="what-i-do" class="capabilities-section">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow" style="color:var(--teal)">Skills</div>
-      <h2>Tools I reach for.</h2>
+    <div class="section-head reveal center-head">
+      <div class="tag">What I do</div>
+      <h2 class="section-title">Three disciplines, one standard of craft.</h2>
+      <p class="section-desc">From statistical data models to full-scale web platforms and agentic workflows.</p>
     </div>
-    <div class="skill-groups reveal">
-      <div class="skill-row">
-        <h4>Languages</h4>
-        <div class="pill-set">
-          <span class="pill">Python</span><span class="pill">Java</span><span class="pill">C</span><span class="pill">C++</span><span class="pill">JavaScript</span><span class="pill">PHP</span><span class="pill">SQL</span>
-        </div>
+
+    <div class="rows-body" id="rowsBody">
+      <!-- Central Glowing Progress Line -->
+      <div class="rows-line" aria-hidden="true">
+        <span></span>
+        <i></i>
       </div>
-      <div class="skill-row">
-        <h4>Web</h4>
-        <div class="pill-set">
-          <span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript</span><span class="pill">WordPress</span><span class="pill">Bootstrap</span>
-        </div>
-      </div>
-      <div class="skill-row">
-        <h4>Data Science</h4>
-        <div class="pill-set">
-          <span class="pill">Pandas</span><span class="pill">NumPy</span><span class="pill">Scikit-learn</span><span class="pill">Matplotlib</span><span class="pill">Machine Learning</span><span class="pill">Data Mining</span><span class="pill">Data Visualization</span>
-        </div>
-      </div>
-      <div class="skill-row">
-        <h4>Database</h4>
-        <div class="pill-set">
-          <span class="pill">MySQL</span><span class="pill">MongoDB</span><span class="pill">XAMPP</span>
-        </div>
-      </div>
-      <div class="skill-row">
-        <h4>IDEs &amp; Tools</h4>
-        <div>
-          <div class="pill-set">
-            <span class="pill">Antigravity</span><span class="pill">Cursor</span><span class="pill">VS Code</span><span class="pill">Git</span><span class="pill">GitHub</span><span class="pill">Google Colab</span><span class="pill">Jupyter Notebook</span><span class="pill">XAMPP</span>
+
+      <!-- Capability 1: Data Science & Machine Learning -->
+      <div class="capability-row reveal">
+        <div class="capability-card">
+          <div class="card-badge">01 · Intelligence</div>
+          <h3 class="card-title">Data Science &amp; Machine Learning</h3>
+          <p class="card-desc">
+            Developing predictive models, data mining pipelines, and actionable analytics. Transforming messy raw data into structured intelligence using modern Python data science frameworks.
+          </p>
+          <div class="card-pills">
+            <span class="tech-pill">Predictive Modeling</span>
+            <span class="tech-pill">Feature Engineering</span>
+            <span class="tech-pill">Data Mining</span>
+            <span class="tech-pill">Visualization</span>
           </div>
-          <p style="font-size: 13.5px; color: var(--text-muted); margin-top: 10px; line-height: 1.5;">Proficient in utilizing next-generation AI IDEs such as <strong>Antigravity</strong> and <strong>Cursor</strong> alongside VS Code to accelerate engineering workflows, streamline architecture, and deliver high-impact results for both solo initiatives and company projects.</p>
+          <div class="card-tools">
+            <span class="tool-tag">Python</span>
+            <span class="tool-tag">Pandas</span>
+            <span class="tool-tag">NumPy</span>
+            <span class="tool-tag">Scikit-learn</span>
+            <span class="tool-tag">Matplotlib</span>
+          </div>
+        </div>
+        <div class="capability-meta">
+          <div class="meta-preview">
+            <div class="meta-stat">
+              <span class="stat-highlight">Research Driven</span>
+              <span class="stat-detail">Undergraduate work in predictive healthcare &amp; analytics</span>
+            </div>
+            <div class="meta-stat">
+              <span class="stat-highlight">Clean Pipelines</span>
+              <span class="stat-detail">Structured data cleaning, preprocessing, &amp; evaluation</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="skill-row">
-        <h4>Other</h4>
-        <div class="pill-set">
-          <span class="pill">Problem Solving</span><span class="pill">AI-assisted Development</span><span class="pill">Responsive Design</span>
+
+      <!-- Capability 2: Full-Stack Web Development (Alternating) -->
+      <div class="capability-row row-reverse reveal">
+        <div class="capability-card">
+          <div class="card-badge">02 · Engineering</div>
+          <h3 class="card-title">Full-Stack Web Development</h3>
+          <p class="card-desc">
+            Crafting high-performance websites, custom WordPress themes, and scalable web applications. Delivering responsive, pixel-perfect interfaces with robust backends and clean database schemas.
+          </p>
+          <div class="card-pills">
+            <span class="tech-pill">Custom WP Themes</span>
+            <span class="tech-pill">Responsive Design</span>
+            <span class="tech-pill">REST APIs</span>
+            <span class="tech-pill">Database Design</span>
+          </div>
+          <div class="card-tools">
+            <span class="tool-tag">React</span>
+            <span class="tool-tag">JavaScript</span>
+            <span class="tool-tag">PHP</span>
+            <span class="tool-tag">WordPress</span>
+            <span class="tool-tag">MongoDB</span>
+            <span class="tool-tag">MySQL</span>
+          </div>
+        </div>
+        <div class="capability-meta">
+          <div class="meta-preview">
+            <div class="meta-stat">
+              <span class="stat-highlight">Production Scale</span>
+              <span class="stat-detail">Remote enterprise agency client platforms &amp; e-commerce</span>
+            </div>
+            <div class="meta-stat">
+              <span class="stat-highlight">Fluid UX</span>
+              <span class="stat-detail">Responsive layouts optimized for speed &amp; accessibility</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Capability 3: AI-Assisted Architecture -->
+      <div class="capability-row reveal">
+        <div class="capability-card">
+          <div class="card-badge">03 · Innovation</div>
+          <h3 class="card-title">AI-Assisted Architecture</h3>
+          <p class="card-desc">
+            Accelerating software delivery through next-generation AI IDEs (Antigravity &amp; Cursor). Streamlining complex workflows, reducing turnaround time, and architecting smarter, maintainable codebases for company and solo builds.
+          </p>
+          <div class="card-pills">
+            <span class="tech-pill">Workflow Automation</span>
+            <span class="tech-pill">Agentic Development</span>
+            <span class="tech-pill">Rapid Prototyping</span>
+            <span class="tech-pill">Code Refactoring</span>
+          </div>
+          <div class="card-tools">
+            <span class="tool-tag">Antigravity</span>
+            <span class="tool-tag">Cursor</span>
+            <span class="tool-tag">VS Code</span>
+            <span class="tool-tag">Git / GitHub</span>
+          </div>
+        </div>
+        <div class="capability-meta">
+          <div class="meta-preview">
+            <div class="meta-stat">
+              <span class="stat-highlight">Next-Gen Speed</span>
+              <span class="stat-detail">Hyper-accelerated prototype-to-production lifecycle</span>
+            </div>
+            <div class="meta-stat">
+              <span class="stat-highlight">Reliable Quality</span>
+              <span class="stat-detail">Automated verification, type-safety, &amp; clean code principles</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -505,7 +580,7 @@
       <p class="foot-copy">© 2026 Syed Ridwan Ahmed Fahim. Crafted with purpose.</p>
       <ul class="foot-links">
         <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
+        <li><a href="#what-i-do">What I Do</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#status">Currently</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -647,6 +722,20 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // Vertical scroll progress line for #what-i-do (.rows-line)
+  const rowsBody = document.getElementById('rowsBody');
+  function updateRowsProgress() {
+    if (!rowsBody) return;
+    const rect = rowsBody.getBoundingClientRect();
+    const vh = window.innerHeight;
+    // Calculate progress as the container moves through the middle of the viewport
+    const progress = Math.min(1, Math.max(0, (vh * 0.5 - rect.top) / rect.height));
+    rowsBody.style.setProperty('--fill', progress.toFixed(4));
+  }
+  window.addEventListener('scroll', updateRowsProgress, { passive: true });
+  window.addEventListener('resize', updateRowsProgress, { passive: true });
+  updateRowsProgress();
 
   // Role cycling text (if element present)
   const roleEl = document.getElementById('roleText');
