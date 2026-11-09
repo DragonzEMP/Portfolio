@@ -1,14 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800">
   <defs>
-    <radialGradient id="aura" cx="50%" cy="30%" r="65%">
+    <radialGradient id="aura-uno-online" cx="50%" cy="30%" r="65%">
       <stop offset="0%" stop-color="#ef4444" stop-opacity="0.38"/>
       <stop offset="60%" stop-color="#991b1b" stop-opacity="0.95"/>
       <stop offset="100%" stop-color="#09090b" stop-opacity="1"/>
     </radialGradient>
-    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#991b1b"/>
-      <stop offset="100%" stop-color="#09090b"/>
-    </linearGradient>
     <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
       <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
     </pattern>
@@ -18,7 +14,7 @@
   </defs>
 
   <!-- Background -->
-  <rect width="600" height="800" fill="url(#aura)"/>
+  <rect width="600" height="800" fill="url(#aura-uno-online)"/>
   <rect width="600" height="800" fill="url(#grid)"/>
 
   <!-- Top Category Bar -->
@@ -62,9 +58,6 @@
         </g><g transform="translate(230, 0)">
           <rect width="105" height="28" rx="14" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
           <text x="52.5" y="18" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="rgba(255,255,255,0.85)" text-anchor="middle">Game Logic</text>
-        </g><g transform="translate(345, 0)">
-          <rect width="105" height="28" rx="14" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-          <text x="52.5" y="18" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="rgba(255,255,255,0.85)" text-anchor="middle">CSS Animations</text>
         </g>
     </g>
   </g>

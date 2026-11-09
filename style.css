@@ -1649,7 +1649,16 @@
       perspective: 900px;
     }
     .hall-nav {
-      display: none;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      top: calc(var(--top) + 6px + var(--w) * 2 / 3);
+    }
+    .hall-nav.prev {
+      left: 10px;
+    }
+    .hall-nav.next {
+      right: 10px;
     }
   }
 
