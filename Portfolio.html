@@ -32,7 +32,7 @@
       <a href="#about" class="nav-link">About</a>
       <a href="#what-i-do" class="nav-link">What I Do</a>
       <a href="#work" class="nav-link">Work</a>
-      <a href="#status" class="nav-link">Currently</a>
+      <a href="#terminal" class="nav-link">Terminal</a>
       <a href="#contact" class="nav-link">Contact</a>
     </nav>
 
@@ -65,7 +65,7 @@
     <a href="#about" class="m-link">About</a>
     <a href="#what-i-do" class="m-link">What I Do</a>
     <a href="#work" class="m-link">Work</a>
-    <a href="#status" class="m-link">Currently</a>
+    <a href="#terminal" class="m-link">Terminal</a>
     <a href="#contact" class="m-link">Contact</a>
   </div>
 </header>
@@ -519,40 +519,187 @@
   </div>
 </section>
 
-<section id="status">
+<!-- ==========================================================================
+     INTERACTIVE TERMINAL SECTION (#terminal)
+     ========================================================================== -->
+<section class="s terminal-s" id="terminal">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow" style="color:var(--gold)">Currently</div>
-      <h2>Where I'm at.</h2>
+    <div class="center" style="text-align: center;">
+      <p class="tag" style="margin: 0 auto 10px;">Interactive CLI</p>
+      <h2 class="display" style="font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: var(--dw); letter-spacing: var(--dls); margin-bottom: 8px; color: var(--ink);">Terminal</h2>
+      <p class="lead" style="color: var(--muted); font-size: 15px; margin: 0 auto 14px;">Ask me anything. Type a command or click one of the quick chips below.</p>
     </div>
-    <div class="status-panel reveal">
-      <div>
-        <h3 style="font-size:22px;">Fresh graduate, building large-scale web projects remotely.</h3>
-        <p>I recently finished my CSE degree with a focus on Data Science. Currently, I work remotely as a Web Developer at a private company. Alongside building custom WordPress themes, I am actively collaborating on a large-scale, custom enterprise web platform. I thrive on architecting scalable solutions, solving complex technical challenges, and delivering robust full-stack applications with my team.</p>
-      </div>
-      <div class="badge-set">
-        <span class="badge b1">CSE Graduate</span>
-        <span class="badge b2">Remote Web Developer</span>
-        <span class="badge b3">WordPress & Themes</span>
-        <span class="badge b1">Data Science Focus</span>
-        <span class="badge b2">Fast Learner</span>
+
+    <div class="term-solo">
+      <div class="term" id="termWindow" tabindex="0">
+        <div class="term-top" aria-hidden="true">
+          <i></i>
+          <i></i>
+          <i></i>
+          <span>guest@fahim-portfolio: ~</span>
+        </div>
+        <div class="term-body" id="termBody" role="log" aria-live="polite">
+          <div id="termHistory">
+            <p class="tl tl-system">Welcome to Fahim's terminal v2.0. Type <span class="tl-accent">help</span> to view available commands.</p>
+          </div>
+          <label class="tl tl-in" for="termInput">
+            <span class="tp">$</span>
+            <input type="text" id="termInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="type help..." aria-label="Terminal command input" />
+          </label>
+        </div>
+        <div class="term-quick" role="group" aria-label="Quick commands">
+          <button type="button" class="term-chip" data-cmd="help">help</button>
+          <button type="button" class="term-chip" data-cmd="about">about</button>
+          <button type="button" class="term-chip" data-cmd="skills">skills</button>
+          <button type="button" class="term-chip" data-cmd="projects">projects</button>
+          <button type="button" class="term-chip" data-cmd="contact">contact</button>
+          <button type="button" class="term-chip" data-cmd="clear">clear</button>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="contact">
+<!-- ==========================================================================
+     CONTACT SECTION (#contact)
+     ========================================================================== -->
+<section class="s contact-s" id="contact">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Contact</div>
-      <h2>Let's build something.</h2>
+    <div class="center" style="text-align: center;">
+      <p class="tag" style="margin: 0 auto 10px;">Get in touch</p>
+      <h2 class="display" style="font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: var(--dw); letter-spacing: var(--dls); margin-bottom: 8px; color: var(--ink);">Contact</h2>
+      <p class="lead" style="color: var(--muted); font-size: 15px; margin: 0 auto 14px;">Have a project in mind, a question, or a remote opportunity? Reach out directly.</p>
     </div>
-    <div class="reveal">
-      <a href="mailto:Fahimrr3@gmail.com" class="contact-email">Fahimrr3@gmail.com</a>
-      <div class="contact-links">
-        <a href="mailto:Fahimrr3@gmail.com" class="btn btn-primary">Email me</a>
-        <a href="https://github.com/DragonzEMP" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
-        <a href="https://www.facebook.com/ridwonahmed.fahim" target="_blank" rel="noopener" class="btn btn-ghost">Facebook</a>
+
+    <div class="c-box">
+      <!-- Left Side: Direct Contact Details -->
+      <aside class="c-panel" aria-label="Direct contact details">
+        <div class="c-panel-aura" aria-hidden="true"></div>
+        <div class="c-panel-inner">
+          <p class="c-panel-tag">Direct reach</p>
+          <h3 class="c-panel-title">Let's build something.</h3>
+          <p class="c-panel-desc">Whether you have an enterprise web project, a data science inquiry, or a remote engineering role, my inbox is always open.</p>
+
+          <ul class="c-list">
+            <li class="c-item">
+              <span class="ic" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </span>
+              <div class="c-item-content">
+                <small>Email</small>
+                <div class="c-email-row">
+                  <a href="mailto:Fahimrr3@gmail.com" class="c-link">Fahimrr3@gmail.com</a>
+                  <button type="button" class="copy-btn" id="copyEmailBtn" aria-label="Copy email address">
+                    <span id="copyText">Copy</span>
+                  </button>
+                </div>
+              </div>
+            </li>
+
+            <li class="c-item">
+              <span class="ic" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+              </span>
+              <div class="c-item-content">
+                <small>GitHub</small>
+                <a href="https://github.com/DragonzEMP" target="_blank" rel="noopener" class="c-link">github.com/DragonzEMP</a>
+              </div>
+            </li>
+
+            <li class="c-item">
+              <span class="ic" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+              </span>
+              <div class="c-item-content">
+                <small>Facebook</small>
+                <a href="https://www.facebook.com/ridwonahmed.fahim" target="_blank" rel="noopener" class="c-link">fb.com/ridwonahmed.fahim</a>
+              </div>
+            </li>
+
+            <li class="c-item">
+              <span class="ic" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </span>
+              <div class="c-item-content">
+                <small>Location</small>
+                <b class="c-val">Dhaka, Bangladesh (UTC+6)</b>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Right Side: Interactive Form -->
+      <div class="form-wrap">
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-head">
+            <h3>Send a message</h3>
+            <p class="hint">Tell me what you have in mind and I'll reply via email within 24 hours.</p>
+          </div>
+
+          <div class="fields">
+            <div class="fl" id="fl-name">
+              <input type="text" id="c-name" name="name" required placeholder=" " autocomplete="name" maxlength="100" />
+              <label for="c-name">Your Name</label>
+              <span class="err" id="c-name-err">Please enter your name.</span>
+            </div>
+
+            <div class="fl" id="fl-email">
+              <input type="email" id="c-email" name="email" required placeholder=" " autocomplete="email" maxlength="150" />
+              <label for="c-email">Email Address</label>
+              <span class="err" id="c-email-err">Please enter a valid email address.</span>
+            </div>
+
+            <div class="fl full" id="fl-message">
+              <textarea id="c-msg" name="message" required placeholder=" " maxlength="1000" rows="5"></textarea>
+              <label for="c-msg">Tell me about your project</label>
+              <span class="count" id="c-count" aria-hidden="true">0 / 1000</span>
+              <span class="err" id="c-msg-err">Please write a brief message.</span>
+            </div>
+          </div>
+
+          <div class="consent" id="fl-consent">
+            <label for="c-agree">
+              <input type="checkbox" id="c-agree" name="agree" required />
+              <span>I agree that Fahim may use the details provided to reply to my message.</span>
+            </label>
+            <span class="err" id="c-agree-err">Please check the box so I can reply.</span>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="contactSubmitBtn">
+              <span>Send message</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Done State Overlay -->
+          <div class="done-state" id="contactDone" role="status" aria-live="polite">
+            <div class="done-content">
+              <div class="ok" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <h3>Message delivered!</h3>
+              <p>Thank you for reaching out. I'll get back to you within 24 hours.</p>
+              <button type="button" class="btn btn-secondary" id="contactResetBtn" style="margin-top: 18px;">Send another message</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -588,7 +735,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#what-i-do">What I Do</a></li>
         <li><a href="#work">Work</a></li>
-        <li><a href="#status">Currently</a></li>
+        <li><a href="#terminal">Terminal</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a href="https://github.com/DragonzEMP" target="_blank" rel="noopener">GitHub</a></li>
         <li><a href="https://linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a></li>
@@ -1028,6 +1175,254 @@
     updateMeta(0);
     requestAnimationFrame(loop);
   })();
+
+  // ==========================================================================
+  // INTERACTIVE TERMINAL
+  // ==========================================================================
+  function initTerminal() {
+    const termWindow = document.getElementById('termWindow');
+    const termBody = document.getElementById('termBody');
+    const termHistory = document.getElementById('termHistory');
+    const termInput = document.getElementById('termInput');
+    const chips = document.querySelectorAll('.term-chip');
+
+    if (!termWindow || !termInput || !termHistory) return;
+
+    const historyList = [];
+    let historyIdx = -1;
+
+    // Focus input on window click
+    termWindow.addEventListener('click', () => {
+      termInput.focus();
+    });
+
+    const commands = {
+      help: () => [
+        { kind: 'out', text: 'Available commands:' },
+        { kind: 'out', text: '  about     - Summary of my CSE & Data Science background' },
+        { kind: 'out', text: '  skills    - My complete technology stack & tools' },
+        { kind: 'out', text: '  projects  - Featured web apps & software engineering work' },
+        { kind: 'out', text: '  contact   - Direct email and location details' },
+        { kind: 'out', text: '  socials   - Links to GitHub and Facebook profiles' },
+        { kind: 'out', text: '  clear     - Wipe terminal history' }
+      ],
+      about: () => [
+        { kind: 'out', text: 'Syed Ridwan Ahmed Fahim' },
+        { kind: 'out', text: 'CSE Graduate with Data Science Specialization.' },
+        { kind: 'out', text: 'Currently working remotely as a Web Developer, delivering scalable custom platforms and WordPress architectures.' },
+        { kind: 'out', text: 'Focused on solving complex engineering problems, data-driven optimization, and intelligent modern interfaces.' }
+      ],
+      skills: () => [
+        { kind: 'out', text: 'Languages:    Python, JavaScript (ES6+), TypeScript, Java, C++, SQL, HTML5/CSS3' },
+        { kind: 'out', text: 'Frontend:     React.js, Modern CSS, Responsive Design, Tailwind CSS' },
+        { kind: 'out', text: 'Backend:      Node.js, Express, MongoDB, MySQL, Firebase, RESTful APIs' },
+        { kind: 'out', text: 'Data Science: Pandas, NumPy, Scikit-learn, NLP, Data Visualization, Analytics' },
+        { kind: 'out', text: 'Tools:        Git, GitHub, Docker, Postman, Next-Gen AI IDEs, Linux' }
+      ],
+      projects: () => [
+        { kind: 'out', text: 'Featured Projects:' },
+        { kind: 'out', text: '  1. Nexus Gear         - E-Commerce Gaming Peripherals Platform' },
+        { kind: 'out', text: '  2. Brick Smasher 67   - Canvas Physics Arcade Game' },
+        { kind: 'out', text: '  3. Retro Racing       - 2D Racing Game Engine' },
+        { kind: 'out', text: '  4. Chat-EXE           - Real-time WebSockets Chat App' },
+        { kind: 'out', text: '  5. Neon Snake         - Cyberpunk Arcade Classic' },
+        { kind: 'out', text: '  6. UNO Online         - Interactive Card Game Logic' },
+        { kind: 'out', text: '  7. Sentiment NLP      - YouTube Comment Analysis Model' },
+        { kind: 'out', text: 'Type "clear" to reset terminal.' }
+      ],
+      contact: () => [
+        { kind: 'out', text: 'Direct Email: Fahimrr3@gmail.com' },
+        { kind: 'out', text: 'Location:     Dhaka, Bangladesh (UTC+6)' },
+        { kind: 'out', text: 'Open for remote web engineering and data science roles.' }
+      ],
+      socials: () => [
+        { kind: 'link', text: 'GitHub:   github.com/DragonzEMP', href: 'https://github.com/DragonzEMP' },
+        { kind: 'link', text: 'Facebook: fb.com/ridwonahmed.fahim', href: 'https://www.facebook.com/ridwonahmed.fahim' }
+      ],
+      clear: () => []
+    };
+
+    function appendLine(kind, text, href) {
+      const p = document.createElement('p');
+      p.className = 'tl tl-' + kind;
+      if (kind === 'cmd') {
+        const span = document.createElement('span');
+        span.className = 'tp';
+        span.textContent = '$';
+        p.appendChild(span);
+        p.appendChild(document.createTextNode(' ' + text));
+      } else if (kind === 'link' && href) {
+        const a = document.createElement('a');
+        a.href = href;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.textContent = text;
+        p.appendChild(a);
+      } else {
+        p.textContent = text;
+      }
+      termHistory.appendChild(p);
+      if (termBody) termBody.scrollTop = termBody.scrollHeight;
+    }
+
+    function execCommand(rawCmd) {
+      const cmd = rawCmd.trim();
+      if (!cmd) return;
+
+      historyList.unshift(cmd);
+      historyIdx = -1;
+
+      appendLine('cmd', cmd);
+
+      const action = cmd.toLowerCase();
+      if (action === 'clear') {
+        termHistory.innerHTML = '';
+        return;
+      }
+
+      if (commands[action]) {
+        const lines = commands[action]();
+        lines.forEach(l => appendLine(l.kind, l.text, l.href));
+      } else {
+        appendLine('err', 'command not found: ' + cmd + '. Type "help" for a list of available commands.');
+      }
+    }
+
+    termInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const val = termInput.value;
+        termInput.value = '';
+        execCommand(val);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (historyList.length > 0) {
+          historyIdx = Math.min(historyIdx + 1, historyList.length - 1);
+          termInput.value = historyList[historyIdx] || '';
+        }
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (historyIdx > 0) {
+          historyIdx--;
+          termInput.value = historyList[historyIdx] || '';
+        } else if (historyIdx === 0) {
+          historyIdx = -1;
+          termInput.value = '';
+        }
+      }
+    });
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const cmd = chip.getAttribute('data-cmd');
+        if (cmd) {
+          execCommand(cmd);
+          termInput.focus();
+        }
+      });
+    });
+  }
+
+  // ==========================================================================
+  // CONTACT FORM & EMAIL COPY
+  // ==========================================================================
+  function initContact() {
+    const copyBtn = document.getElementById('copyEmailBtn');
+    const copyText = document.getElementById('copyText');
+    const form = document.getElementById('contactForm');
+    const resetBtn = document.getElementById('contactResetBtn');
+    const msgInput = document.getElementById('c-msg');
+    const countEl = document.getElementById('c-count');
+
+    // Email copy button
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        const email = 'Fahimrr3@gmail.com';
+        try {
+          await navigator.clipboard.writeText(email);
+          copyBtn.classList.add('done');
+          if (copyText) copyText.textContent = 'Copied!';
+          setTimeout(() => {
+            copyBtn.classList.remove('done');
+            if (copyText) copyText.textContent = 'Copy';
+          }, 2000);
+        } catch (err) {
+          window.location.href = 'mailto:' + email;
+        }
+      });
+    }
+
+    // Message character counter
+    if (msgInput && countEl) {
+      msgInput.addEventListener('input', () => {
+        countEl.textContent = msgInput.value.length + ' / 1000';
+      });
+    }
+
+    // Form submission & validation
+    if (form) {
+      const nameInput = document.getElementById('c-name');
+      const emailInput = document.getElementById('c-email');
+      const agreeInput = document.getElementById('c-agree');
+
+      const flName = document.getElementById('fl-name');
+      const flEmail = document.getElementById('fl-email');
+      const flMsg = document.getElementById('fl-message');
+      const flConsent = document.getElementById('fl-consent');
+
+      nameInput?.addEventListener('input', () => flName?.classList.remove('bad'));
+      emailInput?.addEventListener('input', () => flEmail?.classList.remove('bad'));
+      msgInput?.addEventListener('input', () => flMsg?.classList.remove('bad'));
+      agreeInput?.addEventListener('change', () => flConsent?.classList.remove('bad'));
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let valid = true;
+
+        if (!nameInput?.value.trim()) {
+          flName?.classList.add('bad');
+          valid = false;
+        }
+
+        const emailVal = emailInput?.value.trim() || '';
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailVal || !emailRegex.test(emailVal)) {
+          flEmail?.classList.add('bad');
+          valid = false;
+        }
+
+        if (!msgInput?.value.trim()) {
+          flMsg?.classList.add('bad');
+          valid = false;
+        }
+
+        if (!agreeInput?.checked) {
+          flConsent?.classList.add('bad');
+          valid = false;
+        }
+
+        if (!valid) return;
+
+        // Show sent state
+        form.classList.add('sent');
+      });
+
+      resetBtn?.addEventListener('click', () => {
+        form.reset();
+        if (countEl) countEl.textContent = '0 / 1000';
+        flName?.classList.remove('bad');
+        flEmail?.classList.remove('bad');
+        flMsg?.classList.remove('bad');
+        flConsent?.classList.remove('bad');
+        form.classList.remove('sent');
+      });
+    }
+  }
+
+  // Initialize terminal and contact
+  initTerminal();
+  initContact();
 </script>
 </body>
 </html>
