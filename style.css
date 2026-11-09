@@ -1276,15 +1276,15 @@
     position: relative;
     display: block;
     aspect-ratio: 3 / 4;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
     background: #0b1220;
-    box-shadow: 0 30px 60px -30px #000c, 0 0 0 1px #ffffff0f;
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
     transition: box-shadow 0.5s ease;
   }
 
   .hall-card.front .hall-frame {
-    box-shadow: 0 50px 90px -30px #000000e6, 0 0 0 1px #ffffff14;
+    box-shadow: 0 50px 90px -30px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.18), 0 0 36px rgba(34, 211, 238, 0.12);
   }
 
   .hall-card:focus-visible .hall-frame {
@@ -1292,33 +1292,123 @@
     outline-offset: 4px;
   }
 
-  /* Card Images & Fallback */
-  .hall-frame img {
+  /* Built-in Styled Card Art (Fallback & High-Visual Foundation) */
+  .hall-card-art {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 16px;
+    background: var(--card-bg, #0b1220);
+    overflow: hidden;
+    z-index: 1;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .hall-card-art::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+  }
+
+  .hall-card-art::after {
+    content: "";
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: var(--card-accent, var(--accent));
+    opacity: 0.18;
+    filter: blur(36px);
+    pointer-events: none;
+  }
+
+  .hall-art-badge {
+    position: relative;
+    z-index: 2;
+    align-self: flex-start;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--card-accent, var(--accent));
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-family: var(--font-mono);
+  }
+
+  .hall-art-center {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto 0;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5));
+  }
+
+  .hall-art-footer {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hall-art-name {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #ffffff;
+    margin-bottom: 8px;
+  }
+
+  .hall-art-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .hall-art-tags span {
+    font-size: 9px;
+    font-family: var(--font-mono);
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    padding: 2px 6px;
+  }
+
+  /* Card Image Layer (Overlay when available) */
+  .hall-frame img.hall-img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    z-index: 3;
     pointer-events: none;
     transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
     filter: brightness(0.7) saturate(0.85);
     display: block;
   }
 
-  .hall-card.front .hall-frame img {
+  .hall-card.front .hall-frame img.hall-img {
     filter: none;
   }
 
-  .hall-card.front:hover .hall-frame img {
+  .hall-card.front:hover .hall-frame img.hall-img {
     transform: scale(1.06);
-  }
-
-  .hall-fallback {
-    display: grid;
-    place-items: center;
-    height: 100%;
-    font-size: 3rem;
-    font-weight: 900;
-    color: var(--muted);
-    background: #0b1220;
   }
 
   /* Floating Pill on Active Hover (.hall-open) */
@@ -1328,7 +1418,7 @@
     bottom: 14px;
     transform: translate(-50%, 10px);
     opacity: 0;
-    padding: 7px 14px;
+    padding: 7px 16px;
     border-radius: 999px;
     background: #030814bf;
     color: #ffffff;
@@ -1340,6 +1430,7 @@
     backdrop-filter: blur(6px);
     border: 1px solid rgba(255, 255, 255, 0.16);
     pointer-events: none;
+    z-index: 5;
   }
 
   .hall-card.front:hover .hall-open,
@@ -1355,7 +1446,7 @@
     aspect-ratio: 3 / 4;
     object-fit: cover;
     margin-top: 4px;
-    border-radius: 10px;
+    border-radius: 12px;
     transform: scaleY(-1);
     transform-origin: center;
     opacity: 0.6;
@@ -1373,7 +1464,7 @@
   .hall-nav {
     position: absolute;
     top: calc(var(--top) + 6px + var(--w) * 2 / 3);
-    z-index: 200;
+    z-index: 350;
     width: 48px;
     height: 48px;
     border-radius: 50%;
@@ -1390,7 +1481,12 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    transform: translateZ(600px);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    pointer-events: auto;
   }
 
   .hall-nav:hover,
@@ -1398,7 +1494,11 @@
     background: var(--accent);
     border-color: var(--accent);
     color: #04202a;
-    transform: scale(1.08);
+    transform: translateZ(600px) scale(1.08);
+  }
+
+  .hall-nav:active {
+    transform: translateZ(600px) scale(0.95);
   }
 
   .hall-nav.prev {
@@ -2337,6 +2437,16 @@
    INTERACTIVE LIQUID WEBGL BACKGROUND & PROCEDURAL GRAIN OVERLAY
    ========================================================================== */
 #bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  pointer-events: none;
+  display: block;
+}
+
+#crystal-canvas {
   position: fixed;
   inset: 0;
   width: 100vw;

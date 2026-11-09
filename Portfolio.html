@@ -37,6 +37,7 @@
 
 <!-- Interactive Liquid WebGL Background Canvas -->
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
+<canvas id="crystal-canvas" aria-hidden="true"></canvas>
 
 
 <header class="hdr" id="siteNav">
@@ -306,118 +307,210 @@
     <div class="hall-floor" aria-hidden="true"></div>
 
     <div class="hall-stage" id="hallStage">
-      <!-- Project 01: Nexus Gear -->
-      <a href="https://nexus-gear.onrender.com" target="_blank" rel="noopener" class="hall-card" data-index="0" draggable="false" aria-label="Nexus Gear: open project">
-        <span class="hall-label" aria-hidden="true">Nexus Gear</span>
+      <!-- Project 01: NEXUS GEAR -->
+      <a href="https://nexus-gear.onrender.com" target="_blank" rel="noopener" class="hall-card" data-index="0" draggable="false" aria-label="NEXUS GEAR: open project">
+        <span class="hall-label" aria-hidden="true">NEXUS GEAR</span>
         <span class="hall-frame">
-          <img src="assets/projects/nexus-gear.svg" alt="Nexus Gear" loading="lazy" decoding="async" draggable="false" />
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #1e3a8a 0%, #0c1527 70%, #050b14 100%); --card-accent: #22d3ee;">
+            <div class="hall-art-badge">E-COMMERCE PLATFORM</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="10" width="36" height="26" rx="4"/><line x1="16" y1="23" x2="22" y2="23"/><line x1="19" y1="20" x2="19" y2="26"/><circle cx="31" cy="21" r="1.5" fill="#22d3ee"/><circle cx="35" cy="25" r="1.5" fill="#22d3ee"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">NEXUS GEAR</span>
+              <div class="hall-art-tags"><span>React</span><span>Node.js</span><span>MongoDB</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/nexus-gear.svg" alt="NEXUS GEAR" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
           <span class="hall-open" aria-hidden="true">Open project</span>
         </span>
-        <img class="hall-mirror" src="assets/projects/nexus-gear.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+        <img class="hall-mirror" src="assets/projects/nexus-gear.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
       </a>
 
-      <!-- Project 02: Brick Smasher 67 -->
-      <a href="https://brick67.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="1" draggable="false" aria-label="Brick Smasher 67: open project">
-        <span class="hall-label" aria-hidden="true">Brick Smasher 67</span>
+      <!-- Project 02: BRICK SMASHER 67 -->
+      <a href="https://brick67.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="1" draggable="false" aria-label="BRICK SMASHER 67: open project">
+        <span class="hall-label" aria-hidden="true">BRICK SMASHER 67</span>
         <span class="hall-frame">
-          <img src="assets/projects/brick-smasher-67.svg" alt="Brick Smasher 67" loading="lazy" decoding="async" draggable="false" />
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #581c87 0%, #1e0933 70%, #0a0312 100%); --card-accent: #f59e0b;">
+            <div class="hall-art-badge">ARCADE PHYSICS GAME</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="10" width="9" height="6" rx="1"/><rect x="20" y="10" width="9" height="6" rx="1"/><rect x="32" y="10" width="9" height="6" rx="1"/><rect x="14" y="19" width="9" height="6" rx="1"/><rect x="26" y="19" width="9" height="6" rx="1"/><rect x="17" y="34" width="14" height="4" rx="2" fill="#f59e0b"/><circle cx="24" cy="28" r="2.5" fill="#ec4899"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">BRICK SMASHER 67</span>
+              <div class="hall-art-tags"><span>HTML5 Canvas</span><span>Web Audio</span><span>JS</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/brick-smasher-67.svg" alt="BRICK SMASHER 67" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
           <span class="hall-open" aria-hidden="true">Open project</span>
         </span>
-        <img class="hall-mirror" src="assets/projects/brick-smasher-67.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+        <img class="hall-mirror" src="assets/projects/brick-smasher-67.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
       </a>
 
-      <!-- Project 03: Retro Racing -->
-      <a href="https://retro-racing-game.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="2" draggable="false" aria-label="Retro Racing: open project">
-        <span class="hall-label" aria-hidden="true">Retro Racing</span>
+      <!-- Project 03: RETRO RACING -->
+      <a href="https://retro-racing-game.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="2" draggable="false" aria-label="RETRO RACING: open project">
+        <span class="hall-label" aria-hidden="true">RETRO RACING</span>
         <span class="hall-frame">
-          <img src="assets/projects/retro-racing.svg" alt="Retro Racing" loading="lazy" decoding="async" draggable="false" />
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #4c1d95 0%, #190838 70%, #080314 100%); --card-accent: #a855f7;">
+            <div class="hall-art-badge">2.5D PSEUDO-3D RACER</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 36 L20 16 L28 16 L36 36 Z"/><line x1="24" y1="16" x2="24" y2="36" stroke-dasharray="3 3"/><circle cx="24" cy="12" r="4" stroke="#ec4899"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">RETRO RACING</span>
+              <div class="hall-art-tags"><span>Canvas 2D</span><span>Procedural Track</span><span>Physics</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/retro-racing.svg" alt="RETRO RACING" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
           <span class="hall-open" aria-hidden="true">Open project</span>
         </span>
-        <img class="hall-mirror" src="assets/projects/retro-racing.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+        <img class="hall-mirror" src="assets/projects/retro-racing.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
       </a>
 
-      <!-- Project 04: Chat-EXE -->
-      <a href="https://chat-exe.onrender.com" target="_blank" rel="noopener" class="hall-card" data-index="3" draggable="false" aria-label="Chat-EXE: open project">
-        <span class="hall-label" aria-hidden="true">Chat-EXE</span>
+      <!-- Project 04: CHAT-EXE -->
+      <a href="https://chat-exe.onrender.com" target="_blank" rel="noopener" class="hall-card" data-index="3" draggable="false" aria-label="CHAT-EXE: open project">
+        <span class="hall-label" aria-hidden="true">CHAT-EXE</span>
         <span class="hall-frame">
-          <img src="assets/projects/chat-exe.svg" alt="Chat-EXE" loading="lazy" decoding="async" draggable="false" />
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #064e3b 0%, #04241c 70%, #020f0b 100%); --card-accent: #10b981;">
+            <div class="hall-art-badge">REAL-TIME SOCKET CHAT</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12 A4 4 0 0 1 12 8 L36 8 A4 4 0 0 1 40 12 L40 28 A4 4 0 0 1 36 32 L16 32 L8 38 Z"/><circle cx="18" cy="20" r="1.5" fill="#10b981"/><circle cx="24" cy="20" r="1.5" fill="#10b981"/><circle cx="30" cy="20" r="1.5" fill="#10b981"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">CHAT-EXE</span>
+              <div class="hall-art-tags"><span>Socket.io</span><span>Tailwind</span><span>Node.js</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/chat-exe.svg" alt="CHAT-EXE" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
           <span class="hall-open" aria-hidden="true">Open project</span>
         </span>
-        <img class="hall-mirror" src="assets/projects/chat-exe.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+        <img class="hall-mirror" src="assets/projects/chat-exe.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
       </a>
 
-      <!-- Project 05: Neon Snake -->
-      <a href="https://neon-snake-swart-beta.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="4" draggable="false" aria-label="Neon Snake: open project">
-        <span class="hall-label" aria-hidden="true">Neon Snake</span>
+      <!-- Project 05: NEON SNAKE -->
+      <a href="https://neon-snake-swart-beta.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="4" draggable="false" aria-label="NEON SNAKE: open project">
+        <span class="hall-label" aria-hidden="true">NEON SNAKE</span>
         <span class="hall-frame">
-          <img src="assets/projects/neon-snake.svg" alt="Neon Snake" loading="lazy" decoding="async" draggable="false" />
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #701a75 0%, #280a33 70%, #0e0314 100%); --card-accent: #f43f5e;">
+            <div class="hall-art-badge">CYBER ARCADE GAME</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#f43f5e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 36 L12 28 L24 28 L24 16 L36 16 L36 24"/><circle cx="36" cy="24" r="2.5" fill="#38bdf8"/><circle cx="16" cy="14" r="2" fill="#f43f5e"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">NEON SNAKE</span>
+              <div class="hall-art-tags"><span>WebGL Glow</span><span>Canvas</span><span>JavaScript</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/neon-snake.svg" alt="NEON SNAKE" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
           <span class="hall-open" aria-hidden="true">Open project</span>
         </span>
-        <img class="hall-mirror" src="assets/projects/neon-snake.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+        <img class="hall-mirror" src="assets/projects/neon-snake.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
       </a>
 
-      <!-- Project 06: UNO Online -->
-      <a href="https://uno-six-iota.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="5" draggable="false" aria-label="UNO Online: open project">
-        <span class="hall-label" aria-hidden="true">UNO Online</span>
+      <!-- Project 06: UNO ONLINE -->
+      <a href="https://uno-six-iota.vercel.app" target="_blank" rel="noopener" class="hall-card" data-index="5" draggable="false" aria-label="UNO ONLINE: open project">
+        <span class="hall-label" aria-hidden="true">UNO ONLINE</span>
         <span class="hall-frame">
-          <img src="assets/projects/uno-online.svg" alt="UNO Online" loading="lazy" decoding="async" draggable="false" />
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #991b1b 0%, #3b0808 70%, #120202 100%); --card-accent: #ef4444;">
+            <div class="hall-art-badge">MULTIPLAYER CARD GAME</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="8" width="18" height="26" rx="3" transform="rotate(-10 10 8)" fill="#ef444422"/><rect x="18" y="12" width="18" height="26" rx="3" stroke="#facc15" fill="#facc1522"/><text x="24" y="29" font-size="12" font-weight="900" fill="#facc15" stroke="none">U</text></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">UNO ONLINE</span>
+              <div class="hall-art-tags"><span>React</span><span>Game Logic</span><span>Multiplayer</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/uno-online.svg" alt="UNO ONLINE" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
           <span class="hall-open" aria-hidden="true">Open project</span>
         </span>
-        <img class="hall-mirror" src="assets/projects/uno-online.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+        <img class="hall-mirror" src="assets/projects/uno-online.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
       </a>
 
-      <!-- Project 07: Sentiment NLP -->
-      <a href="https://github.com/DragonzEMP/YouTube-Comment-Sentiment-Analysis" target="_blank" rel="noopener" class="hall-card" data-index="6" draggable="false" aria-label="Sentiment NLP: open project">
-        <span class="hall-label" aria-hidden="true">Sentiment NLP</span>
+      <!-- Project 07: SENTIMENT NLP -->
+      <a href="https://github.com/DragonzEMP/YouTube-Comment-Sentiment-Analysis" target="_blank" rel="noopener" class="hall-card" data-index="6" draggable="false" aria-label="SENTIMENT NLP: open project">
+        <span class="hall-label" aria-hidden="true">SENTIMENT NLP</span>
         <span class="hall-frame">
-          <img src="assets/projects/youtube-sentiment.svg" alt="Sentiment NLP" loading="lazy" decoding="async" draggable="false" />
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #1e1b4b 0%, #0e1236 70%, #040618 100%); --card-accent: #38bdf8;">
+            <div class="hall-art-badge">AI & COMMENT ANALYSIS</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="18" r="4"/><circle cx="36" cy="14" r="4"/><circle cx="24" cy="34" r="4"/><line x1="15" y1="20" x2="22" y2="31"/><line x1="33" y1="17" x2="26" y2="31"/><circle cx="24" cy="24" r="2" fill="#38bdf8"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">SENTIMENT NLP</span>
+              <div class="hall-art-tags"><span>Python</span><span>PyTorch</span><span>BERT Model</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/youtube-sentiment.svg" alt="SENTIMENT NLP" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
           <span class="hall-open" aria-hidden="true">Open project</span>
         </span>
-        <img class="hall-mirror" src="assets/projects/youtube-sentiment.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+        <img class="hall-mirror" src="assets/projects/youtube-sentiment.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
       </a>
 
-      <!-- Project 08: WordPress Themes -->
-      <a href="#contact" target="_blank" rel="noopener" class="hall-card" data-index="7" draggable="false" aria-label="WordPress Themes: open project">
-        <span class="hall-label" aria-hidden="true">WordPress Themes</span>
+      <!-- Project 08: WORDPRESS THEMES -->
+      <a href="#contact" target="_blank" rel="noopener" class="hall-card" data-index="7" draggable="false" aria-label="WORDPRESS THEMES: open project">
+        <span class="hall-label" aria-hidden="true">WORDPRESS THEMES</span>
         <span class="hall-frame">
-          <img src="assets/projects/wordpress-themes.svg" alt="WordPress Themes" loading="lazy" decoding="async" draggable="false" />
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #1e293b 0%, #0f172a 70%, #050811 100%); --card-accent: #60a5fa;">
+            <div class="hall-art-badge">CMS ARCHITECTURE</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="16"/><path d="M14 24 L20 34 L25 18 L29 34 L34 24"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">WORDPRESS THEMES</span>
+              <div class="hall-art-tags"><span>PHP</span><span>CSS3 Architecture</span><span>REST API</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/wordpress-themes.svg" alt="WORDPRESS THEMES" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
           <span class="hall-open" aria-hidden="true">Open project</span>
         </span>
-        <img class="hall-mirror" src="assets/projects/wordpress-themes.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+        <img class="hall-mirror" src="assets/projects/wordpress-themes.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
       </a>
 
-      <!-- Project 09: Network Systems -->
-      <a href="https://github.com/DragonzEMP" target="_blank" rel="noopener" class="hall-card" data-index="8" draggable="false" aria-label="Network Systems: open project">
-        <span class="hall-label" aria-hidden="true">Network Systems</span>
+      <!-- Project 09: NETWORK SYSTEMS -->
+      <a href="https://github.com/DragonzEMP" target="_blank" rel="noopener" class="hall-card" data-index="8" draggable="false" aria-label="NETWORK SYSTEMS: open project">
+        <span class="hall-label" aria-hidden="true">NETWORK SYSTEMS</span>
         <span class="hall-frame">
-          <img src="assets/projects/network-infrastructure.svg" alt="Network Systems" loading="lazy" decoding="async" draggable="false" />
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #075985 0%, #082f49 70%, #02121e 100%); --card-accent: #06b6d4;">
+            <div class="hall-art-badge">SYSTEMS & PROTOCOLS</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="8" width="12" height="8" rx="2"/><rect x="8" y="32" width="12" height="8" rx="2"/><rect x="28" y="32" width="12" height="8" rx="2"/><path d="M24 16 L24 24 M14 32 L14 24 L34 24 L34 32"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">NETWORK SYSTEMS</span>
+              <div class="hall-art-tags"><span>C++</span><span>Socket Architecture</span><span>Linux</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/network-infrastructure.svg" alt="NETWORK SYSTEMS" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
           <span class="hall-open" aria-hidden="true">Open project</span>
         </span>
-        <img class="hall-mirror" src="assets/projects/network-infrastructure.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+        <img class="hall-mirror" src="assets/projects/network-infrastructure.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
       </a>
 
-      <!-- Project 10: Sonar Radar -->
-      <a href="https://github.com/DragonzEMP" target="_blank" rel="noopener" class="hall-card" data-index="9" draggable="false" aria-label="Sonar Radar: open project">
-        <span class="hall-label" aria-hidden="true">Sonar Radar</span>
+      <!-- Project 10: SONAR RADAR -->
+      <a href="https://github.com/DragonzEMP" target="_blank" rel="noopener" class="hall-card" data-index="9" draggable="false" aria-label="SONAR RADAR: open project">
+        <span class="hall-label" aria-hidden="true">SONAR RADAR</span>
         <span class="hall-frame">
-          <img src="assets/projects/sonar-detection.svg" alt="Sonar Radar" loading="lazy" decoding="async" draggable="false" />
+          <div class="hall-card-art" style="--card-bg: radial-gradient(circle at 50% 32%, #14532d 0%, #052e16 70%, #011409 100%); --card-accent: #22c55e;">
+            <div class="hall-art-badge">HARDWARE VISUALIZER</div>
+            <div class="hall-art-center">
+              <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="16"/><circle cx="24" cy="24" r="10"/><circle cx="24" cy="24" r="4" fill="#22c55e"/><line x1="24" y1="24" x2="36" y2="12"/></svg>
+            </div>
+            <div class="hall-art-footer">
+              <span class="hall-art-name">SONAR RADAR</span>
+              <div class="hall-art-tags"><span>Arduino</span><span>Processing</span><span>C++</span></div>
+            </div>
+          </div>
+          <img src="assets/projects/sonar-detection.svg" alt="SONAR RADAR" loading="lazy" decoding="async" draggable="false" class="hall-img" onerror="this.style.display='none';" />
           <span class="hall-open" aria-hidden="true">Open project</span>
         </span>
-        <img class="hall-mirror" src="assets/projects/sonar-detection.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" />
+        <img class="hall-mirror" src="assets/projects/sonar-detection.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';" />
       </a>
     </div>
 
-    <!-- Navigation Buttons with SVG Chevrons -->
-    <button type="button" class="hall-nav prev" id="hallPrev" aria-label="Previous project">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="pointer-events: none; display: block;">
-        <polyline points="15 18 9 12 15 6"></polyline>
-      </svg>
-    </button>
-    <button type="button" class="hall-nav next" id="hallNext" aria-label="Next project">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="pointer-events: none; display: block;">
-        <polyline points="9 18 15 12 9 6"></polyline>
-      </svg>
-    </button>
+    <!-- Navigation Buttons with Direct Chevrons -->
+    <button type="button" class="hall-nav prev" id="hallPrev" aria-label="Previous project">‹</button>
+    <button type="button" class="hall-nav next" id="hallNext" aria-label="Next project">›</button>
   </div>
 
   <!-- Bottom Meta Section (Below Carousel & Overlapping Floor) -->
