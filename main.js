@@ -1203,21 +1203,21 @@
     // Clamp to circular index
     const wrap = (i) => ((i % s) + s) % s;
 
-    // --- Layout constants ---
+    // --- Layout constants (Tuned to match reference photo) ---
     // Gap between card centers as a fraction of card width
-    const GAP_RATIO = 1.28;
+    const GAP_RATIO = 1.16;
     // Per-step Y-axis rotation for side cards (degrees)
-    const TILT_DEG  = 48;
-    // Per-step Z-translate (how far back side cards push)
-    const DEPTH_PX  = 180;
+    const TILT_DEG  = 28;
+    // Per-step Z-translate (depth curve)
+    const DEPTH_PX  = 120;
     // Scale falloff per step from center
-    const SCALE_STEP = 0.11;
-    // Opacity at ±2 cards
-    const FAR_OPACITY = 0.55;
+    const SCALE_STEP = 0.06;
+    // Opacity at side cards
+    const FAR_OPACITY = 0.75;
 
     function getCardWidth() {
       const c = cards[0];
-      return (c && c.offsetWidth > 0) ? c.offsetWidth : 220;
+      return (c && c.offsetWidth > 0) ? c.offsetWidth : 260;
     }
 
     function applyLayout(smoothPos) {
@@ -1233,8 +1233,8 @@
 
         const absD = Math.abs(d);
 
-        // Visibility: hide if more than 2.6 slots from center
-        if (absD > 2.65) {
+        // Visibility: smooth fade at screen edges (visible up to 3.2 slots)
+        if (absD > 3.2) {
           card.style.opacity = '0';
           card.style.pointerEvents = 'none';
           card.style.zIndex = '0';
@@ -1252,17 +1252,17 @@
         const tz = -absD * DEPTH_PX;
 
         // Scale: shrink as distance increases
-        const sc = Math.max(0.55, 1 - absD * SCALE_STEP);
+        const sc = Math.max(0.68, 1 - absD * SCALE_STEP);
 
         // Opacity: fade far cards
-        const op = absD > 1.6
-          ? FAR_OPACITY - (absD - 1.6) * 0.65
-          : 1 - absD * (1 - FAR_OPACITY) * 0.4;
+        const op = absD > 2.0
+          ? Math.max(0, FAR_OPACITY - (absD - 2.0) * 0.55)
+          : 1 - absD * 0.12;
 
         card.style.transform  = `translateX(${tx.toFixed(1)}px) translateZ(${tz.toFixed(1)}px) rotateY(${ry.toFixed(1)}deg) scale(${sc.toFixed(3)})`;
         card.style.opacity    = Math.max(0, Math.min(1, op)).toFixed(3);
-        card.style.zIndex     = String(Math.round(100 - absD * 20));
-        card.style.pointerEvents = absD > 2.4 ? 'none' : '';
+        card.style.zIndex     = String(Math.round(100 - absD * 15));
+        card.style.pointerEvents = absD > 2.8 ? 'none' : '';
         card.classList.toggle('front', absD < 0.5);
       });
     }

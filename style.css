@@ -1341,7 +1341,7 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    background: var(--bg);
+    background: #020208;
     min-height: 100vh;
     min-height: 100svh;
     display: flex;
@@ -1351,6 +1351,20 @@
     padding-bottom: clamp(40px, 6vh, 72px);
     box-sizing: border-box;
     color: var(--ink);
+  }
+
+  .work-hall .tag {
+    display: inline-block;
+    background: rgba(34, 211, 238, 0.08);
+    border: 1px solid rgba(34, 211, 238, 0.28);
+    color: #22d3ee;
+    border-radius: 999px;
+    padding: 5px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 auto 12px;
   }
 
   /* Ambient background lighting */
@@ -1370,7 +1384,7 @@
     width: 900px;
     height: 600px;
     transform: translate(-50%, -50%);
-    background: radial-gradient(ellipse at center, color-mix(in srgb, var(--accent) 18%, transparent) 0%, rgba(37, 99, 235, 0.12) 35%, transparent 70%);
+    background: radial-gradient(ellipse at center, rgba(34, 211, 238, 0.12) 0%, rgba(37, 99, 235, 0.08) 35%, transparent 70%);
     animation: work-aura-pulse 8s ease-in-out infinite alternate;
   }
 
@@ -1383,24 +1397,25 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, var(--bg) 0%, rgba(5, 8, 15, 0.35) 14%, rgba(5, 8, 15, 0.2) 40%, rgba(5, 8, 15, 0.8) 70%, var(--bg) 92%);
+    background: linear-gradient(180deg, #020208 0%, rgba(2, 2, 8, 0.35) 14%, rgba(2, 2, 8, 0.2) 40%, rgba(2, 2, 8, 0.8) 70%, #020208 92%);
   }
 
   /* ── Wrapper holds the hall + the nav buttons as siblings ── */
   .hall-wrapper {
     position: relative;
     width: 100%;
-    --card-w: clamp(160px, 18vw, 260px);
+    --card-w: clamp(210px, 21vw, 290px);
+    margin-top: 10px;
   }
 
   /* ── 3D Carousel Stage ── */
   .hall {
     position: relative;
     isolation: isolate;
-    margin-top: 20px;
-    height: calc(var(--card-w) * 1.42 + 60px);   /* card height + label */
-    perspective: 1200px;
-    perspective-origin: 50% 46%;
+    margin-top: 12px;
+    height: calc(var(--card-w) * 1.333 + 46px);
+    perspective: 1400px;
+    perspective-origin: 50% 44%;
     outline: none;
     touch-action: pan-y;
     -webkit-user-select: none;
@@ -1412,21 +1427,23 @@
   .hall:active { cursor: grabbing; }
 
   .hall:focus-visible {
-    box-shadow: inset 0 0 0 2px var(--accent);
+    box-shadow: inset 0 0 0 2px #22d3ee;
   }
 
-  /* ── Floor reflection strip ── */
+  /* ── Floor reflection plane (glossy black glass) ── */
   .hall-floor {
     position: absolute;
-    left: 0; right: 0;
-    top: calc(60px + var(--card-w) * 1.42);
-    bottom: -600px;
+    left: 0;
+    right: 0;
+    top: calc(var(--card-w) * 1.333 + 46px);
+    bottom: -800px;
     z-index: -1;
     pointer-events: none;
     background:
-      radial-gradient(60% 300px at 50% 0%, rgba(34, 211, 238, 0.07), transparent 70%),
-      linear-gradient(180deg, rgba(2, 4, 9, 0.5) 0px, rgba(5, 8, 15, 0.82) 180px, var(--bg) 400px);
-    border-top: 1px solid color-mix(in srgb, var(--accent) 14%, transparent);
+      radial-gradient(70% 380px at 50% 0%, rgba(34, 211, 238, 0.12) 0%, rgba(30, 58, 138, 0.08) 35%, transparent 70%),
+      linear-gradient(180deg, rgba(3, 7, 18, 0.65) 0px, rgba(2, 4, 10, 0.9) 180px, #020208 450px);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 -2px 24px rgba(34, 211, 238, 0.12);
   }
 
   /* ── Track: flat container that cards are positioned absolutely within ── */
@@ -1439,7 +1456,7 @@
   /* ── Individual Cards ── */
   .hall-card {
     position: absolute;
-    top: 36px;                        /* room for the label above */
+    top: 0;
     left: 50%;
     margin-left: calc(var(--card-w) / -2);
     width: var(--card-w);
@@ -1451,58 +1468,59 @@
     outline: none;
     cursor: pointer;
     transform-origin: center center;
+    display: flex;
+    flex-direction: column;
   }
 
+  /* ── Label right above each card (matching reference image) ── */
   .hall-label {
     display: block;
     text-align: center;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
+    font-family: var(--font-sans);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.55);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     margin-bottom: 10px;
-    transition: color 0.4s ease, opacity 0.4s ease;
-    position: relative;
-    top: -36px;                       /* float above the frame */
+    height: 16px;
+    line-height: 16px;
+    transition: color 0.3s ease, opacity 0.3s ease;
   }
 
   .hall-card.front .hall-label {
-    color: var(--ink);
-    overflow: visible;
-    text-overflow: clip;
-    width: max-content;
-    max-width: calc(100vw - 32px);
-    left: 50%;
-    transform: translate(-50%);
+    color: #ffffff;
+    font-weight: 800;
+    text-shadow: 0 0 12px rgba(34, 211, 238, 0.45);
   }
 
-  /* ── Card Frame — portrait 3:4 ── */
+  /* ── Card Frame — portrait 3:4 with Apple-like 18px rounded corners ── */
   .hall-frame {
     position: relative;
     display: block;
+    width: 100%;
     aspect-ratio: 3 / 4;
-    border-radius: 12px;
+    border-radius: 18px;
     overflow: hidden;
-    background: #0b1220;
+    background: #090f1d;
     box-shadow:
-      0 20px 50px -20px rgba(0, 0, 0, 0.75),
-      0 0 0 1px rgba(255, 255, 255, 0.08);
-    transition: box-shadow 0.5s ease;
+      0 20px 50px -10px rgba(0, 0, 0, 0.85),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+    transition: box-shadow 0.4s ease;
   }
 
   .hall-card.front .hall-frame {
     box-shadow:
-      0 40px 80px -24px rgba(0, 0, 0, 0.9),
-      0 0 0 1px rgba(255, 255, 255, 0.18),
-      0 0 36px rgba(34, 211, 238, 0.14);
+      0 32px 75px -15px rgba(0, 0, 0, 0.95),
+      0 0 0 1px rgba(255, 255, 255, 0.22),
+      0 0 35px rgba(34, 211, 238, 0.16);
   }
 
   .hall-card:focus-visible .hall-frame {
-    outline: 2px solid var(--accent);
+    outline: 2px solid #22d3ee;
     outline-offset: 4px;
   }
 
@@ -1541,7 +1559,7 @@
     width: 140px;
     height: 140px;
     border-radius: 50%;
-    background: var(--card-accent, var(--accent));
+    background: var(--card-accent, #22d3ee);
     opacity: 0.18;
     filter: blur(36px);
     pointer-events: none;
@@ -1555,7 +1573,7 @@
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--card-accent, var(--accent));
+    color: var(--card-accent, #22d3ee);
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 6px;
@@ -1603,7 +1621,7 @@
     padding: 2px 6px;
   }
 
-  /* ── Project image overlay ── */
+  /* ── Project image overlay (Bright & Crisp like reference image) ── */
   .hall-frame img.hall-img {
     position: absolute;
     inset: 0;
@@ -1612,84 +1630,67 @@
     object-fit: cover;
     z-index: 3;
     pointer-events: none;
-    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
-    filter: brightness(0.7) saturate(0.85);
+    border-radius: 18px;
+    filter: brightness(0.92) saturate(0.98);
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.3s ease;
     display: block;
   }
 
-  .hall-card.front .hall-frame img.hall-img { filter: none; }
-  .hall-card.front:hover .hall-frame img.hall-img { transform: scale(1.05); }
+  .hall-card.front .hall-frame img.hall-img { filter: brightness(1) saturate(1); }
+  .hall-card.front:hover .hall-frame img.hall-img { transform: scale(1.03); }
 
-  /* ── "Open project" pill ── */
   .hall-open {
-    position: absolute;
-    left: 50%;
-    bottom: 14px;
-    transform: translate(-50%, 10px);
-    opacity: 0;
-    padding: 7px 16px;
-    border-radius: 999px;
-    background: #030814bf;
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: 700;
-    white-space: nowrap;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    pointer-events: none;
-    z-index: 5;
+    display: none !important;
   }
 
-  .hall-card.front:hover .hall-open,
-  .hall-card.front:focus-visible .hall-open {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-
-  /* ── Floor mirror ── */
+  /* ── High-Intensity Glossy Floor Reflection ── */
   .hall-mirror {
     display: block;
     width: 100%;
     aspect-ratio: 3 / 4;
     object-fit: cover;
-    margin-top: 4px;
-    border-radius: 12px;
+    margin-top: 6px;
+    border-radius: 18px;
     transform: scaleY(-1);
     transform-origin: center;
-    opacity: 0.5;
-    filter: blur(1px) brightness(0.65) saturate(1.05);
-    -webkit-mask-image: linear-gradient(0deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 30%, transparent 68%);
-    mask-image: linear-gradient(0deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 30%, transparent 68%);
+    opacity: 0.78;
+    filter: brightness(0.95) contrast(1.08);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 35%, rgba(0, 0, 0, 0.15) 65%, transparent 85%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 35%, rgba(0, 0, 0, 0.15) 65%, transparent 85%);
     pointer-events: none;
+    transition: opacity 0.3s ease;
   }
 
-  .hall-card.front .hall-mirror { opacity: 0.65; }
+  .hall-card.front .hall-mirror {
+    opacity: 0.92;
+    filter: brightness(1.02) contrast(1.12);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.72) 40%, rgba(0, 0, 0, 0.28) 72%, transparent 92%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.72) 40%, rgba(0, 0, 0, 0.28) 72%, transparent 92%);
+  }
 
-  /* ── Navigation Buttons — anchored to .hall-wrapper ── */
+  /* ── Circular Glass Navigation Buttons (Positioned over side cards) ── */
   .hall-nav {
     position: absolute;
-    top: 50%;
+    top: calc(16px + (var(--card-w) * 1.333) / 2);
     transform: translateY(-50%);
     z-index: 500;
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    border: 1px solid var(--line);
-    background: color-mix(in srgb, var(--surface) 90%, transparent);
-    color: var(--ink);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(18, 24, 38, 0.85);
+    color: #ffffff;
     font-size: 26px;
     line-height: 1;
     cursor: pointer;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease, transform 0.2s ease;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease, transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
@@ -1698,98 +1699,80 @@
 
   .hall-nav:hover,
   .hall-nav:focus-visible {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #04202a;
+    background: #22d3ee;
+    border-color: #22d3ee;
+    color: #04121e;
     transform: translateY(-50%) scale(1.08);
+    box-shadow: 0 0 24px rgba(34, 211, 238, 0.45);
   }
 
   .hall-nav:active {
     transform: translateY(-50%) scale(0.94);
   }
 
-  .hall-nav.prev { left: max(12px, calc((100vw - 1240px) / 2)); }
-  .hall-nav.next { right: max(12px, calc((100vw - 1240px) / 2)); }
+  .hall-nav.prev {
+    left: max(24px, calc(50vw - var(--card-w) * 1.85));
+  }
 
-  /* ── Bottom Meta ── */
+  .hall-nav.next {
+    right: max(24px, calc(50vw - var(--card-w) * 1.85));
+  }
+
+  /* ── Bottom Meta (Centered directly on floor reflection) ── */
   .hall-meta {
     position: relative;
     z-index: 10;
-    margin-top: 28px;
+    margin-top: clamp(24px, 4vh, 44px);
     text-align: center;
+    pointer-events: none;
   }
 
   .hall-count {
     font-family: var(--font-mono);
-    font-size: 14px;
-    letter-spacing: 0.2em;
-    color: var(--muted);
+    font-size: 13.5px;
+    letter-spacing: 0.24em;
+    color: rgba(255, 255, 255, 0.65);
     font-variant-numeric: tabular-nums;
     margin: 0;
+    font-weight: 600;
   }
 
   .hall-count b {
-    color: var(--accent);
-    font-weight: 700;
+    color: #22d3ee;
+    font-weight: 800;
   }
 
   .hall-title {
-    margin: 10px auto 0;
+    margin: 8px auto 0;
     max-width: none;
     white-space: nowrap;
     font-family: var(--font-sans);
-    font-weight: 500;
-    letter-spacing: 0.12em;
+    font-weight: 800;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     line-height: 1.15;
-    font-size: min(clamp(1.4rem, 3.4vw, 2.4rem), calc((100vw - 48px) / (var(--len, 12) * 0.92)));
-    color: var(--ink);
-    animation: hall-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+    color: #ffffff;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.85);
+    animation: hall-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   @keyframes hall-in {
     0% { opacity: 0; transform: translateY(10px); letter-spacing: 0.28em; }
   }
 
-  .hall-dots {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .hall-dots button {
-    width: 7px;
-    height: 7px;
-    padding: 0;
-    border: 0;
-    border-radius: 999px;
-    background: var(--line);
-    cursor: pointer;
-    transition: width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.3s ease;
-  }
-
-  .hall-dots button.on {
-    width: 28px;
-    background: var(--accent);
-    box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 70%, transparent);
-  }
-
+  .hall-dots,
   .hall-ctas {
-    margin-top: 24px;
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
+    display: none !important;
   }
 
   @media (max-width: 760px) {
-    .hall-wrapper { --card-w: clamp(140px, 44vw, 210px); }
+    .hall-wrapper { --card-w: clamp(160px, 46vw, 220px); }
     .hall { perspective: 900px; }
     .hall-nav { width: 40px; height: 40px; font-size: 18px; }
     .hall-nav.prev { left: 8px; }
     .hall-nav.next { right: 8px; }
+    .hall-title { font-size: clamp(1.4rem, 5vw, 2rem); }
   }
 
   @media (prefers-reduced-motion: reduce) {
