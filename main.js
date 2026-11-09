@@ -738,7 +738,421 @@
     } catch (err) {
       console.error('Daiki crystal error:', err);
     }
+    try {
+      initCrystalIntro();
+    } catch (err) {
+      console.error('Crystal intro error:', err);
+    }
   }
+
+  // ==========================================================================
+  // 4.5 DAIKI FUJITA FULLSCREEN CRYSTAL INTRO (#crystal-intro)
+  // ==========================================================================
+  function initCrystalIntro() {
+    const introEl = document.getElementById('crystal-intro');
+    const introCanvas = document.getElementById('crystal-intro-canvas');
+    const smokeCanvas = document.getElementById('crystal-smoke-canvas');
+    const scrollHint = document.getElementById('crystalScrollHint');
+    if (!introEl || !introCanvas) return;
+
+    // --- 1. SCROLL & TRANSITION HANDLER ---
+    let isExited = false;
+    function updateScrollState() {
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+      const threshold = window.innerHeight * 0.85;
+      const progress = Math.min(scrollY / threshold, 1);
+
+      introEl.style.opacity = String(Math.max(0, 1 - progress));
+      if (progress >= 0.96) {
+        if (!isExited) {
+          isExited = true;
+          introEl.classList.add('exited');
+        }
+      } else {
+        if (isExited) {
+          isExited = false;
+          introEl.classList.remove('exited');
+        }
+      }
+    }
+
+    window.addEventListener('scroll', updateScrollState, { passive: true });
+    updateScrollState();
+
+    if (scrollHint) {
+      scrollHint.addEventListener('click', () => {
+        window.scrollTo({
+          top: window.innerHeight,
+          behavior: prefersReducedMotion ? 'auto' : 'smooth'
+        });
+      });
+    }
+
+    // --- 2. PURPLE SMOKE CURSOR TRAIL (2D CANVAS) ---
+    let smokeCtx = null;
+    let smokeParticles = [];
+    if (smokeCanvas) {
+      smokeCtx = smokeCanvas.getContext('2d');
+      const resizeSmoke = () => {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        smokeCanvas.width = window.innerWidth * dpr;
+        smokeCanvas.height = window.innerHeight * dpr;
+        if (smokeCtx) smokeCtx.scale(dpr, dpr);
+      };
+      resizeSmoke();
+      window.addEventListener('resize', resizeSmoke, { passive: true });
+
+      window.addEventListener('mousemove', (e) => {
+        if (isExited) return;
+        const count = 3;
+        for (let i = 0; i < count; i++) {
+          smokeParticles.push({
+            x: e.clientX + (Math.random() - 0.5) * 14,
+            y: e.clientY + (Math.random() - 0.5) * 14,
+            vx: (Math.random() - 0.5) * 1.8,
+            vy: (Math.random() - 0.5) * 1.8 - 0.45,
+            radius: 20 + Math.random() * 28,
+            life: 0,
+            maxLife: 42 + Math.random() * 26,
+            hue: 265 + Math.random() * 45 // 265 to 310 (purple to magenta)
+          });
+        }
+        if (smokeParticles.length > 80) {
+          smokeParticles.splice(0, smokeParticles.length - 80);
+        }
+      }, { passive: true });
+    }
+
+    function renderSmoke() {
+      if (!smokeCtx || isExited) return;
+      smokeCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      smokeCtx.globalCompositeOperation = 'screen';
+
+      for (let i = smokeParticles.length - 1; i >= 0; i--) {
+        const p = smokeParticles[i];
+        p.life++;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vx *= 0.96;
+        p.vy *= 0.96;
+        p.radius += 0.5;
+
+        const progress = p.life / p.maxLife;
+        if (progress >= 1) {
+          smokeParticles.splice(i, 1);
+          continue;
+        }
+
+        const alpha = Math.sin(progress * Math.PI) * 0.45;
+        const grad = smokeCtx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+        grad.addColorStop(0, `hsla(${p.hue}, 92%, 70%, ${alpha.toFixed(3)})`);
+        grad.addColorStop(0.45, `hsla(${p.hue + 15}, 85%, 52%, ${(alpha * 0.5).toFixed(3)})`);
+        grad.addColorStop(1, `hsla(${p.hue}, 80%, 35%, 0)`);
+
+        smokeCtx.fillStyle = grad;
+        smokeCtx.beginPath();
+        smokeCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        smokeCtx.fill();
+      }
+    }
+
+    // --- 3. THREE.JS 3D BISMUTH CRYSTAL & SHATTER/REJOIN ENGINE ---
+    const THREE = window.THREE;
+    if (!THREE) return;
+
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        canvas: introCanvas,
+        alpha: true,
+        antialias: true,
+        powerPreference: 'high-performance'
+      });
+    } catch (e) {
+      console.warn('[Intro WebGL] Failed WebGLRenderer:', e);
+      return;
+    }
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    renderer.setPixelRatio(dpr);
+    renderer.setSize(window.innerWidth, window.innerHeight, false);
+    renderer.setClearColor(0x000000, 0);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 10, 5000);
+    camera.position.set(0, 0, 1050);
+
+    const onResize = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    };
+    window.addEventListener('resize', onResize, { passive: true });
+
+    // Bismuth & Prismatic Shader
+    const introUniforms = {
+      uTime: { value: 0 },
+      uHover: { value: 0 },
+      uCrackGlow: { value: 0 }
+    };
+
+    const introVert = `
+      varying vec3 vN;
+      varying vec3 vVP;
+      varying vec3 vObj;
+      varying vec3 vWorld;
+      void main() {
+        vObj = position;
+        vec4 wp = modelMatrix * vec4(position, 1.0);
+        vWorld = wp.xyz;
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        vVP = mv.xyz;
+        vN = normalize(normalMatrix * normal);
+        gl_Position = projectionMatrix * mv;
+      }
+    `;
+
+    const introFrag = `
+      precision highp float;
+      uniform float uTime;
+      uniform float uHover;
+      uniform float uCrackGlow;
+      varying vec3 vN;
+      varying vec3 vVP;
+      varying vec3 vObj;
+      varying vec3 vWorld;
+
+      vec3 rainbow(float t) {
+        return 0.5 + 0.5 * cos(6.2831853 * (t + vec3(0.0, 0.33, 0.67)));
+      }
+
+      void main() {
+        vec3 V = normalize(vVP);
+        vec3 N = normalize(vN);
+        float ndv = clamp(dot(N, -V), 0.0, 1.0);
+        float F = pow(1.0 - ndv, 3.2);
+
+        // Bismuth terraced iridescent thin-film banding
+        float bands = sin(dot(vWorld, vec3(0.04, 0.07, 0.03)) * 4.2 + uTime * 0.35);
+        vec3 iridRainbow = rainbow(bands * 1.5 + dot(vObj, vec3(0.012, 0.015, 0.01)) + uTime * 0.08);
+
+        // Metallic silver core
+        vec3 baseSilver = mix(vec3(0.72, 0.74, 0.8), vec3(0.96, 0.98, 1.0), F);
+        vec3 col = mix(baseSilver, iridRainbow * 1.45, F * 0.72);
+
+        // Multiple studio specular panels
+        vec3 refl = reflect(V, N);
+        vec3 L1 = normalize(vec3(-0.55, 0.7, 0.75));
+        vec3 L2 = normalize(vec3(0.65, 0.25, 0.8));
+        vec3 L3 = normalize(vec3(0.0, -0.8, 0.6));
+        float sp1 = pow(max(dot(refl, L1), 0.0), 90.0);
+        float sp2 = pow(max(dot(refl, L2), 0.0), 140.0);
+        float sp3 = pow(max(dot(refl, L3), 0.0), 60.0);
+        col += vec3(1.0) * (sp1 * 0.85 + sp2 * 1.2 + sp3 * 0.4);
+
+        // Violet ambient backlight
+        col += vec3(0.65, 0.4, 0.95) * (0.2 + uHover * 0.4) * (1.0 - ndv);
+
+        // Crack healing glow
+        col += vec3(0.7, 0.9, 1.0) * uCrackGlow * 2.0;
+
+        gl_FragColor = vec4(col, 0.92);
+      }
+    `;
+
+    const bismuthMaterial = new THREE.ShaderMaterial({
+      uniforms: introUniforms,
+      vertexShader: introVert,
+      fragmentShader: introFrag,
+      transparent: true,
+      side: THREE.DoubleSide
+    });
+
+    // Unified Solid Crystal (Faceted Bismuth Hopper Geometry)
+    const baseGeo = new THREE.IcosahedronGeometry(165, 1);
+    const pos = baseGeo.attributes.position;
+    const p = new THREE.Vector3();
+    for (let i = 0; i < pos.count; i++) {
+      p.fromBufferAttribute(pos, i);
+      // Terraced stepped sculpture
+      p.y *= 1.3;
+      p.x *= 0.92 - Math.abs(p.y) * 0.0012;
+      p.z *= 0.84 + p.x * 0.0008;
+      if (p.x > 30 && p.y > 20) { p.x *= 1.15; p.z *= 0.88; }
+      if (p.x < -20 && p.y < -20) { p.x *= 1.08; p.z *= 1.14; }
+      pos.setXYZ(i, p.x, p.y, p.z);
+    }
+    baseGeo.computeVertexNormals();
+
+    const solidCrystal = new THREE.Mesh(baseGeo, bismuthMaterial);
+    scene.add(solidCrystal);
+
+    // 24 Geometric Shards for Shatter / Rebuild
+    const shardGroup = new THREE.Group();
+    scene.add(shardGroup);
+    shardGroup.visible = false;
+
+    const numShards = 24;
+    const shards = [];
+    for (let i = 0; i < numShards; i++) {
+      const sGeo = new THREE.TetrahedronGeometry(30 + (i % 5) * 8, 0);
+      const sPos = sGeo.attributes.position;
+      const sp = new THREE.Vector3();
+      for (let j = 0; j < sPos.count; j++) {
+        sp.fromBufferAttribute(sPos, j);
+        sp.x *= 0.9 + (i % 3) * 0.2;
+        sp.y *= 1.25 + (i % 2) * 0.25;
+        sPos.setXYZ(j, sp.x, sp.y, sp.z);
+      }
+      sGeo.computeVertexNormals();
+
+      const phi = Math.acos(-1 + (2 * i) / numShards);
+      const theta = Math.sqrt(numShards * Math.PI) * phi;
+      const r = 85 + (i % 4) * 25;
+
+      const homePos = new THREE.Vector3(
+        r * Math.cos(theta) * Math.sin(phi) * 0.85,
+        r * Math.cos(phi) * 1.28,
+        r * Math.sin(theta) * Math.sin(phi) * 0.8
+      );
+
+      const shardMesh = new THREE.Mesh(sGeo, bismuthMaterial);
+      shardMesh.position.copy(homePos);
+      shardGroup.add(shardMesh);
+
+      const burstDir = homePos.clone().normalize().add(
+        new THREE.Vector3((Math.random() - 0.5) * 0.5, (Math.random() - 0.5) * 0.5, (Math.random() - 0.5) * 0.5)
+      ).normalize();
+
+      shards.push({
+        mesh: shardMesh,
+        homePos: homePos.clone(),
+        homeRot: new THREE.Euler(Math.random() * Math.PI, Math.random() * Math.PI, 0),
+        burstDir: burstDir,
+        speed: 1.4 + Math.random() * 1.8,
+        rotSpeed: new THREE.Vector3((Math.random() - 0.5) * 0.1, (Math.random() - 0.5) * 0.1, (Math.random() - 0.5) * 0.1)
+      });
+    }
+
+    // Shatter State Machine
+    let crystalState = 'SOLID'; // 'SOLID', 'EXPLODING', 'GATHERING'
+    let stateTime = 0;
+    const EXPLODE_DURATION = 1.35;
+    const GATHER_DURATION = 1.05;
+
+    function triggerIntroShatter() {
+      if (crystalState === 'EXPLODING') return;
+      crystalState = 'EXPLODING';
+      stateTime = 0;
+      solidCrystal.visible = false;
+      shardGroup.visible = true;
+      shardGroup.position.copy(solidCrystal.position);
+      shardGroup.rotation.copy(solidCrystal.rotation);
+
+      shards.forEach(s => {
+        s.mesh.position.copy(s.homePos);
+      });
+    }
+
+    // Raycast interaction — shatter when cursor passes through crystal
+    const raycaster = new THREE.Raycaster();
+    const mouseNorm = new THREE.Vector2(-999, -999);
+    window.addEventListener('mousemove', (e) => {
+      if (isExited) return;
+      mouseNorm.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseNorm.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+      raycaster.setFromCamera(mouseNorm, camera);
+      const hits = raycaster.intersectObject(solidCrystal);
+      if (hits.length > 0) {
+        introUniforms.uHover.value = 1.0;
+        if (crystalState === 'SOLID') {
+          triggerIntroShatter();
+        }
+      } else {
+        introUniforms.uHover.value = Math.max(0, introUniforms.uHover.value - 0.05);
+      }
+    }, { passive: true });
+
+    // Also trigger shatter on click
+    window.addEventListener('click', (e) => {
+      if (!isExited && crystalState === 'SOLID') {
+        triggerIntroShatter();
+      }
+    });
+
+    // Animation Loop
+    let clock = new THREE.Clock();
+    function animate() {
+      requestAnimationFrame(animate);
+      if (isExited) return;
+
+      const delta = clock.getDelta();
+      const time = clock.getElapsedTime();
+      introUniforms.uTime.value = time;
+
+      // Render smoke overlay
+      renderSmoke();
+
+      // Crystal floating bob & rotation
+      if (crystalState === 'SOLID') {
+        solidCrystal.rotation.y += 0.005;
+        solidCrystal.rotation.x += 0.0018;
+        solidCrystal.position.y = Math.sin(time * 1.3) * 14;
+      } else if (crystalState === 'EXPLODING') {
+        stateTime += delta;
+        const progress = Math.min(stateTime / EXPLODE_DURATION, 1.0);
+        const ease = 1 - Math.pow(1 - progress, 3);
+
+        shardGroup.rotation.y += 0.003;
+        shardGroup.position.y = Math.sin(time * 1.3) * 14;
+
+        shards.forEach(s => {
+          const dist = s.speed * ease * 180;
+          s.mesh.position.copy(s.homePos).addScaledVector(s.burstDir, dist);
+          s.mesh.rotation.x += s.rotSpeed.x;
+          s.mesh.rotation.y += s.rotSpeed.y;
+          s.mesh.rotation.z += s.rotSpeed.z;
+        });
+
+        if (stateTime >= EXPLODE_DURATION) {
+          crystalState = 'GATHERING';
+          stateTime = 0;
+        }
+      } else if (crystalState === 'GATHERING') {
+        stateTime += delta;
+        const progress = Math.min(stateTime / GATHER_DURATION, 1.0);
+
+        shardGroup.rotation.y += 0.004;
+        shardGroup.position.y = Math.sin(time * 1.3) * 14;
+
+        shards.forEach(s => {
+          s.mesh.position.lerp(s.homePos, 0.12);
+        });
+
+        // Flash healing crack seam as it nears finish
+        if (progress > 0.65) {
+          introUniforms.uCrackGlow.value = (1 - (progress - 0.65) / 0.35) * 1.4;
+        }
+
+        if (stateTime >= GATHER_DURATION) {
+          crystalState = 'SOLID';
+          solidCrystal.visible = true;
+          shardGroup.visible = false;
+          solidCrystal.position.copy(shardGroup.position);
+          solidCrystal.rotation.copy(shardGroup.rotation);
+          introUniforms.uCrackGlow.value = 0;
+        }
+      }
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+  }
+
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', safeInitDaikiCrystal);
